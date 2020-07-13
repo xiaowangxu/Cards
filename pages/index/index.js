@@ -12,7 +12,7 @@ Page({
   //事件处理函数
   bindViewTap: function() {
     wx.navigateTo({
-      url: '../Table/Table'
+      url: '../Table/Table?collectionid=test'
     })
   },
   onLoad: function () {

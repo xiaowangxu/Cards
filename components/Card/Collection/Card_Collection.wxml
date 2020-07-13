@@ -3,7 +3,13 @@
 	<!-- <text class="TEXT_Large">{{idx}}</text> -->
 	<view class="Binder2"></view>
 	<view class="Binder1"></view>
-	<view class="Binder-Container"></view>
+	<view class="Binder-Container">
+		
+		<!-- <text>{{data.collectionid}}</text> -->
+		<input style="font-size: 22px; font-weight: bold; color: white" value="{{data.name}}" placeholder="未命名集合" placeholder-style="color: rgba(255,255,255,0.5);" bindinput="input" bindblur="blur">
+		</input>
+		<view class="Button-Goto" bindtap="tap"></view>
+	</view>
 	
 	
 </view>

@@ -41,7 +41,7 @@ Component({
                 list: newlist,
                 inputdata: ''
             })
-            this.triggerEvent('datachange', {idx: this.properties.idx, data: {type: 'Todo', data: this.data.list}}, {})
+            this.triggerEvent('datachange', {idx: this.properties.idx, data: {type: 'Todo', data: this.properties.list}}, {})
         },
 
         has: function (value) {
@@ -67,7 +67,7 @@ Component({
                 list: newlist,
                 inputdata: ''
             })
-            this.triggerEvent('datachange', {idx: this.properties.idx, data: {type: 'Todo', data: this.data.list}}, {})
+            this.triggerEvent('datachange', {idx: this.properties.idx, data: {type: 'Todo', data: this.properties.list}}, {})
         },
 
         switch_active: function (event) {
@@ -78,7 +78,7 @@ Component({
                 [item]: !value,
                 innerText: 666
             })
-            this.triggerEvent('datachange', {idx: this.properties.idx, data: {type: 'Todo', data: this.data.list}}, {})
+            this.triggerEvent('datachange', {idx: this.properties.idx, data: {type: 'Todo', data: this.properties.list}}, {})
         }
     }
 })

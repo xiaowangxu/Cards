@@ -17,11 +17,11 @@
 </template>
 
 <template name="Collection">
-	<card-collection idx="{{index}}" list="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged"/>
+	<card-collection idx="{{index}}" data="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged"/>
 </template>
 
 <template name="Collection-Template">
-	<card-collection idx="{{index}}" list="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_SelectedCardChanged"/>
+	<card-collection idx="{{index}}" data="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_SelectedCardChanged"/>
 </template>
 
 

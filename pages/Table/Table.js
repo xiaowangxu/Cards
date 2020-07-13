@@ -17,11 +17,12 @@ Page({
 
         cards: [],
 
-        
+
         deleteActive: false
     },
 
     staticData: {
+        collectionid: 'test',
         lastPageTop: 0,
         cards: [],
         cardsTemplate: [],
@@ -33,18 +34,29 @@ Page({
             data: []
         }, {
             type: 'Collection',
-            data: []
+            data: {
+                collectionid: 'template',
+                name: ''
+            }
         }]
     },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        console.log(">>>>")
-        let data = wx.getStorageSync('test')
-        this.setData({
-            cards: data
-        })
+        this.staticData.collectionid = options.collectionid
+        let storage = wx.getStorageInfoSync()
+        if (storage.keys.includes(options.collectionid)) {
+            let data = wx.getStorageSync(options.collectionid)
+            this.setData({
+                cards: data,
+                selectedCardIndex: 0
+            })
+        } else {
+            this.setData({
+                selectedCardIndex: 0
+            })
+        }
         this.sync_StaticCards()
     },
 
@@ -73,7 +85,6 @@ Page({
      * 生命周期函数--监听页面卸载
      */
     onUnload: function () {
-        this.save()
     },
 
     /**
@@ -135,11 +146,15 @@ Page({
 
     delete_Card: function (event) {
         let index = event.currentTarget.dataset.index
-        this.staticData.cards.splice(index, 1)
+        let item = this.staticData.cards.splice(index, 1)
+        if (item[0].type == 'Collection') {
+            this.remove(item[0].data.collectionid)
+        }
         this.setData({
             cards: this.staticData.cards,
             // deleteActive: this.staticData.cards.length === 0 ? false : true
         })
+        this.save()
         // console.log(this.data.cards.length)
     },
 
@@ -147,7 +162,10 @@ Page({
         if (!this.data.isCardShopOpen) {
             // this.scroll_PageToBottom()
         }
-        this.staticData.cardsTemplate = this.staticData.cardsTemplateBlank.filter((item) => {return true})
+        this.staticData.cardsTemplate = this.staticData.cardsTemplateBlank.filter((item) => {
+            return true
+        })
+        // console.log(JSON.stringify(this.staticData.cardsTemplate))
         this.setData({
             isCardShopOpen: true,
             cardShopList: this.staticData.cardsTemplate,
@@ -175,32 +193,63 @@ Page({
 
     add_Card: function () {
         this.close_CardShop()
-        this.staticData.cards.push(this.staticData.cardsTemplate[this.data.selectedCardIndex])
-        console.log(this.staticData.cards)
+        console.log(this.data.selectedCardIndex, this.staticData.cardsTemplate, this.staticData.cardsTemplate[this.data.selectedCardIndex])
+        let item = this.staticData.cardsTemplate[this.data.selectedCardIndex]
+        if (item.type === 'Collection') {
+            item.data.collectionid = 'unknown'
+        }
+        this.staticData.cards.push(item)
+        // console.log(this.staticData.cards)
         // console.log(this.staticData.cards)
         this.setData({
             cards: this.staticData.cards
         })
         this.sync_StaticCards()
         this.scroll_PageToBottom()
+        this.save()
     },
 
     on_CardChanged: function (event) {
         let index = event.detail.idx
         let data = event.detail.data
         this.staticData.cards[index] = data
-        console.log(this.staticData.cards)
+        // console.log(this.staticData.cards)
+        this.save()
     },
 
     on_SelectedCardChanged: function (event) {
+        // console.log(">>>>>")
         let index = event.detail.idx
         let data = event.detail.data
-        this.staticData.cardsTemplate[this.data.selectedCardIndex] = data
-        // console.log(this.staticData.cardsTemplate)
+        this.staticData.cardsTemplate[index] = data
+        // console.log(">>> ", JSON.stringify(this.staticData.cardsTemplate))
         // console.log(this.staticData.cardsTemplate[2] === undefined)
     },
 
     save: function () {
-        wx.setStorageSync('test', this.staticData.cards)
+        if (this.staticData.cards.length <= 0) {
+            this.remove(this.staticData.collectionid)
+            return
+        }
+        wx.setStorage({
+            key: this.staticData.collectionid,
+            data: this.staticData.cards,
+            success(res) {
+                console.log(res)
+            }
+        })
+    },
+
+    remove: function (id) {
+        let storage = wx.getStorageInfoSync()
+        // console.log(storage.keys, id)
+        if (storage.keys.includes(String(id))) {
+            wx.removeStorage({
+                key: String(id),
+                success(res) {
+                    console.log(res)
+                }
+            })
+        }
     }
 })

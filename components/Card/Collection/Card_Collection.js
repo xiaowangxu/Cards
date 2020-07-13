@@ -8,12 +8,36 @@ Component({
             type: Number,
             value: -1,
         },
-        list: {
-            type: Array,
-            value: [{
-                path: ''
-            }],
+        data: {
+            type: Object,
+            value: {
+                collectionid: 'unknown',
+                name: '123456'
+            },
         }
+    },
+
+    lifetimes: {
+        attached: function () {
+            let date = Date.now()
+            // console.log(this.properties.data.collectionid)
+            if (this.properties.data.collectionid === 'unknown') {
+                this.setData({
+                    'data.collectionid': String(date)
+                })
+            }
+            this.triggerEvent('datachange', {
+                idx: this.properties.idx,
+                data: {
+                    type: 'Collection',
+                    data: this.properties.data
+                }
+            }, {})
+            // console.log(this.properties.data)
+        },
+        detached: function () {
+            // 在组件实例被从页面节点树移除时执行
+        },
     },
 
     /**
@@ -27,53 +51,36 @@ Component({
      * 组件的方法列表
      */
     methods: {
-        select_Pictures: function () {
-            const that = this
-            wx.chooseImage({
-                sourceType: '拍照或相册',
-                sizeType: '压缩或原图',
-                count: 9,
-                success(res) {
-                    console.log(res)
-                    that.setData({
-                        list: res.tempFilePaths
-                    })
-                    that.triggerEvent('datachange',{idx: that.properties.idx, data: {type: 'Picture', data: that.properties.list}}, {})
-                }
+        preventTap: function () {
+            console.log(">>>>")
+            return false
+        },
+
+        input: function (event) {
+            let value = event.detail.value
+            this.setData({
+                'data.name': value
             })
         },
 
-        saveFile() {
-            if (this.data.tempFilePath.length > 0) {
-                const that = this
-                wx.saveFile({
-                    tempFilePath: this.data.tempFilePath,
-                    success(res) {
-                        that.setData({
-                            savedFilePath: res.savedFilePath
-                        })
-                        wx.setStorageSync('savedFilePath', res.savedFilePath)
-                    },
-                    fail() {
-                        that.setData({
-                            dialog: {
-                                title: '保存失败',
-                                content: '应该是有 bug 吧',
-                                hidden: false
-                            }
-                        })
-                    }
+        blur: function () {
+            this.triggerEvent('datachange', {
+                idx: this.properties.idx,
+                data: {
+                    type: 'Collection',
+                    data: this.properties.data
+                }
+            }, {})
+        },
+
+        tap: function () {
+            if (this.properties.data.collectionid !== 'template' && this.properties.data.collectionid !== 'unknown') {
+                let url = '../../../Table?collectionid=' + this.properties.data.collectionid
+                wx.navigateTo({
+                    url: url
                 })
             }
-        },
-
-        previewImage(e) {
-            const current = e.target.dataset.src
-
-            wx.previewImage({
-                current,
-                urls: this.properties.list
-            })
         }
+
     }
 })
