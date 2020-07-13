@@ -48,6 +48,7 @@ Page({
         let storage = wx.getStorageInfoSync()
         if (storage.keys.includes(options.collectionid)) {
             let data = wx.getStorageSync(options.collectionid)
+            this.staticData.cards = data
             this.setData({
                 cards: data,
                 selectedCardIndex: 0
@@ -57,7 +58,6 @@ Page({
                 selectedCardIndex: 0
             })
         }
-        this.sync_StaticCards()
     },
 
     /**
@@ -193,10 +193,11 @@ Page({
 
     add_Card: function () {
         this.close_CardShop()
-        console.log(this.data.selectedCardIndex, this.staticData.cardsTemplate, this.staticData.cardsTemplate[this.data.selectedCardIndex])
+        // console.log(this.data.selectedCardIndex, this.staticData.cardsTemplate, this.staticData.cardsTemplate[this.data.selectedCardIndex])
         let item = this.staticData.cardsTemplate[this.data.selectedCardIndex]
         if (item.type === 'Collection') {
-            item.data.collectionid = 'unknown'
+            let date = Date.now()
+            item.data.collectionid = String(date)
         }
         this.staticData.cards.push(item)
         // console.log(this.staticData.cards)
@@ -212,6 +213,7 @@ Page({
     on_CardChanged: function (event) {
         let index = event.detail.idx
         let data = event.detail.data
+        // console.log("!!!!!", index, JSON.stringify(data))
         this.staticData.cards[index] = data
         // console.log(this.staticData.cards)
         this.save()

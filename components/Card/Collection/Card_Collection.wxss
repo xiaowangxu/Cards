@@ -2,7 +2,7 @@
 .Card-Container {
     width: 100%;
     height: auto;
-    min-height: 100px;
+    min-height: 88px;
     padding: 10px 10px;
     border-radius: 8px;
     box-sizing: border-box;
@@ -32,8 +32,8 @@
     min-height: 40px;
     min-width: 40px;
     height: 40px;
-    border-radius: 50%;
-    background-color: rgba(255,255,255,0.5);
+    border-radius: 6px;
+    background-color: rgba(255,255,255,0.3);
 }
 
 .Binder1 {

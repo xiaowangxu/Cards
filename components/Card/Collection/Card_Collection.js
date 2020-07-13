@@ -17,29 +17,6 @@ Component({
         }
     },
 
-    lifetimes: {
-        attached: function () {
-            let date = Date.now()
-            // console.log(this.properties.data.collectionid)
-            if (this.properties.data.collectionid === 'unknown') {
-                this.setData({
-                    'data.collectionid': String(date)
-                })
-            }
-            this.triggerEvent('datachange', {
-                idx: this.properties.idx,
-                data: {
-                    type: 'Collection',
-                    data: this.properties.data
-                }
-            }, {})
-            // console.log(this.properties.data)
-        },
-        detached: function () {
-            // 在组件实例被从页面节点树移除时执行
-        },
-    },
-
     /**
      * 组件的初始数据
      */
