@@ -11,9 +11,7 @@ Page({
   },
   //事件处理函数
   bindViewTap: function() {
-    wx.navigateTo({
-      url: '../Table/Table?collectionid=test'
-    })
+    getApp().navigateTo_Table('test', '主页')
   },
   onLoad: function () {
     if (app.globalData.userInfo) {

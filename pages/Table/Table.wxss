@@ -16,18 +16,33 @@ page {
     width: 100%;
     position: sticky;
     top: 0px;
-    padding-left: 12px;
+    /* padding: 0px 12px; */
     box-sizing: border-box;
     z-index: 1;
 }
 
 .NavBar {
+    /* justify-self: stretch; */
+    padding: 0px 12px;
+    width: 100%;
     position: absolute;
-    bottom: 0px;
+    /* bottom: 0px; */
     display: flex;
     flex-direction: row;
     align-items: center;
     box-sizing: border-box;
+}
+
+.NavBar.center {
+    justify-content: space-evenly;
+}
+
+.NavBar.left {
+    justify-content: flex-start;
+}
+
+.NavBar.right {
+    justify-content: flex-end;
 }
 
 .NavButton:active {
@@ -39,7 +54,7 @@ page {
     padding: 0px 12px;
     min-width: 30px;
     background-color: black;
-    margin-right: 6px;
+    /* margin-right: 6px; */
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -48,7 +63,6 @@ page {
     opacity: 100%;
     transition: opacity 0.1s ease-out;
 }
-
 
 .NavButton.center {
     margin-left: 6px;
@@ -63,6 +77,11 @@ page {
     margin-left: 12px;
 }
 
+.NavButton.expand {
+    justify-self: stretch;
+    width: 100%;
+}
+
 .BG-Green {
     background-color: rgb(79, 197, 79);
     color: white;
@@ -74,7 +93,7 @@ page {
 }
 
 .BG-Gray {
-    background-color: rgb(210, 210, 210);
+    background-color: rgb(230, 230, 230);
     color: black;
 }
 
@@ -175,12 +194,14 @@ page {
     right: 0px;
     background-color: rgba(0, 0, 0, 0);
     pointer-events: none;
+    /* backdrop-filter: blur(0px); */
     transition: background-color 0.2s linear;
 }
 
 .Cover.show {
     background-color: rgba(0, 0, 0, 0.3);
     pointer-events: all;
+    /* backdrop-filter: blur(20px); */
     transition: background-color 0.2s linear;
 }
 
@@ -192,22 +213,22 @@ page {
     box-sizing: border-box;
 }
 
-.NavButton_Container {
+.NavButton-Container {
     display: flex;
     flex-direction: row;
     align-items: center;
     row-gap: 12px;
 }
 
-.NavButton_Container.center {
+.NavButton-Container.center {
     justify-content: space-evenly;
 }
 
-.NavButton_Container.left {
+.NavButton-Container.left {
     justify-content: flex-start;
 }
 
-.NavButton_Container.right {
+.NavButton-Container.right {
     justify-content: flex-end;
 }
 
@@ -231,6 +252,6 @@ page {
     align-items: center;
     justify-content: space-between;
     overflow-y: auto;
-    margin: 20px 0px 36px 0px;
+    margin: 16px 0px 36px 0px;
     padding: 0px 30px;
 }

@@ -52,10 +52,7 @@ Component({
 
         tap: function () {
             if (this.properties.data.collectionid !== 'template' && this.properties.data.collectionid !== 'unknown') {
-                let url = '../../../Table?collectionid=' + this.properties.data.collectionid
-                wx.navigateTo({
-                    url: url
-                })
+                getApp().navigateTo_Table(this.properties.data.collectionid, this.properties.data.name)
             }
         }
 

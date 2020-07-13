@@ -5,6 +5,7 @@ Page({
      * 页面的初始数据
      */
     data: {
+        // app: getApp(),
         statusHeight: getApp().globalData.statusHeight,
         navHeight: getApp().globalData.navHeight,
         navButtonHeight: getApp().globalData.navButtonHeight,
@@ -14,7 +15,7 @@ Page({
 
 
         cardShopList: [],
-
+        title: '',
         cards: [],
 
 
@@ -25,6 +26,7 @@ Page({
         collectionid: 'test',
         lastPageTop: 0,
         cards: [],
+        uid: 0,
         cardsTemplate: [],
         cardsTemplateBlank: [{
             type: 'Todo',
@@ -45,26 +47,23 @@ Page({
      */
     onLoad: function (options) {
         this.staticData.collectionid = options.collectionid
-        let storage = wx.getStorageInfoSync()
-        if (storage.keys.includes(options.collectionid)) {
-            let data = wx.getStorageSync(options.collectionid)
-            this.staticData.cards = data
-            this.setData({
-                cards: data,
-                selectedCardIndex: 0
-            })
-        } else {
-            this.setData({
-                selectedCardIndex: 0
-            })
-        }
+        let title = options.title
+        // let data = JSON.parse(options.data)
+        // console.log(table)
+        let data = getApp().globalData.tables[this.staticData.collectionid]
+        let uiddata = this.get_Cards_with_UID(data)
+        this.staticData.cards = uiddata
+        this.setData({
+            cards: uiddata,
+            selectedCardIndex: 0,
+            title: title
+        })
     },
 
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady: function () {
-
     },
 
     /**
@@ -78,13 +77,16 @@ Page({
      * 生命周期函数--监听页面隐藏
      */
     onHide: function () {
-        console.log(">>>>>")
+        // console.log(">>>>>")
     },
 
     /**
      * 生命周期函数--监听页面卸载
      */
     onUnload: function () {
+        this.setData({
+            deleteActive: false
+        })
     },
 
     /**
@@ -106,6 +108,46 @@ Page({
      */
     onShareAppMessage: function () {
 
+    },
+
+    back: function () {
+        if (this.data.deleteActive) {
+            // console.log("close card shop")
+            this.setData({
+                deleteActive: false
+            })
+        } else {
+            // console.log("back")
+            wx.navigateBack({
+                delta: 0,
+            })
+        }
+    },
+
+    get_Cards_with_UID: function (cards) {
+        return cards.map((item) => {
+            let uid = this.staticData.uid
+            this.staticData.uid++
+            return {
+                uid: uid,
+                card: item
+            }
+        })
+    },
+
+    unwrap_Cards_with_UID: function (cards) {
+        return cards.map((item) => {
+            return item.card
+        })
+    },
+
+    wrap_Card_with_UID: function (card) {
+        let uid = this.staticData.uid
+        this.staticData.uid++
+        return {
+            uid: uid,
+            card: card
+        }
     },
 
     prevent_Scroll: function () {
@@ -147,8 +189,8 @@ Page({
     delete_Card: function (event) {
         let index = event.currentTarget.dataset.index
         let item = this.staticData.cards.splice(index, 1)
-        if (item[0].type == 'Collection') {
-            this.remove(item[0].data.collectionid)
+        if (item[0].card.type == 'Collection') {
+            this.remove(item[0].card.data.collectionid)
         }
         this.setData({
             cards: this.staticData.cards,
@@ -199,7 +241,7 @@ Page({
             let date = Date.now()
             item.data.collectionid = String(date)
         }
-        this.staticData.cards.push(item)
+        this.staticData.cards.push(this.wrap_Card_with_UID(item))
         // console.log(this.staticData.cards)
         // console.log(this.staticData.cards)
         this.setData({
@@ -214,7 +256,7 @@ Page({
         let index = event.detail.idx
         let data = event.detail.data
         // console.log("!!!!!", index, JSON.stringify(data))
-        this.staticData.cards[index] = data
+        this.staticData.cards[index].card = data
         // console.log(this.staticData.cards)
         this.save()
     },
@@ -229,13 +271,17 @@ Page({
     },
 
     save: function () {
+        let collectionid = String(this.staticData.collectionid)
         if (this.staticData.cards.length <= 0) {
-            this.remove(this.staticData.collectionid)
+            this.remove(collectionid)
+            delete getApp().globalData.tables[collectionid]
             return
         }
+        let cards = this.unwrap_Cards_with_UID(this.staticData.cards)
+        getApp().globalData.tables[collectionid] = cards
         wx.setStorage({
-            key: this.staticData.collectionid,
-            data: this.staticData.cards,
+            key: collectionid,
+            data: cards,
             success(res) {
                 console.log(res)
             }
@@ -243,11 +289,12 @@ Page({
     },
 
     remove: function (id) {
+        let collectionid = String(this.staticData.collectionid)
+        delete getApp().globalData.tables[collectionid]
         let storage = wx.getStorageInfoSync()
-        // console.log(storage.keys, id)
-        if (storage.keys.includes(String(id))) {
+        if (storage.keys.includes(collectionid)) {
             wx.removeStorage({
-                key: String(id),
+                key: collectionid,
                 success(res) {
                     console.log(res)
                 }

@@ -62,7 +62,7 @@ Component({
             
             let newlist = this.properties.list
             newlist.push({text: value, finish: false})
-            console.log(newlist)
+            // console.log(newlist)
             this.setData({
                 list: newlist,
                 inputdata: ''

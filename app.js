@@ -50,5 +50,25 @@ App({
     statusHeight: 0,
     windowHeight: 0,
     navButtonHeight: 0,
+    tables: {}
+  },
+
+  navigateTo_Table: function (tableid, title) {
+    let collectionid = String(tableid)
+    if (!(collectionid in this.globalData.tables)) { // doesn't exist
+      let storage = wx.getStorageInfoSync()
+      if (storage.keys.includes(collectionid)) {
+        let data = wx.getStorageSync(collectionid)
+        this.globalData.tables[collectionid] = data
+      } else {
+        this.globalData.tables[collectionid] = []
+      }
+    }
+    // console.log(this.globalData.tables)
+    // return
+    let url = '/pages/Table/Table?collectionid=' + tableid + "&title=" + title + "&data=" + JSON.stringify(this.globalData.tables[collectionid])
+    wx.navigateTo({
+      url: url
+    })
   }
 })
