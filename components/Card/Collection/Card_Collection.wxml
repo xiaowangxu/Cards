@@ -1,0 +1,9 @@
+<!--components/Card_Text.wxml-->
+<view class="Card-Container">
+	<!-- <text class="TEXT_Large">{{idx}}</text> -->
+	<view class="Binder2"></view>
+	<view class="Binder1"></view>
+	<view class="Binder-Container"></view>
+	
+	
+</view>

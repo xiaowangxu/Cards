@@ -1,0 +1,25 @@
+<!--components/Card_Text.wxml-->
+<view class="Card-Container">
+	<!-- <text class="TEXT_Large">{{idx}}</text> -->
+	<view class="Viewbox">
+		<view wx:if="{{list.length === 0}}" class="List-Container">
+			<view class="Buttom-Finish blank"></view>
+			<text class="Line-Edit">无事项</text>
+		</view>
+
+		<view wx:for="{{list}}" class="List-Container">
+			<view class="Buttom-Finish {{item.finish? 'selected' : ''}}" data-itemindex="{{index}}" bindtap="switch_active">
+				<view class="Button-Finish-Icon" />
+			</view>
+			<input class="Line-Edit" value="{{item.text}}" adjust-position="true" data-itemindex="{{index}}" bindinput="input" bindblur="blur" />
+			<view class="Line-Stroke-Container">
+				<view wx:if="{{item.finish}}" class="Line-Stroke"></view>
+			</view>
+
+		</view>
+		<view class="List-Container">
+			<view class="Buttom-Finish blank" />
+			<input class="Line-Edit" adjust-position="true" placeholder="输入事项" value="{{inputdata}}" confirm-hold="true" bindconfirm="add" />
+		</view>
+	</view>
+</view>

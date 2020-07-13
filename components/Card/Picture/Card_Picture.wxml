@@ -1,0 +1,12 @@
+<!--components/Card_Text.wxml-->
+<view class="Card-Container">
+	<!-- <text class="TEXT_Large">{{idx}}</text> -->
+	<view class="Viewbox">
+		<view wx:for="{{list}}" class="Image-Container">
+			<image class="Image" src="{{item}}" data-src="{{item}}" bindtap="previewImage"></image>
+		</view>
+		<view class="Image-Container" bindtap="select_Pictures">
+
+		</view>
+	</view>
+</view>
