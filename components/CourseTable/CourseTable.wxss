@@ -73,7 +73,7 @@
     /* height: 40px; */
 }
 
-.Course > text {
+.Course-Name {
     box-sizing: border-box;
     text-overflow: ellipsis;
     font-size: small;

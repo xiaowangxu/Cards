@@ -48,18 +48,22 @@ Page({
         this.staticData.collectionid = String(options.collectionid)
         let title = options.title
         let data = app.globalData.tables[this.staticData.collectionid]
-        // console.log(data)
-        let uiddata = this.get_Cards_with_UID(data)
-        this.staticData.cards = uiddata
-        this.setData({
-            cards: uiddata,
-            selectedCardIndex: 0,
-            title: title
-        })
+        if (data !== undefined) {
+            // console.log(data)
+            let uiddata = this.get_Cards_with_UID(data)
+            this.staticData.cards = uiddata
+            this.setData({
+                cards: uiddata,
+                title: title
+            })
+        } else {
+            this.setData({
+                title: title
+            })
+        }
     },
 
-    onReady: function () {
-    },
+    onReady: function () {},
 
 
     onShow: function () {
@@ -211,7 +215,7 @@ Page({
 
     add_Card: function () {
         this.close_CardShop()
-        // console.log(this.data.selectedCardIndex, this.staticData.cardsTemplate, this.staticData.cardsTemplate[this.data.selectedCardIndex])
+
         let item = this.staticData.cardsTemplate[this.data.selectedCardIndex]
         if (item.type === 'Collection') {
             if (getCurrentPages().length >= 10) {
@@ -221,11 +225,9 @@ Page({
             let date = Date.now()
             item.data.collectionid = String(date)
         }
-        this.staticData.cards.push(this.wrap_Card_with_UID(item))
-        // console.log(this.staticData.cards)
-        // console.log(this.staticData.cards)
+        // this.staticData.cards.push(this.wrap_Card_with_UID(item))
         this.setData({
-            cards: this.staticData.cards
+            ['cards[' + this.staticData.cards.length + ']']: this.wrap_Card_with_UID(item)
         })
         this.sync_StaticCards()
         this.scroll_PageToBottom()
@@ -242,11 +244,8 @@ Page({
     },
 
     on_SelectedCardChanged: function (event) {
-        // console.log(">>>>>")
         let index = event.detail.idx
         let data = event.detail.data
         this.staticData.cardsTemplate[index] = data
-        // console.log(">>> ", JSON.stringify(this.staticData.cardsTemplate))
-        // console.log(this.staticData.cardsTemplate[2] === undefined)
     }
 })

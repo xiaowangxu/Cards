@@ -16,7 +16,6 @@ Page({
 
 
         cardShopList: [],
-        title: '',
         cards: [],
 
 
@@ -24,7 +23,7 @@ Page({
     },
 
     staticData: {
-        collectionid: 'test',
+        collectionid: 'Main',
         lastPageTop: 0,
         cards: [],
         uid: 0,
@@ -46,19 +45,19 @@ Page({
 
     onLoad: function (options) {
         this.staticData.collectionid = 'Main'
-        let title = '课程表'
         let data = app.globalData.tables['Main']
-        let uiddata = this.get_Cards_with_UID(data)
-        this.staticData.cards = uiddata
-        this.setData({
-            cards: uiddata,
-            selectedCardIndex: 0,
-            title: title
-        })
+        if (data === undefined) {
+            return
+        } else {
+            let uiddata = this.get_Cards_with_UID(data)
+            this.staticData.cards = uiddata
+            this.setData({
+                cards: uiddata,
+            })
+        }
     },
 
-    onReady: function () {
-    },
+    onReady: function () {},
 
     onShow: function () {
 
@@ -200,7 +199,7 @@ Page({
 
     add_Card: function () {
         this.close_CardShop()
-        // console.log(this.data.selectedCardIndex, this.staticData.cardsTemplate, this.staticData.cardsTemplate[this.data.selectedCardIndex])
+
         let item = this.staticData.cardsTemplate[this.data.selectedCardIndex]
         if (item.type === 'Collection') {
             if (getCurrentPages().length >= 10) {
@@ -210,11 +209,9 @@ Page({
             let date = Date.now()
             item.data.collectionid = String(date)
         }
-        this.staticData.cards.push(this.wrap_Card_with_UID(item))
-        // console.log(this.staticData.cards)
-        // console.log(this.staticData.cards)
+        // this.staticData.cards.push(this.wrap_Card_with_UID(item))
         this.setData({
-            cards: this.staticData.cards
+            ['cards[' + this.staticData.cards.length + ']']: this.wrap_Card_with_UID(item)
         })
         this.sync_StaticCards()
         this.scroll_PageToBottom()

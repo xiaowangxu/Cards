@@ -15,7 +15,7 @@
 
 		<block wx:for="{{courses}}" wx:for-item="course">
 			<view wx:for="{{course.times}}" wx:for-item="item" class="Course" style="grid-column-start: {{item.day + 1}}; grid-row-start: {{item.timestart}}; grid-row-end: {{item.timeend + 1}}; background-color: {{course.color}};" data-coursename="{{course.name}}" bindtap="tap_Course">
-				<text>{{course.name}}</text>
+				<text class="Course-Name">{{course.name}}</text>
 			</view>
 		</block>
 

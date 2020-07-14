@@ -48,7 +48,7 @@
 
 <view class="Container" id="page">
 
-	<view wx:for="{{cards}}" class="Card-MoveArea" style="top: {{ (navHeight * 2) + statusHeight + index * 12 }}px; " wx:key="{{item.uid}}">
+	<view wx:for="{{cards}}" class="Card-MoveArea" style="top: {{ (navHeight * 2) + statusHeight + index * 12 }}px; " wx:key="uid">
 		<view class="Card-Button">
 			<view class="Button" data-index="{{index}}" bindtap="delete_Card">
 				<icon type="cancel" color="#ffffff" size="30"></icon>
