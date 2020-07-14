@@ -48,12 +48,9 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        this.staticData.collectionid = options.collectionid
-        let title = options.title
-        // let from = options.from
-        // let data = JSON.parse(options.data)
-        // console.log(table)
-        let data = app.globalData.tables[this.staticData.collectionid]
+        this.staticData.collectionid = 'test'
+        let title = '课程表'
+        let data = app.globalData.tables['test']
         let uiddata = this.get_Cards_with_UID(data)
         this.staticData.cards = uiddata
         this.setData({

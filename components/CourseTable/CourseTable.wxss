@@ -1,0 +1,84 @@
+/* components/CourseTable/CourseTable.wxss */
+
+.Course-Notify-Container {
+    margin-bottom: 12px;
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+    background-color: teal;
+}
+
+.Table-Container {
+    width: 100%;
+    /* height: 500px; */
+    padding: 10px 10px 10px 1px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+    /* box-shadow: 0px -4px 10px 0px rgba(0, 0, 0, 0.2); */
+}
+
+.Table-Grid {
+    width: 100%;
+    /* height: 100%; */
+    box-sizing: border-box;
+    /* background-color: teal; */
+    display: grid;
+    grid-template-columns: 1fr repeat(5, 2fr);
+    grid-template-rows: repeat(13, 40px);
+    overflow-y: visible;
+}
+
+.Table-Line {
+    grid-column-start: 2;
+    grid-column-end: 7;
+    background-color: rgb(240, 240, 240);
+}
+
+.Table-Line.top {
+    border-radius: 4px 4px 0px 0px;
+}
+
+.Table-Line.bottom {
+    border-radius: 0px 0px 4px 4px;
+}
+
+.Course-Number {
+    border-radius: 4px;
+    display: table-cell;
+    /* margin-right: 8px; */
+    box-sizing: border-box;
+    align-self: center;
+    justify-self: center;
+    color: rgb(220, 220, 220);
+}
+
+.Course {
+    border-radius: 4px;
+    margin: 2px;
+    min-height: 40px;
+    display: table-cell;
+    background-color: tomato;
+    box-shadow: 0px -4px 10px 0px rgba(0, 0, 0, 0.1);
+    /* background-color: chocolate; */
+    padding: 6px 8px;
+    display: flex;
+    flex-direction: column;
+    /* align-self: stretch;
+    justify-self: stretch; */
+    /* height: 40px; */
+}
+
+.Course > text {
+    text-overflow: clip;
+    font-size: small;
+    color: white;
+    font-weight: bold;
+    word-break: break-all;
+    /* align-self: stretch;
+    justify-self: stretch; */
+    /* height: 40px; */
+}

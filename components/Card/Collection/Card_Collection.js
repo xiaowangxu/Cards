@@ -52,7 +52,7 @@ Component({
 
         tap: function () {
             if (this.properties.data.collectionid !== 'template' && this.properties.data.collectionid !== 'unknown') {
-                getApp().navigateTo_Table(this.properties.data.collectionid, this.properties.data.name)
+                getApp().navigateTo_Table(this.properties.data.collectionid, this.properties.data.name, 'ceshi')
             }
         }
 

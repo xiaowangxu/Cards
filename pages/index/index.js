@@ -1,6 +1,7 @@
 //index.js
 //获取应用实例
 const app = getApp()
+const jinrishici = require('../../utils/jinrishici.js')
 
 Page({
   data: {
@@ -10,16 +11,26 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
   //事件处理函数
-  bindViewTap: function() {
-    getApp().navigateTo_Table('test', '主页')
+  bindViewTap: function () {
+    getApp().navigateTo_Table('test', '主页', '')
   },
   onLoad: function () {
+    jinrishici.load(result => {
+      // 下面是处理逻辑示例
+      console.log(result)
+      this.setData({
+        motto: result.data.content
+      })
+    })
+
+
+
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
       })
-    } else if (this.data.canIUse){
+    } else if (this.data.canIUse) {
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
       app.userInfoReadyCallback = res => {
@@ -41,7 +52,7 @@ Page({
       })
     }
   },
-  getUserInfo: function(e) {
+  getUserInfo: function (e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({

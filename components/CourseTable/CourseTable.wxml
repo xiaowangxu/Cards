@@ -1,0 +1,24 @@
+<!--components/CourseTable/CourseTable.wxml-->
+<view wx:if="{{currentCourse !== null}}" class="Course-Notify-Container" style="background-color: {{currentCourse.color}};">
+</view>
+<view class="Table-Container">
+	<view class="Table-Grid">
+		<view class="Table-Line top" style="grid-row-start: 1;" />
+		<view class="Table-Line" style="grid-row-start: 3;" />
+		<view class="Table-Line" style="grid-row-start: 5;" />
+		<view class="Table-Line" style="grid-row-start: 7;" />
+		<view class="Table-Line" style="grid-row-start: 9;" />
+		<view class="Table-Line" style="grid-row-start: 11;" />
+		<view class="Table-Line bottom" style="grid-row-start: 13;" />
+
+		<text wx:for="{{[1,2,3,4,5,6,7,8,9,10,11,12,13]}}" class="Course-Number" style="grid-row-start: {{item}};">{{item}}</text>
+
+		<block wx:for="{{courses}}" wx:for-item="course">
+			<view wx:for="{{course.times}}" wx:for-item="item" class="Course" style="grid-column-start: {{item.day + 1}}; grid-row-start: {{item.timestart}}; grid-row-end: {{item.timeend + 1}}; background-color: {{course.color}};" data-coursename="{{course.name}}" bindtap="tap_Course">
+				<text>{{course.name}}</text>
+			</view>
+		</block>
+
+
+	</view>
+</view>

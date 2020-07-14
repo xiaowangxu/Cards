@@ -1,6 +1,7 @@
 //app.js
 App({
   onLaunch: function () {
+    this.load_MainTable()
     wx.getSystemInfo({
       success: res => {
         let menuButtonObject = wx.getMenuButtonBoundingClientRect()
@@ -44,6 +45,17 @@ App({
       }
     })
   },
+
+  load_MainTable: function () {
+    let storage = wx.getStorageInfoSync()
+    if (storage.keys.includes('test')) {
+      let data = wx.getStorageSync('test')
+      this.globalData.tables['test'] = data
+    } else {
+      this.globalData.tables['test'] = []
+    }
+  },
+
   globalData: {
     userInfo: null,
     navHeight: 0,
@@ -53,7 +65,7 @@ App({
     tables: {}
   },
 
-  navigateTo_Table: function (tableid, title) {
+  navigateTo_Table: function (tableid, title, from) {
     let collectionid = String(tableid)
     if (!(collectionid in this.globalData.tables)) { // doesn't exist
       let storage = wx.getStorageInfoSync()
@@ -66,7 +78,7 @@ App({
     }
     // console.log(this.globalData.tables)
     // return
-    let url = '/pages/Table/Table?collectionid=' + tableid + "&title=" + title + "&data=" + JSON.stringify(this.globalData.tables[collectionid])
+    let url = '/pages/Table/Table?collectionid=' + tableid + "&title=" + title + "&from=" + from + "&data=" + JSON.stringify(this.globalData.tables[collectionid])
     wx.navigateTo({
       url: url
     })

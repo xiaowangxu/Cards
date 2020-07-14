@@ -29,20 +29,22 @@
 
 
 <!--  -->
-<view class="StatusBar" style="height: {{navHeight * 2 + statusHeight }}px;">
+<view class="StatusBar" style="height: {{navHeight + statusHeight}}px;">
 	<view class="NavBar" style="height: {{navHeight}}px; top: {{statusHeight}}px">
-		<view class="NavButton BG-Gray left" style="width: {{navButtonHeight}}px; height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px; padding: 0px;" bindtap="back">
-			<image style="width: {{navButtonHeight - 16}}px; height: {{navButtonHeight - 16}}px;" src="Back.svg" />
-		</view>
 		<text class="TEXT_Large">{{title}}</text>
 	</view>
-	<view class="NavBar right" style="height: {{navHeight}}px; top: {{ navHeight + statusHeight }}px">
-		<view wx:if="{{cards.length>0}}" class="NavButton BG-Red right" style="height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px;" bindtap="switch_DeleteActive">
-			管理卡片
-		</view>
-		<view class="NavButton BG-Green right" style="height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px;" bindtap="open_CardShop">
-			新卡片
-		</view>
+</view>
+
+<view class="CourseTable">
+	<course-table/>
+</view>
+
+<view class="NavButton-Container right" style="margin: 0px 12px; height: {{navHeight}}px; position: sticky; top: {{navHeight + statusHeight}}px;">
+	<view wx:if="{{cards.length>0}}" class="NavButton BG-Red right" style="height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px;" bindtap="switch_DeleteActive">
+		管理卡片
+	</view>
+	<view class="NavButton BG-Green right" style="height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px;" bindtap="open_CardShop">
+		新卡片
 	</view>
 </view>
 
