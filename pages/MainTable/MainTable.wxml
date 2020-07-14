@@ -30,13 +30,16 @@
 
 <!--  -->
 <view class="StatusBar" style="height: {{navHeight + statusHeight}}px;">
-	<view class="NavBar" style="height: {{navHeight}}px; top: {{statusHeight}}px">
-		<text class="TEXT_Large">{{title}}</text>
+	<view class="NavBar" style="height: {{navHeight}}px; top: {{statusHeight}}px; padding-right: {{navButtonRight + navButtonWidth + 12}}px;">
+		<view class="NavButton BG-Gray left" style="min-width: {{navButtonHeight}}px; width: {{navButtonHeight}}px; height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px; padding: 0px;" bindtap="back">
+			<image style="width: {{navButtonHeight - 13}}px; height: {{navButtonHeight - 13}}px;" src="Setting.svg" />
+		</view>
+		<text class="Title TEXT_Large">{{title}}</text>
 	</view>
 </view>
 
 <view class="CourseTable">
-	<course-table/>
+	<course-table />
 </view>
 
 <view class="NavButton-Container right" style="margin: 0px 12px; height: {{navHeight}}px; position: sticky; top: {{navHeight + statusHeight}}px;">

@@ -6,6 +6,15 @@ page {
     background-color: white;
 }
 
+.Title {
+    width: 100%;
+    box-sizing: border-box;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    word-break: break-all;
+}
+
 .Container {
     box-sizing: border-box;
     padding-bottom: 12px;

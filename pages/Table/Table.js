@@ -11,6 +11,8 @@ Page({
         statusHeight: app.globalData.statusHeight,
         navHeight: app.globalData.navHeight,
         navButtonHeight: app.globalData.navButtonHeight,
+        navButtonWidth: app.globalData.navButtonWidth,
+        navButtonRight: app.globalData.navButtonRight,
 
         isCardShopOpen: false,
         selectedCardIndex: 0,

@@ -30,11 +30,11 @@
 
 <!--  -->
 <view class="StatusBar" style="height: {{navHeight * 2 + statusHeight }}px;">
-	<view class="NavBar" style="height: {{navHeight}}px; top: {{statusHeight}}px">
-		<view class="NavButton BG-Gray left" style="width: {{navButtonHeight}}px; height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px; padding: 0px;" bindtap="back">
+	<view class="NavBar" style="height: {{navHeight}}px; top: {{statusHeight}}px; padding-right: {{navButtonRight + navButtonWidth + 12}}px;">
+		<view class="NavButton BG-Gray left" style="min-width: {{navButtonHeight}}px; width: {{navButtonHeight}}px; height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px; padding: 0px;" bindtap="back">
 			<image style="width: {{navButtonHeight - 16}}px; height: {{navButtonHeight - 16}}px;" src="Back.svg" />
 		</view>
-		<text class="TEXT_Large">{{title}}</text>
+		<text class="Title TEXT_Large">{{title}}</text>
 	</view>
 	<view class="NavBar right" style="height: {{navHeight}}px; top: {{ navHeight + statusHeight }}px">
 		<view wx:if="{{cards.length>0}}" class="NavButton BG-Red right" style="height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px;" bindtap="switch_DeleteActive">

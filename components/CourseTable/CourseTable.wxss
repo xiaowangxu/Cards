@@ -67,18 +67,19 @@
     padding: 6px 8px;
     display: flex;
     flex-direction: column;
+    
     /* align-self: stretch;
     justify-self: stretch; */
     /* height: 40px; */
 }
 
 .Course > text {
-    text-overflow: clip;
+    box-sizing: border-box;
+    text-overflow: ellipsis;
     font-size: small;
     color: white;
     font-weight: bold;
+    overflow: auto;
     word-break: break-all;
-    /* align-self: stretch;
-    justify-self: stretch; */
-    /* height: 40px; */
+    /* word-wrap: break-word; */
 }
