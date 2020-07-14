@@ -7,11 +7,11 @@
 			<text class="Line-Edit">无事项</text>
 		</view>
 
-		<view wx:for="{{list}}" class="List-Container">
-			<view class="Buttom-Finish {{item.finish? 'selected' : ''}}" data-itemindex="{{index}}" bindtap="switch_active">
+		<view wx:for="{{list}}" class="List-Container" data-itemindex="{{index}}" bindtap="switch_active">
+			<view class="Buttom-Finish {{item.finish? 'selected' : ''}}">
 				<view class="Button-Finish-Icon" />
 			</view>
-			<input class="Line-Edit" value="{{item.text}}" adjust-position="true" data-itemindex="{{index}}" bindinput="input" bindblur="blur" />
+			<input class="Line-Edit" value="{{item.text}}" adjust-position="true" data-itemindex="{{index}}" bindinput="input" bindblur="blur" catchtap="true"/>
 			<view class="Line-Stroke-Container">
 				<view wx:if="{{item.finish}}" class="Line-Stroke"></view>
 			</view>

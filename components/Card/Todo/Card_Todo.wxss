@@ -2,7 +2,7 @@
 .Card-Container {
     width: 100%;
     min-height: 80px;
-    padding: 13px 20px;
+    padding: 13px 20px 13px 12px;
     background-color: rgb(80, 80, 80);
     border-radius: 8px;
     box-sizing: border-box;
@@ -15,17 +15,18 @@
     overflow-y: auto;
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
 }
 
 .List-Container {
-    width: 100%;
+    /* width: 100%; */
+    justify-self: stretch;
     min-height: 30px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-    box-sizing: content-box;
-    margin: 4px 0px;
+    margin: 4px 0px 4px 10px;
     box-sizing: border-box;
     position: relative;
 }

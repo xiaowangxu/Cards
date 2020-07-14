@@ -45,9 +45,10 @@ Page({
     },
 
     onLoad: function (options) {
-        this.staticData.collectionid = options.collectionid
+        this.staticData.collectionid = String(options.collectionid)
         let title = options.title
         let data = app.globalData.tables[this.staticData.collectionid]
+        // console.log(data)
         let uiddata = this.get_Cards_with_UID(data)
         this.staticData.cards = uiddata
         this.setData({

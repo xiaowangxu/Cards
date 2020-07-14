@@ -50,17 +50,16 @@ App({
       this.remove(collectionid)
       return
     }
-    let cards = data
-    this.globalData.tables[collectionid] = cards
+    this.globalData.tables[collectionid] = data
     // this.update_TableList()
-    // this.save_Data()
+    this.save_Data()
   },
 
   remove: function (collectionid) {
     collectionid = String(collectionid)
     delete this.globalData.tables[collectionid]
     // this.update_TableList()
-    // this.save_Data()
+    this.save_Data()
   },
 
   update_TableList: function () {
@@ -71,11 +70,6 @@ App({
   },
 
   save_Data: function () {
-    this.update_TableList()
-    wx.setStorage({
-      data: this.globalData.tablelist,
-      key: 'tablelist',
-    })
     wx.setStorage({
       data: this.globalData.tables,
       key: 'tables',
@@ -84,6 +78,8 @@ App({
 
   navigateTo_Table: function (tableid, title, from) {
     let collectionid = String(tableid)
+
+    this.update_TableList()
 
     if (!this.globalData.tablelist.includes(collectionid)) {
       this.globalData.tables[collectionid] = []
