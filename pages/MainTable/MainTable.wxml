@@ -31,9 +31,12 @@
 <!--  -->
 <view class="StatusBar" style="height: {{navHeight + statusHeight}}px;">
 	<view class="NavBar" style="height: {{navHeight}}px; top: {{statusHeight}}px; padding-right: {{navButtonRight + navButtonWidth + 12}}px;">
-		<view class="NavButton BG-Gray left" style="min-width: {{navButtonHeight}}px; width: {{navButtonHeight}}px; height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px; padding: 0px;" bindtap="back">
+		<view class="NavButton BG-Gray left" style="min-width: {{navButtonHeight}}px; width: {{navButtonHeight}}px; height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px; padding: 0px;" bindtap="tap_Setting">
 			<image style="width: {{navButtonHeight - 13}}px; height: {{navButtonHeight - 13}}px;" src="Setting.svg" />
 		</view>
+		<!-- <view class="NavButton BG-Gray left" style="min-width: {{navButtonHeight}}px; width: {{navButtonHeight}}px; height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px; padding: 0px;" bindtap="tap_Setting">
+			<image style="width: {{navButtonHeight - 8}}px; height: {{navButtonHeight - 8}}px;" src="Upload.svg" />
+		</view> -->
 		<text class="Title TEXT_Large">{{title}}</text>
 	</view>
 </view>

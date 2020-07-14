@@ -1,7 +1,7 @@
 //app.js
 App({
   onLaunch: function () {
-    this.load_MainTable()
+    this.load_Tables()
     wx.getSystemInfo({
       success: res => {
         let menuButtonObject = wx.getMenuButtonBoundingClientRect()
@@ -10,7 +10,6 @@ App({
         this.globalData.navHeight = navHeight
         this.globalData.navButtonHeight = menuButtonObject.height
         this.globalData.navButtonRight = res.windowWidth - menuButtonObject.right
-        // console.log(this.globalData.navButtonRight)
         this.globalData.navButtonWidth = menuButtonObject.width
         this.globalData.statusHeight = statusBarHeight
         this.globalData.windowHeight = res.windowHeight
@@ -18,41 +17,79 @@ App({
     })
   },
 
-  load_MainTable: function () {
-    let storage = wx.getStorageInfoSync()
-    if (storage.keys.includes('test')) {
-      let data = wx.getStorageSync('test')
-      this.globalData.tables['test'] = data
-    } else {
-      this.globalData.tables['test'] = []
-    }
+  onHide: function () {
+    console.log(">> save")
+    this.save_Data()
   },
 
   globalData: {
-    userInfo: null,
     navHeight: 0,
     statusHeight: 0,
     windowHeight: 0,
     navButtonHeight: 0,
     navButtonRight: 0,
     navButtonWidth: 0,
-    tables: {}
+    tables: {},
+    tablelist: []
+  },
+
+  load_Tables: function () {
+    let storage = wx.getStorageInfoSync()
+    if (storage.keys.includes('tables')) {
+      let data = wx.getStorageSync('tables')
+      this.globalData.tables = data
+    } else {
+      this.globalData.tables = {Main: []}
+    }
+    this.update_TableList()
+  },
+
+  save: function (collectionid, data) {
+    collectionid = String(collectionid)
+    if (data.length <= 0) {
+      this.remove(collectionid)
+      return
+    }
+    let cards = data
+    this.globalData.tables[collectionid] = cards
+    // this.update_TableList()
+    // this.save_Data()
+  },
+
+  remove: function (collectionid) {
+    collectionid = String(collectionid)
+    delete this.globalData.tables[collectionid]
+    // this.update_TableList()
+    // this.save_Data()
+  },
+
+  update_TableList: function () {
+    this.globalData.tablelist = []
+    for (let collectionid in this.globalData.tables) {
+      this.globalData.tablelist.push(String(collectionid))
+    }
+  },
+
+  save_Data: function () {
+    this.update_TableList()
+    wx.setStorage({
+      data: this.globalData.tablelist,
+      key: 'tablelist',
+    })
+    wx.setStorage({
+      data: this.globalData.tables,
+      key: 'tables',
+    })
   },
 
   navigateTo_Table: function (tableid, title, from) {
     let collectionid = String(tableid)
-    if (!(collectionid in this.globalData.tables)) { // doesn't exist
-      let storage = wx.getStorageInfoSync()
-      if (storage.keys.includes(collectionid)) {
-        let data = wx.getStorageSync(collectionid)
-        this.globalData.tables[collectionid] = data
-      } else {
-        this.globalData.tables[collectionid] = []
-      }
+
+    if (!this.globalData.tablelist.includes(collectionid)) {
+      this.globalData.tables[collectionid] = []
     }
-    // console.log(this.globalData.tables)
-    // return
-    let url = '/pages/Table/Table?collectionid=' + tableid + "&title=" + title + "&from=" + from + "&data=" + JSON.stringify(this.globalData.tables[collectionid])
+
+    let url = '/pages/Table/Table?collectionid=' + collectionid + "&title=" + title + "&from=" + from + "&data=" + JSON.stringify(this.globalData.tables[collectionid])
     wx.navigateTo({
       url: url
     })
