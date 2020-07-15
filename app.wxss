@@ -9,7 +9,130 @@
   box-sizing: border-box;
 }
 
-.TEXT_Large {
+.TEXT-Large {
   font-size: 24px;
   font-weight: bold;
+}
+
+.TEXT-Medium{
+  font-size: 18px;
+  /* font-weight: bold; */
+}
+
+.StatusBar {
+  width: 100%;
+  position: sticky;
+  top: 0px;
+  /* padding: 0px 12px; */
+  box-sizing: border-box;
+  background-color: white;
+  z-index: 1;
+}
+
+.NavBar {
+  /* justify-self: stretch; */
+  padding: 0px 12px;
+  width: 100%;
+  position: absolute;
+  /* bottom: 0px; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.NavBar.center {
+  justify-content: space-evenly;
+}
+
+.NavBar.left {
+  justify-content: flex-start;
+}
+
+.NavBar.right {
+  justify-content: flex-end;
+}
+
+.NavButton:active {
+  opacity: 60%;
+  transition: opacity 0.1s ease-out;
+}
+
+.NavButton {
+  padding: 0px 12px;
+  min-width: 30px;
+  background-color: black;
+  /* margin-right: 6px; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  opacity: 100%;
+  transition: opacity 0.1s ease-out;
+}
+
+.NavButton.center {
+  margin-left: 6px;
+  margin-right: 6px;
+}
+
+.NavButton.left {
+  margin-right: 12px;
+}
+
+.NavButton.right {
+  margin-left: 12px;
+}
+
+.NavButton.expand {
+  justify-self: stretch;
+  width: 100%;
+}
+
+.BG-Green {
+  background-color: rgb(79, 197, 79);
+  color: white;
+}
+
+.BG-Red {
+  background-color: tomato;
+  color: white;
+}
+
+.BG-Gray {
+  background-color: rgb(230, 230, 230);
+  color: black;
+}
+
+.Card-MoveArea {
+  width: 100%;
+  max-width: 100%;
+  background-color: transparent;
+  box-sizing: border-box;
+  /* margin-top: 8px; */
+  padding: 12px 12px 0px 12px;
+  overflow-x: hidden;
+  /* box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.1); */
+  position: sticky;
+  /* min-height: 92px; */
+}
+
+.NavButton-Container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  row-gap: 12px;
+}
+
+.NavButton-Container.center {
+  justify-content: space-evenly;
+}
+
+.NavButton-Container.left {
+  justify-content: flex-start;
+}
+
+.NavButton-Container.right {
+  justify-content: flex-end;
 }

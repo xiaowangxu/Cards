@@ -1,8 +1,9 @@
 {
     "pages": [
         "pages/MainTable/MainTable",
-        "pages/logs/logs",
-        "pages/Table/Table"
+        "pages/Table/Table",
+        "pages/Setting/Setting",
+        "pages/File/File"
     ],
     "window": {
         "backgroundTextStyle": "light",

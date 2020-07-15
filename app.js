@@ -29,6 +29,7 @@ App({
 		navButtonHeight: 0,
 		navButtonRight: 0,
 		navButtonWidth: 0,
+		colorPalettes: ['#D32F2F','#7B1FA2','#303F9F','#1976D2','#689F38','#FBC02D','#FFA000','#F57C00','#E64A19','#5D4037', '#111d5e', '#2f2519', '#c70039', '#184d47', '#f37121', '#ffbd69', '#b83b5e', '#3ec1d3', '#6c5b7b', '#455d7a', '#8f8787'],
 		tables: {}
 	},
 
@@ -49,6 +50,7 @@ App({
 			return
 		}
 		this.globalData.tables[collectionid] = data
+		this.save_Data()
 	},
 
 	remove_Deep: function (collectionid) {
@@ -60,6 +62,26 @@ App({
 				}
 			})
 			delete this.globalData.tables[collectionid]
+		}
+	},
+
+	remove_Card: function (collectionid, index) {
+		console.log("????")
+		collectionid = String(collectionid)
+		let table = this.globalData.tables[collectionid]
+		console.log(collectionid)
+		if (table !== undefined) {
+			console.log(">>>>")
+			let card = table.splice(index, 1)[0]
+			if (card !== undefined && card.type === 'Collection') {
+				this.remove_Deep(card.data.collectionid)
+			}
+		}
+		if (table.length <= 0) {
+			this.remove(collectionid)
+		}
+		else {
+			this.save_Data()
 		}
 	},
 

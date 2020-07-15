@@ -13,8 +13,8 @@
 
 		<text wx:for="{{[1,2,3,4,5,6,7,8,9,10,11,12,13]}}" class="Course-Number" style="grid-row-start: {{item}};">{{item}}</text>
 
-		<block wx:for="{{courses}}" wx:for-item="course">
-			<view wx:for="{{course.times}}" wx:for-item="item" class="Course" style="grid-column-start: {{item.day + 1}}; grid-row-start: {{item.timestart}}; grid-row-end: {{item.timeend + 1}}; background-color: {{course.color}};" data-coursename="{{course.name}}" bindtap="tap_Course">
+		<block wx:for="{{courses}}" wx:for-item="course" wx:for-index="idx">
+			<view wx:for="{{course.times}}" wx:for-item="item" class="Course" style="grid-column-start: {{item.day + 1}}; grid-row-start: {{item.timestart}}; grid-row-end: {{item.timeend + 1}}; background-color: {{colorPalettes[(idx % colorPalettes.length)]}};" data-coursename="{{course.name}}" bindtap="tap_Course">
 				<text class="Course-Name">{{course.name}}</text>
 			</view>
 		</block>

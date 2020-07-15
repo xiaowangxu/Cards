@@ -29,32 +29,23 @@
 
 
 <!--  -->
-<view class="StatusBar" style="height: {{navHeight * 2 + statusHeight }}px;">
+<view class="StatusBar" style="height: {{navHeight + statusHeight}}px;">
 	<view class="NavBar" style="height: {{navHeight}}px; top: {{statusHeight}}px; padding-right: {{navButtonRight + navButtonWidth + 12}}px;">
 		<view class="NavButton BG-Gray left" style="min-width: {{navButtonHeight}}px; width: {{navButtonHeight}}px; height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px; padding: 0px;" bindtap="tap_Back">
 			<image style="width: {{navButtonHeight - 16}}px; height: {{navButtonHeight - 16}}px;" src="../../assests/Back.svg" />
 		</view>
 		<text class="Title TEXT-Large">{{title}}</text>
 	</view>
-	<view class="NavBar right" style="height: {{navHeight}}px; top: {{ navHeight + statusHeight }}px">
+	<!-- <view class="NavBar right" style="height: {{navHeight}}px; top: {{ navHeight + statusHeight }}px">
 		<view wx:if="{{cards.length>0}}" class="NavButton BG-Red right" style="height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px;" bindtap="switch_DeleteActive">
 			管理卡片
 		</view>
-		<view class="NavButton BG-Green right" style="height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px;" bindtap="open_CardShop">
-			新卡片
-		</view>
-	</view>
+	</view> -->
 </view>
 
 <view class="Container" id="page">
 
-	<view wx:for="{{cards}}" class="Card-MoveArea" style="top: {{ (navHeight * 2) + statusHeight + index * 12 }}px; " wx:key="uid">
-		<view class="Card-Button">
-			<view class="Button" data-index="{{index}}" bindtap="delete_Card">
-				<icon type="cancel" color="#ffffff" size="30"></icon>
-			</view>
-		</view>
-
+	<view wx:for="{{cards}}" class="Card-MoveArea" style="top: {{ navHeight + statusHeight + index * 12 }}px; " wx:key="uid">
 		<view class="Card {{deleteActive&&cards.length>0 ? 'selected' : ''}}">
 			<template is="{{item.card.type}}" data="{{index: index, data: item.card.data, full: false}}"></template>
 		</view>
@@ -66,30 +57,4 @@
 		<view wx:else style="height: {{navButtonHeight}}px;"/>
 	</view> -->
 
-</view>
-
-<view class="Cover {{isCardShopOpen? 'show' : ''}}" bindtap="close_CardShop">
-</view>
-
-<view class="Card-Shop {{isCardShopOpen? 'show' : ''}}">
-	<text class="TEXT-Large" style="margin: 0px 30px">卡片集</text>
-	<view class="Card_Container">
-
-		<swiper class="Card_Swiper" indicator-dots="true" current="{{selectedCardIndex}}" bindchange="select_CardIndex">
-			<swiper-item wx:for="{{cardShopList}}" style="box-sizing: border-box;">
-				<view class="Card_Item">
-					<view style="flex: 1;" />
-					<template is="{{item.type + '-Template'}}" data="{{index: index, data: item.data, full: true}}">
-					</template>
-					<view style="flex: 1;" />
-				</view>
-			</swiper-item>
-		</swiper>
-
-	</view>
-	<view class="NavButton-Container right" style="margin: 0px 30px; height: {{navHeight}}px; margin-top: 10px">
-		<view class="NavButton BG-Green expand" hover-class="NavButton-Hover" style="height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px;" bindtap="add_Card">
-			添加
-		</view>
-	</view>
 </view>

@@ -3,236 +3,253 @@ const app = getApp()
 
 Page({
 
-    data: {
-        // app: getApp(),
-        statusHeight: app.globalData.statusHeight,
-        navHeight: app.globalData.navHeight,
-        navButtonHeight: app.globalData.navButtonHeight,
-        navButtonWidth: app.globalData.navButtonWidth,
-        navButtonRight: app.globalData.navButtonRight,
+	data: {
+		// app: getApp(),
+		statusHeight: app.globalData.statusHeight,
+		navHeight: app.globalData.navHeight,
+		navButtonHeight: app.globalData.navButtonHeight,
+		navButtonWidth: app.globalData.navButtonWidth,
+		navButtonRight: app.globalData.navButtonRight,
 
-        isCardShopOpen: false,
-        selectedCardIndex: 0,
-
-
-        cardShopList: [],
-        cards: [],
+		isCardShopOpen: false,
+		selectedCardIndex: 0,
 
 
-        deleteActive: false
-    },
+		cardShopList: [],
+		cards: [],
 
-    staticData: {
-        collectionid: 'Main',
-        lastPageTop: 0,
-        cards: [],
-        uid: 0,
-        cardsTemplate: [],
-        cardsTemplateBlank: [{
-            type: 'Todo',
-            data: []
-        }, {
-            type: 'Picture',
-            data: []
-        }, {
-            type: 'Collection',
-            data: {
-                collectionid: 'template',
-                name: ''
-            }
-        }]
-    },
 
-    onLoad: function (options) {
-        this.staticData.collectionid = 'Main'
-        let data = app.globalData.tables['Main']
-        if (data === undefined) {
-            return
-        } else {
-            let uiddata = this.get_Cards_with_UID(data)
-            this.staticData.cards = uiddata
-            this.setData({
-                cards: uiddata,
-            })
-        }
-    },
+		deleteActive: false
+	},
 
-    onReady: function () {},
+	staticData: {
+		collectionid: 'Main',
+		lastPageTop: 0,
+		cards: [],
+		uid: 0,
+		cardsTemplate: [],
+		cardsTemplateBlank: [{
+			type: 'Todo',
+			data: []
+		}, {
+			type: 'Picture',
+			data: []
+		}, {
+			type: 'Collection',
+			data: {
+				collectionid: 'template',
+				name: ''
+			}
+		}]
+	},
 
-    onShow: function () {
+	onLoad: function (options) {
+		this.staticData.collectionid = 'Main'
+		let data = app.globalData.tables['Main']
+		if (data === undefined) {
+			return
+		} else {
+			let uiddata = this.get_Cards_with_UID(data)
+			this.staticData.cards = uiddata
+			this.setData({
+				cards: uiddata,
+			})
+		}
+	},
 
-    },
+	onReady: function () {},
 
-    onHide: function () {
-        // console.log(">>>>>")
-    },
+	onShow: function () {
 
-    onUnload: function () {
-        // console.log(">>>>>")
-    },
+	},
 
-    onPullDownRefresh: function () {
+	onHide: function () {
+		// console.log(">>>>>")
+	},
 
-    },
+	onUnload: function () {
+		// console.log(">>>>>")
+	},
 
-    onReachBottom: function () {
+	onPullDownRefresh: function () {
 
-    },
+	},
 
-    onShareAppMessage: function () {
+	onReachBottom: function () {
 
-    },
+	},
 
-    tap_Setting: function () {
-        console.log(">> Setting")
-    },
+	onShareAppMessage: function () {
 
-    get_Cards_with_UID: function (cards) {
-        return cards.map((item) => {
-            let uid = this.staticData.uid
-            this.staticData.uid++
-            return {
-                uid: uid,
-                card: item
-            }
-        })
-    },
+	},
 
-    unwrap_Cards_with_UID: function (cards) {
-        return cards.map((item) => {
-            return item.card
-        })
-    },
+	tap_Setting: function () {
+		let that = this
+		wx.navigateTo({
+		  url: '../Setting/Setting',
+		  events: {
+			  refresh: function () {
+				let data = app.globalData.tables['Main']
+				if (data === undefined) {
+					return
+				} else {
+					let uiddata = that.get_Cards_with_UID(data)
+					that.staticData.cards = uiddata
+					that.setData({
+						cards: uiddata,
+					})
+				}
+			  }
+		  }
+		})
+	},
 
-    wrap_Card_with_UID: function (card) {
-        let uid = this.staticData.uid
-        this.staticData.uid++
-        return {
-            uid: uid,
-            card: card
-        }
-    },
+	get_Cards_with_UID: function (cards) {
+		return cards.map((item) => {
+			let uid = this.staticData.uid
+			this.staticData.uid++
+			return {
+				uid: uid,
+				card: item
+			}
+		})
+	},
 
-    prevent_Scroll: function () {
-        return false
-    },
+	unwrap_Cards_with_UID: function (cards) {
+		return cards.map((item) => {
+			return item.card
+		})
+	},
 
-    scroll_PageToBottom: function () {
-        let that = this
-        wx.createSelectorQuery().select('#page').boundingClientRect(function (rect) {
-            if (rect) {
-                that.staticData.lastPageTop = rect.top
-                wx.pageScrollTo({
-                    scrollTop: rect.height,
-                    duration: 200
-                })
-            }
-        }).exec()
-    },
+	wrap_Card_with_UID: function (card) {
+		let uid = this.staticData.uid
+		this.staticData.uid++
+		return {
+			uid: uid,
+			card: card
+		}
+	},
 
-    scroll_PageTo: function (position) {
-        wx.pageScrollTo({
-            scrollTop: -position,
-            duration: 200
-        })
-    },
+	prevent_Scroll: function () {
+		return false
+	},
 
-    switch_DeleteActive: function () {
-        this.setData({
-            deleteActive: !this.data.deleteActive
-        })
-    },
+	scroll_PageToBottom: function () {
+		let that = this
+		wx.createSelectorQuery().select('#page').boundingClientRect(function (rect) {
+			if (rect) {
+				that.staticData.lastPageTop = rect.top
+				wx.pageScrollTo({
+					scrollTop: rect.height,
+					duration: 200
+				})
+			}
+		}).exec()
+	},
 
-    set_DeleteActive: function (active) {
-        this.setData({
-            deleteActive: active
-        })
-    },
+	scroll_PageTo: function (position) {
+		wx.pageScrollTo({
+			scrollTop: -position,
+			duration: 200
+		})
+	},
 
-    delete_Card: function (event) {
-        let index = event.currentTarget.dataset.index
-        let item = this.staticData.cards.splice(index, 1)
-        if (item[0].card.type == 'Collection') {
-            app.remove(item[0].card.data.collectionid)
-            // this.remove(item[0].card.data.collectionid)
-        }
-        this.setData({
-            cards: this.staticData.cards,
-            // deleteActive: this.staticData.cards.length === 0 ? false : true
-        })
-        app.save(this.staticData.collectionid, this.unwrap_Cards_with_UID(this.staticData.cards))
-        // console.log(this.data.cards.length)
-    },
+	switch_DeleteActive: function () {
+		this.setData({
+			deleteActive: !this.data.deleteActive
+		})
+	},
 
-    open_CardShop: function () {
-        if (!this.data.isCardShopOpen) {
-            // this.scroll_PageToBottom()
-        }
-        this.staticData.cardsTemplate = this.staticData.cardsTemplateBlank.filter((item) => {
-            return true
-        })
-        // console.log(JSON.stringify(this.staticData.cardsTemplate))
-        this.setData({
-            isCardShopOpen: true,
-            cardShopList: this.staticData.cardsTemplate,
-            // selectedCardIndex: 0,
-            deleteActive: false
-        })
-    },
+	set_DeleteActive: function (active) {
+		this.setData({
+			deleteActive: active
+		})
+	},
 
-    close_CardShop: function () {
-        this.setData({
-            isCardShopOpen: false,
-            deleteActive: false
-        })
-    },
+	delete_Card: function (event) {
+		let index = event.currentTarget.dataset.index
+		let item = this.staticData.cards.splice(index, 1)
+		if (item[0].card.type == 'Collection') {
+			app.remove(item[0].card.data.collectionid)
+			// this.remove(item[0].card.data.collectionid)
+		}
+		this.setData({
+			cards: this.staticData.cards,
+			// deleteActive: this.staticData.cards.length === 0 ? false : true
+		})
+		app.save(this.staticData.collectionid, this.unwrap_Cards_with_UID(this.staticData.cards))
+		// console.log(this.data.cards.length)
+	},
 
-    sync_StaticCards: function () {
-        this.staticData.cards = this.data.cards.filter((item) => {
-            return true
-        })
-    },
+	open_CardShop: function () {
+		if (!this.data.isCardShopOpen) {
+			// this.scroll_PageToBottom()
+		}
+		this.staticData.cardsTemplate = this.staticData.cardsTemplateBlank.filter((item) => {
+			return true
+		})
+		// console.log(JSON.stringify(this.staticData.cardsTemplate))
+		this.setData({
+			isCardShopOpen: true,
+			cardShopList: this.staticData.cardsTemplate,
+			// selectedCardIndex: 0,
+			deleteActive: false
+		})
+	},
 
-    select_CardIndex: function (event) {
-        this.data.selectedCardIndex = event.detail.current
-    },
+	close_CardShop: function () {
+		this.setData({
+			isCardShopOpen: false,
+			deleteActive: false
+		})
+	},
 
-    add_Card: function () {
-        this.close_CardShop()
+	sync_StaticCards: function () {
+		this.staticData.cards = this.data.cards.filter((item) => {
+			return true
+		})
+	},
 
-        let item = this.staticData.cardsTemplate[this.data.selectedCardIndex]
-        if (item.type === 'Collection') {
-            if (getCurrentPages().length >= 10) {
-                // console.log(">>>>>>>>")
-                return
-            }
-            let date = Date.now()
-            item.data.collectionid = String(date)
-        }
-        // this.staticData.cards.push(this.wrap_Card_with_UID(item))
-        this.setData({
-            ['cards[' + this.staticData.cards.length + ']']: this.wrap_Card_with_UID(item)
-        })
-        this.sync_StaticCards()
-        this.scroll_PageToBottom()
-        app.save(this.staticData.collectionid, this.unwrap_Cards_with_UID(this.staticData.cards))
-    },
+	select_CardIndex: function (event) {
+		this.data.selectedCardIndex = event.detail.current
+	},
 
-    on_CardChanged: function (event) {
-        let index = event.detail.idx
-        let data = event.detail.data
-        // console.log("!!!!!", index, JSON.stringify(data))
-        this.staticData.cards[index].card = data
-        // console.log(this.staticData.cards)
-        app.save(this.staticData.collectionid, this.unwrap_Cards_with_UID(this.staticData.cards))
-    },
+	add_Card: function () {
+		this.close_CardShop()
 
-    on_SelectedCardChanged: function (event) {
-        // console.log(">>>>>")
-        let index = event.detail.idx
-        let data = event.detail.data
-        this.staticData.cardsTemplate[index] = data
-        // console.log(">>> ", JSON.stringify(this.staticData.cardsTemplate))
-        // console.log(this.staticData.cardsTemplate[2] === undefined)
-    }
+		let item = this.staticData.cardsTemplate[this.data.selectedCardIndex]
+		if (item.type === 'Collection') {
+			if (getCurrentPages().length >= 10) {
+				// console.log(">>>>>>>>")
+				return
+			}
+			let date = Date.now()
+			item.data.collectionid = String(date)
+		}
+		// this.staticData.cards.push(this.wrap_Card_with_UID(item))
+		this.setData({
+			['cards[' + this.staticData.cards.length + ']']: this.wrap_Card_with_UID(item)
+		})
+		this.sync_StaticCards()
+		this.scroll_PageToBottom()
+		app.save(this.staticData.collectionid, this.unwrap_Cards_with_UID(this.staticData.cards))
+	},
+
+	on_CardChanged: function (event) {
+		let index = event.detail.idx
+		let data = event.detail.data
+		// console.log("!!!!!", index, JSON.stringify(data))
+		this.staticData.cards[index].card = data
+		// console.log(this.staticData.cards)
+		app.save(this.staticData.collectionid, this.unwrap_Cards_with_UID(this.staticData.cards))
+	},
+
+	on_SelectedCardChanged: function (event) {
+		// console.log(">>>>>")
+		let index = event.detail.idx
+		let data = event.detail.data
+		this.staticData.cardsTemplate[index] = data
+		// console.log(">>> ", JSON.stringify(this.staticData.cardsTemplate))
+		// console.log(this.staticData.cardsTemplate[2] === undefined)
+	}
 })

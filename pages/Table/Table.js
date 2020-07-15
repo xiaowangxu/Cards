@@ -90,7 +90,7 @@ Page({
 
     },
 
-    back: function () {
+    tap_Back: function () {
         if (this.data.deleteActive) {
             // console.log("close card shop")
             this.setData({
