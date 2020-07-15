@@ -41,6 +41,15 @@
 	</view>
 </view>
 
+<view class="Container">
+	<view class="List-Container">
+		<view class="Item-Container">
+			<view class="Card-Icon" style="background-color: transparent;"></view>
+			<text class="TEXT-Medium">春季学期第{{number}}周</text>
+		</view>
+	</view>
+</view>
+
 <view class="CourseTable">
 	<course-table />
 </view>
