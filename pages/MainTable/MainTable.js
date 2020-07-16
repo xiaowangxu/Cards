@@ -18,6 +18,7 @@ Page({
 		cardShopList: [],
 		cards: [],
 
+		courses: [],
 
 		deleteActive: false
 	},
@@ -47,12 +48,16 @@ Page({
 		this.staticData.collectionid = 'Main'
 		let data = app.globalData.tables['Main']
 		if (data === undefined) {
+			this.setData({
+				courses: app.globalData.courses
+			})
 			return
 		} else {
 			let uiddata = this.get_Cards_with_UID(data)
 			this.staticData.cards = uiddata
 			this.setData({
 				cards: uiddata,
+				courses: app.globalData.courses
 			})
 		}
 	},
@@ -72,7 +77,9 @@ Page({
 	},
 
 	onPullDownRefresh: function () {
-
+		let coursetable = this.selectComponent('.CourseTableObject')
+		coursetable.refresh()
+		wx.stopPullDownRefresh()
 	},
 
 	onReachBottom: function () {
@@ -175,7 +182,7 @@ Page({
 		}
 		this.setData({
 			cards: this.staticData.cards,
-			// deleteActive: this.staticData.cards.length === 0 ? false : true
+			deleteActive: this.staticData.cards.length === 0 ? false : true
 		})
 		app.save(this.staticData.collectionid, this.unwrap_Cards_with_UID(this.staticData.cards))
 		// console.log(this.data.cards.length)

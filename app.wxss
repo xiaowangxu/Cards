@@ -19,6 +19,17 @@
   /* font-weight: bold; */
 }
 
+.TEXT-Normal{
+  font-size: 14px;
+  /* font-weight: bold; */
+}
+
+.TEXT-Small{
+  font-size: 12px;
+  /* font-weight: bold; */
+}
+
+
 .StatusBar {
   width: 100%;
   position: sticky;

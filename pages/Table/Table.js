@@ -174,7 +174,7 @@ Page({
         }
         this.setData({
             cards: this.staticData.cards,
-            // deleteActive: this.staticData.cards.length === 0 ? false : true
+            deleteActive: this.staticData.cards.length === 0 ? false : true
         })
         app.save(this.staticData.collectionid, this.unwrap_Cards_with_UID(this.staticData.cards))
         // console.log(this.data.cards.length)

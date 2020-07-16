@@ -30,7 +30,8 @@ App({
 		navButtonRight: 0,
 		navButtonWidth: 0,
 		colorPalettes: ['#D32F2F','#7B1FA2','#303F9F','#1976D2','#689F38','#FBC02D','#FFA000','#F57C00','#E64A19','#5D4037', '#111d5e', '#2f2519', '#c70039', '#184d47', '#f37121', '#ffbd69', '#b83b5e', '#3ec1d3', '#6c5b7b', '#455d7a', '#8f8787'],
-		tables: {}
+		tables: {},
+		courses:[]
 	},
 
 	load_Tables: function () {
@@ -40,6 +41,94 @@ App({
 			this.globalData.tables = data
 		} else {
 			this.globalData.tables = {}
+		}
+		if (storage.keys.includes('courses')) {
+			let data = wx.getStorageSync('courses')
+			this.globalData.courses = data
+		} else {
+			this.globalData.courses = [{
+                name: '汇编语言程序设计',
+                week: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                times: [{
+                    day: 1,
+                    timestart: 11,
+                    timeend: 13
+                }, {
+                    day: 3,
+                    timestart: 6,
+                    timeend: 8
+                }],
+                property: {place: 'A103', teacher: '杨洪斌'}
+            },{
+                name: '组合数学',
+                week: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                times: [{
+                    day: 1,
+                    timestart: 6,
+                    timeend: 8
+                }],
+                property: {place: 'A103', teacher: '李卫民'}
+            },{
+                name: '形势与政策',
+                week: [1, 6],
+                times: [{
+                    day: 3,
+                    timestart: 11,
+                    timeend: 12
+                }],
+                property: {place: 'A103', teacher: '宋津明'}
+            },{
+                name: '操作系统(1)',
+                week: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                times: [{
+                    day: 2,
+                    timestart: 7,
+                    timeend: 8
+                },{
+                    day: 4,
+                    timestart: 1,
+                    timeend: 2
+                },{
+                    day: 4,
+                    timestart: 3,
+                    timeend: 4
+                }],
+                property: {place: 'A103', teacher: '刘福岩'}
+            },{
+                name: '计算机图形学',
+                week: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                times: [{
+                    day: 2,
+                    timestart: 11,
+                    timeend: 13
+                },{
+                    day: 5,
+                    timestart: 7,
+                    timeend: 8
+                }],
+                property: {place: 'A103', teacher: '王宜敏'}
+            },{
+                name: '计算机网络',
+                week: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                times: [{
+                    day: 1,
+                    timestart: 1,
+                    timeend: 2
+                },{
+                    day: 1,
+                    timestart: 3,
+                    timeend: 4
+                },{
+                    day: 3,
+                    timestart: 1,
+                    timeend: 2
+                },{
+                    day: 3,
+                    timestart: 3,
+                    timeend: 4
+                }],
+                property: {place: 'A103', teacher: '张云华'}
+            }]
 		}
 	},
 

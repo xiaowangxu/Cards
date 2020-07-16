@@ -1,6 +1,39 @@
 <!--components/CourseTable/CourseTable.wxml-->
-<view wx:if="{{currentCourse !== null}}" class="Course-Notify-Container" style="background-color: {{currentCourse.color}};">
+<view wx:if="{{currentCourse !== null}}" class="Course-Notify-Container" style="background-color: {{currentCourse.color}};" data-coursename="{{currentCourse.course.name}}" bindtap="tap_Course">
+	<view class="List-Container">
+		<text class="TEXT-Small" style="color: white; justify-self: flex-start;">当前课程</text>
+		<text class="TEXT-Small" style="color: white; justify-self: flex-end;">{{currentCourse.formattedtime}}</text>
+	</view>
+
+	<view class="List-Container">
+		<text class="TEXT-Large" style="color: white; font-weight: bold;">{{currentCourse.course.name}}</text>
+		<view class="List-VContainer">
+			<text wx:for="{{currentCourse.course.property}}"  class="TEXT-Medium" style="color: white;">{{item}}</text>
+		</view>
+	</view>
 </view>
+
+<view wx:if="{{nextCourse !== null}}" class="Course-Notify-Container" style="background-color: {{nextCourse.color}};" data-coursename="{{nextCourse.course.name}}" bindtap="tap_Course">
+	<view class="List-Container">
+		<text class="TEXT-Small" style="color: white; justify-self: flex-start;">下一堂课</text>
+		<text class="TEXT-Small" style="color: white; justify-self: flex-end;">{{nextCourse.formattedtime}}</text>
+	</view>
+
+	<view class="List-Container">
+		<text class="TEXT-Medium" style="color: white; font-weight: bold;">{{nextCourse.course.name}}</text>
+		<view class="List-VContainer">
+			<text wx:for="{{nextCourse.course.property}}"  class="TEXT-Small" style="color: white;">{{item}}</text>
+		</view>
+	</view>
+</view>
+
+<view wx:if="{{nextCourse === null && currentCourse === null}}" class="Course-Notify-Container" style="background-color: white;">
+	<view class="List-Container">
+		<text class="TEXT-Medium" style="color: rgb(200,200,200); font-weight: bold;">好好休息吧</text>
+	</view>
+</view>
+
+
 <view class="Table-Container">
 	<view class="Table-Grid">
 		<view class="Table-Line top" style="grid-row-start: 1;" />

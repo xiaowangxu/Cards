@@ -42,7 +42,7 @@
 </view>
 
 <view class="CourseTable">
-	<course-table />
+	<course-table class="CourseTableObject" courses="{{courses}}"/>
 </view>
 
 <view class="NavButton-Container right" style="margin: 0px 12px; height: {{navHeight}}px; position: sticky; top: {{navHeight + statusHeight}}px;">
