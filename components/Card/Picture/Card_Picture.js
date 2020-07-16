@@ -30,8 +30,8 @@ Component({
         select_Pictures: function () {
             const that = this
             wx.chooseImage({
-                sourceType: '拍照或相册',
-                sizeType: '压缩或原图',
+                sourceType: ['album', 'camera'],
+                sizeType: ['original', 'compressed'],
                 count: 9,
                 success(res) {
                     console.log(res)

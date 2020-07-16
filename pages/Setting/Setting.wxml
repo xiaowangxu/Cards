@@ -12,6 +12,18 @@
 </view>
 
 <view class="Container">
+
+	<view class="List-Container">
+		<view class="Item-Container">
+			<view class="Card-Icon" style="background-color: transparent;"></view>
+			<text class="TEXT-Medium">日期是{{date_time}}</text>
+		</view>
+		<view class="Item-Container">
+			<view class="Card-Icon" style="background-color: transparent;"></view>
+			<text class="TEXT-Medium">当前是春季学期第{{number}}周</text>
+		</view>
+	</view>
+
 	<view class="List-Container">
 		<view class="Item-Container" data-file="Todo" bindtap="goto_File">
 			<view class="Card-Icon" style="background-color: rgb(80, 80, 80);"></view>
@@ -24,17 +36,6 @@
 		<view class="Item-Container" data-file="Collection" bindtap="goto_File">
 			<view class="Card-Icon" style="background-color: rgb(244, 183, 62);"></view>
 			<text class="TEXT-Medium">Collection</text>
-		</view>
-	</view>
-
-	<view class="List-Container">
-		<view class="Item-Container" data-file="Todo" bindtap="edit_CourseTable">
-			<view class="Card-Icon" style="background-color: transparent;"></view>
-			<text class="TEXT-Medium">{{time}}</text>
-		</view>
-		<view class="Item-Container" data-file="Todo" bindtap="edit_CourseTable">
-			<view class="Card-Icon" style="background-color: transparent;"></view>
-			<text class="TEXT-Medium">当前是春季学期第{{number}}周</text>
 		</view>
 	</view>
 

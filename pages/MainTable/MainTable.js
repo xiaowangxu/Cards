@@ -1,6 +1,6 @@
 // pages/Table.js
 const app = getApp()
-
+import util from '../../utils/util.js';
 Page({
 
 	data: {
@@ -45,6 +45,26 @@ Page({
 	},
 
 	onLoad: function (options) {
+    var DATE_TIME = util.formatDate(new Date());
+    this.setData({
+      date_time: DATE_TIME,
+      start_date_time: '2020/04/06', //开始时间
+    })
+    console.log('date_time:', this.data.date_time);
+    console.log('start_date_time:', this.data.start_date_time);
+    var date_time = new Date(this.data.date_time);
+    var start_date_time = new Date(this.data.start_date_time);
+    var days = date_time.getTime() - start_date_time.getTime();
+    var day = parseInt(days / (1000 * 60 * 60 * 24));
+    var num = Math.ceil(day / 7);
+    if (day > 0) {
+      this.setData({
+        number: num
+      })
+      console.log('当前是春季学期第', this.data.number + '周');
+    } else {
+      console.log('日期出错了');
+    }
 		this.staticData.collectionid = 'Main'
 		let data = app.globalData.tables['Main']
 		if (data === undefined) {
@@ -93,21 +113,21 @@ Page({
 	tap_Setting: function () {
 		let that = this
 		wx.navigateTo({
-		  url: '../Setting/Setting',
-		  events: {
-			  refresh: function () {
-				let data = app.globalData.tables['Main']
-				if (data === undefined) {
-					return
-				} else {
-					let uiddata = that.get_Cards_with_UID(data)
-					that.staticData.cards = uiddata
-					that.setData({
-						cards: uiddata,
-					})
+			url: '../Setting/Setting',
+			events: {
+				refresh: function () {
+					let data = app.globalData.tables['Main']
+					if (data === undefined) {
+						return
+					} else {
+						let uiddata = that.get_Cards_with_UID(data)
+						that.staticData.cards = uiddata
+						that.setData({
+							cards: uiddata,
+						})
+					}
 				}
-			  }
-		  }
+			}
 		})
 	},
 
