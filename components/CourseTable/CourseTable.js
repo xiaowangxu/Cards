@@ -117,7 +117,8 @@ Component({
 
         refresh: function () {
             let courses = this.properties.courses
-            let date = new Date('2020/7/13 14:12:00')
+            // let date = new Date('2020/7/13 14:12:00')
+            let date = new Date()
             let day = util.getDay(date)
             let coursetime = util.getCourse(date)
 

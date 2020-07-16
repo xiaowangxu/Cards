@@ -29,7 +29,7 @@
 
 <view wx:if="{{nextCourse === null && currentCourse === null}}" class="Course-Notify-Container" style="background-color: white;">
 	<view class="List-Container">
-		<text class="TEXT-Medium" style="color: rgb(200,200,200); font-weight: bold;">好好休息吧</text>
+		<text class="TEXT-Medium" style="color: rgb(80, 80, 80); font-weight: bold;">好好休息吧</text>
 	</view>
 </view>
 
