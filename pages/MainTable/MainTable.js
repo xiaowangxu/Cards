@@ -1,5 +1,12 @@
+const util = require("../../utils/util.js")
+
 // pages/Table.js
+
 const app = getApp()
+const startdate = new Date()
+let date = new Date()
+date.setTime(date.getTime() + 24 * 60 * 60 * 1000)
+const enddate = date
 
 Page({
 
@@ -40,6 +47,16 @@ Page({
 			data: {
 				collectionid: 'template',
 				name: ''
+			}
+		}, {
+			type: 'Notify',
+			data: {
+				name: '',
+				startdate: util.formatDate(startdate, '-'),
+				enddate: util.formatDate(enddate, '-'),
+				starttime: util.formatTimeOnly(startdate),
+				endtime: util.formatTimeOnly(enddate),
+				week: [true, true, true, true, true, true, true]
 			}
 		}]
 	},
@@ -93,21 +110,21 @@ Page({
 	tap_Setting: function () {
 		let that = this
 		wx.navigateTo({
-		  url: '../Setting/Setting',
-		  events: {
-			  refresh: function () {
-				let data = app.globalData.tables['Main']
-				if (data === undefined) {
-					return
-				} else {
-					let uiddata = that.get_Cards_with_UID(data)
-					that.staticData.cards = uiddata
-					that.setData({
-						cards: uiddata,
-					})
+			url: '../Setting/Setting',
+			events: {
+				refresh: function () {
+					let data = app.globalData.tables['Main']
+					if (data === undefined) {
+						return
+					} else {
+						let uiddata = that.get_Cards_with_UID(data)
+						that.staticData.cards = uiddata
+						that.setData({
+							cards: uiddata,
+						})
+					}
 				}
-			  }
-		  }
+			}
 		})
 	},
 
@@ -192,8 +209,25 @@ Page({
 		if (!this.data.isCardShopOpen) {
 			// this.scroll_PageToBottom()
 		}
-		this.staticData.cardsTemplate = this.staticData.cardsTemplateBlank.filter((item) => {
-			return true
+		this.staticData.cardsTemplate = this.staticData.cardsTemplateBlank.map((item) => {
+			if (item.type === 'Notify') {
+				let startdate = new Date()
+				let date = new Date()
+				date.setTime(date.getTime() + 24 * 60 * 60 * 1000)
+				let enddate = date
+				return {
+					type: 'Notify',
+					data: {
+						name: '',
+						startdate: util.formatDate(startdate, '-'),
+						enddate: util.formatDate(enddate, '-'),
+						starttime: util.formatTimeOnly(startdate),
+						endtime: util.formatTimeOnly(enddate),
+						week: [true, true, true, true, true, true, true]
+					}
+				}
+			}
+			return item
 		})
 		// console.log(JSON.stringify(this.staticData.cardsTemplate))
 		this.setData({

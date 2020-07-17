@@ -25,6 +25,15 @@
 	<card-collection idx="{{index}}" data="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_SelectedCardChanged" />
 </template>
 
+<template name="Notify">
+	<card-notify idx="{{index}}" data="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged" />
+</template>
+
+<template name="Notify-Template">
+	<card-notify idx="{{index}}" data="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_SelectedCardChanged" />
+</template>
+
+
 
 
 

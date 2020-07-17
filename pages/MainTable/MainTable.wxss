@@ -66,7 +66,7 @@ page {
 }
 
 .Card-Shop {
-    z-index: 3;
+    z-index: 102;
     box-sizing: border-box;
     border-radius: 20px 20px 0px 0px;
     width: 100%;
@@ -89,7 +89,7 @@ page {
 }
 
 .Cover {
-    z-index: 2;
+    z-index: 101;
     position: fixed;
     top: 0px;
     bottom: 0px;

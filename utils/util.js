@@ -9,7 +9,7 @@ const formatTime = date => {
 	return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
 
-const formatTimeFiexDate = date => {
+const formatTimeFiexdDate = date => {
 	let hour = date.getHours()
 	let minute = date.getMinutes()
 	let second = date.getSeconds()
@@ -23,11 +23,11 @@ const formatTimeOnly = (date, withsecond = false) => {
 	return (withsecond ? [hour, minute, second] : [hour, minute]).map(formatNumber).join(':')
 }
 
-const formatDate = date => {
+const formatDate = (date, separator = '/') => {
 	let year = date.getFullYear()
 	let month = date.getMonth() + 1
 	let day = date.getDate()
-	return [year, month, day].map(formatNumber).join('/')
+	return [year, month, day].map(formatNumber).join(separator)
 }
 
 const formatNumber = n => {
@@ -35,8 +35,8 @@ const formatNumber = n => {
 	return n[1] ? n : '0' + n
 }
 
-const getTimeFiexDate = date => {
-	return new Date(formatTimeFiexDate(date))
+const getTimeFiexdDate = date => {
+	return new Date(formatTimeFiexdDate(date))
 }
 
 const getDay = date => {
@@ -98,7 +98,7 @@ const CourseTime = [{
 ]
 
 const getCourse = date => {
-	let newdate = getTimeFiexDate(date)
+	let newdate = getTimeFiexdDate(date)
 	// console.log(newdate.toString())
 	for (let i = 0; i < CourseTime.length; i++) {
 		let coursetime = CourseTime[i]
@@ -137,11 +137,12 @@ const getCourseTimeDuratiomFormated = (start, end) => {
 
 module.exports = {
 	formatTime: formatTime,
+	formatTimeOnly: formatTimeOnly,
 	formatDate: formatDate,
 	getDay: getDay,
 	getCourse: getCourse,
 	getCourseTime: getCourseTime,
 	getCourseTimeFormated: getCourseTimeFormated,
-	getTimeFiexDate: getTimeFiexDate,
+	getTimeFiexdDate: getTimeFiexdDate,
 	getCourseTimeDuratiomFormated: getCourseTimeDuratiomFormated
 }

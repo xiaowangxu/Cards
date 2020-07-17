@@ -3,7 +3,8 @@
     "card-todo": "../../components/Card/Todo/Card_Todo",
     "card-picture": "../../components/Card/Picture/Card_Picture",
     "card-collection": "../../components/Card/Collection/Card_Collection",
-    "course-table": "../../components/CourseTable/CourseTable"
+    "course-table": "../../components/CourseTable/CourseTable",
+    "card-notify": "../../components/Card/Notify/Card_Notify"
   },
   "enablePullDownRefresh": true,
   "backgroundTextStyle": "dark"

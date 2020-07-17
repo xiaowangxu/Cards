@@ -1,7 +1,5 @@
 // components/CourseTable/CourseTable.js
-import util, {
-	getCourseTimeFormate
-} from '../../utils/util.js';
+const util = require("../../utils/util.js")
 
 Component({
 	// behaviors: ['wx://component-export'],
@@ -70,7 +68,7 @@ Component({
 		},
 
 		get_Next_Course: function (week, day, date) {
-			let formeteddate = util.getTimeFiexDate(date)
+			let formeteddate = util.getTimeFiexdDate(date)
 			let lastcourse = null
 			let lastcoursetime = -1
 			let index = -1

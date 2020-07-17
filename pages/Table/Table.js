@@ -1,5 +1,11 @@
+const util = require("../../utils/util.js")
+
 // pages/Table.js
 const app = getApp()
+const startdate = new Date()
+let date = new Date()
+date.setTime(date.getTime() + 24 * 60 * 60 * 1000)
+const enddate = date
 
 Page({
 
@@ -41,7 +47,17 @@ Page({
                 collectionid: 'template',
                 name: ''
             }
-        }]
+        }, {
+			type: 'Notify',
+			data: {
+				name: '',
+				startdate: util.formatDate(startdate, '-'),
+				enddate: util.formatDate(enddate, '-'),
+				starttime: util.formatTimeOnly(startdate),
+				endtime: util.formatTimeOnly(enddate),
+				week: [true, true, true, true, true, true, true]
+			}
+		}]
     },
 
     onLoad: function (options) {
@@ -181,20 +197,37 @@ Page({
     },
 
     open_CardShop: function () {
-        if (!this.data.isCardShopOpen) {
-            // this.scroll_PageToBottom()
-        }
-        this.staticData.cardsTemplate = this.staticData.cardsTemplateBlank.filter((item) => {
-            return true
-        })
-        // console.log(JSON.stringify(this.staticData.cardsTemplate))
-        this.setData({
-            isCardShopOpen: true,
-            cardShopList: this.staticData.cardsTemplate,
-            // selectedCardIndex: 0,
-            deleteActive: false
-        })
-    },
+		if (!this.data.isCardShopOpen) {
+			// this.scroll_PageToBottom()
+		}
+		this.staticData.cardsTemplate = this.staticData.cardsTemplateBlank.map((item) => {
+			if (item.type === 'Notify') {
+				let startdate = new Date()
+				let date = new Date()
+				date.setTime(date.getTime() + 24 * 60 * 60 * 1000)
+				let enddate = date
+				return {
+					type: 'Notify',
+					data: {
+						name: '',
+						startdate: util.formatDate(startdate, '-'),
+						enddate: util.formatDate(enddate, '-'),
+						starttime: util.formatTimeOnly(startdate),
+						endtime: util.formatTimeOnly(enddate),
+						week: [true, true, true, true, true, true, true]
+					}
+				}
+			}
+			return item
+		})
+		// console.log(JSON.stringify(this.staticData.cardsTemplate))
+		this.setData({
+			isCardShopOpen: true,
+			cardShopList: this.staticData.cardsTemplate,
+			// selectedCardIndex: 0,
+			deleteActive: false
+		})
+	},
 
     close_CardShop: function () {
         this.setData({

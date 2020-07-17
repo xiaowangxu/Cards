@@ -5,24 +5,16 @@
 	<card-todo idx="{{index}}" list="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged" />
 </template>
 
-<template name="Todo-Template">
-	<card-todo idx="{{index}}" list="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_SelectedCardChanged" />
-</template>
-
 <template name="Picture">
 	<card-picture idx="{{index}}" list="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged" />
-</template>
-
-<template name="Picture-Template">
-	<card-picture idx="{{index}}" list="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_SelectedCardChanged" />
 </template>
 
 <template name="Collection">
 	<card-collection idx="{{index}}" data="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged" />
 </template>
 
-<template name="Collection-Template">
-	<card-collection idx="{{index}}" data="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_SelectedCardChanged" />
+<template name="Notify">
+	<card-notify idx="{{index}}" data="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged" />
 </template>
 
 
@@ -45,8 +37,9 @@
 
 <view class="Container" id="page">
 
-	<view wx:for="{{cards}}" class="Card-MoveArea" style="top: {{ navHeight + statusHeight + index * 12 }}px; " wx:key="uid">
-		<view class="Card {{deleteActive&&cards.length>0 ? 'selected' : ''}}">
+	<view wx:for="{{cards}}" class="Card-MoveArea" wx:key="uid">
+		<text wx:if="{{item.card.type === 'text'}}" class="TEXT-Medium" style="font-weight: bold;">{{item.card.text}}</text>
+		<view wx:else class="Card">
 			<template is="{{item.card.type}}" data="{{index: index, data: item.card.data, full: false}}"></template>
 		</view>
 	</view>
