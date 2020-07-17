@@ -107,5 +107,14 @@ Page({
     wx.navigateBack({
       delta: 0,
     })
-  }
+  },
+
+  goto_MainTable: function (event) {
+    // console.log(event)
+    let url = '../MainTable/MainTable'
+    wx.navigateTo({
+      url: url,
+    })
+  },
+
 })

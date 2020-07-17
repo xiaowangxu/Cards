@@ -14,14 +14,11 @@
 <view class="Container">
 
 	<view class="List-Container">
-		<view class="Item-Container" data-file="Todo" bindtap="edit_CourseTable">
-			<view class="Card-Icon" style="background-color: transparent;"></view>
-			<text class="TEXT-Medium">日期{{date_time}}</text>
-		</view>
-		<view class="Item-Container" data-file="Todo" bindtap="edit_CourseTable">
+		<view class="Item-Container" data-file="Todo" bindtap="goto_MainTable">
 			<view class="Card-Icon" style="background-color: transparent;"></view>
 			<text class="TEXT-Medium">春季学期第{{number}}周</text>
 		</view>
+		<Calendar id="Calendar" bind:select="select"></Calendar>
 	</view>
 
 	<view class="List-Container">
