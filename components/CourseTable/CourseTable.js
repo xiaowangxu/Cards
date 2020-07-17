@@ -83,7 +83,8 @@ Component({
 							continue
 						}
 						let coursestart = util.getCourseTime(coursetime.timestart)
-						if (formeteddate < coursestart.start) {
+						let courseend = util.getCourseTime(coursetime.timeend)
+						if (formeteddate < coursestart.start || formeteddate < courseend.end) {
 							// console.log(">> ", course)
 							if (lastcourse === null) {
 								lastcourse = {
@@ -115,7 +116,7 @@ Component({
 
 		refresh: function () {
 			let courses = this.properties.courses
-			// let date = new Date('2020/7/13 14:12:00')
+			// let date = new Date('2020/7/13 13:52:00')
 			let date = new Date()
 			let day = util.getDay(date)
 			let coursetime = util.getCourse(date)
@@ -128,7 +129,7 @@ Component({
 			}
 
 			let nextCourse = this.get_Next_Course(1, day, date)
-			// console.log(">>", nextCourse)
+			console.log(">>", nextCourse)
 			if (nextCourse !== null) {
 				nextCourse.formattedtime = util.getCourseTimeDuratiomFormated(nextCourse.course.timestart, nextCourse.course.timeend)
 			}

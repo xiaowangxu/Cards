@@ -13,7 +13,7 @@
 	</view>
 </view>
 
-<view wx:if="{{nextCourse !== null}}" class="Course-Notify-Container" style="background-color: {{nextCourse.color}};" data-coursename="{{nextCourse.course.name}}" bindtap="tap_Course">
+<view wx:if="{{nextCourse !== null && nextCourse.course.name !== currentCourse.course.name}}" class="Course-Notify-Container" style="background-color: {{nextCourse.color}};" data-coursename="{{nextCourse.course.name}}" bindtap="tap_Course">
 	<view class="List-Container">
 		<text class="TEXT-Small" style="color: white; justify-self: flex-start;">下一堂课</text>
 		<text class="TEXT-Small" style="color: white; justify-self: flex-end;">{{nextCourse.formattedtime}}</text>
