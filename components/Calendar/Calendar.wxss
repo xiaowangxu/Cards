@@ -22,7 +22,7 @@
 
 .calendar-title .item {
     display: inline-block;
-    vertical-align: middle;
+    /* vertical-align: middle; */
     line-height: 50rpx;
 }
 
@@ -33,7 +33,7 @@
 
 .calendar-title .today {
     float: right;
-    margin-top: 10rpx;
+    margin-top: 12rpx;
 }
 
 .calendar-week {
