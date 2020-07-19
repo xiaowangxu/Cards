@@ -29,6 +29,12 @@
   /* font-weight: bold; */
 }
 
+.TEXT-Bold{
+  /* font-size: 12px; */
+  font-weight: bold;
+}
+
+
 
 .StatusBar {
   width: 100%;

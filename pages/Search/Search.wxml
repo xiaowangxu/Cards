@@ -1,0 +1,19 @@
+<!--pages/Search/Search.wxml-->
+<view class="StatusBar" style="height: {{navHeight + statusHeight}}px;">
+	<view class="NavBar" style="height: {{navHeight}}px; top: {{statusHeight}}px; padding-right: {{navButtonRight + navButtonWidth + 12}}px;">
+		<view class="NavButton BG-Gray left" style="min-width: {{navButtonHeight}}px; width: {{navButtonHeight}}px; height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px; padding: 0px;" bindtap="tap_Back">
+			<image style="width: {{navButtonHeight - 13}}px; height: {{navButtonHeight - 13}}px;" src="../../assests/Back.svg" />
+		</view>
+		<view class="NavButton BG-Gray left" style="min-width: {{navButtonHeight}}px; width: {{navButtonHeight}}px; height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px; padding: 0px;" bindtap="tap_Scan">
+			<image style="width: {{navButtonHeight - 8}}px; height: {{navButtonHeight - 8}}px;" src="../../assests/Scan.svg" />
+		</view>
+		<!-- <view class="NavButton BG-Gray left" style="min-width: {{navButtonHeight}}px; width: {{navButtonHeight}}px; height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px; padding: 0px;" bindtap="tap_Setting">
+			<image style="width: {{navButtonHeight - 8}}px; height: {{navButtonHeight - 8}}px;" src="Upload.svg" />
+		</view> -->
+		<view class="NavButton BG-Gray" style="min-width: {{navButtonHeight}}px; flex: 1; height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px; padding: 0px;" bindtap="tap_Search">
+            <input></input>
+		</view>
+	</view>
+</view>
+
+<text>{{testData}}</text>

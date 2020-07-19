@@ -40,11 +40,14 @@
 <view class="StatusBar" style="height: {{navHeight * 2 + statusHeight }}px;">
 	<view class="NavBar" style="height: {{navHeight}}px; top: {{statusHeight}}px; padding-right: {{navButtonRight + navButtonWidth + 12}}px;">
 		<view class="NavButton BG-Gray left" style="min-width: {{navButtonHeight}}px; width: {{navButtonHeight}}px; height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px; padding: 0px;" bindtap="tap_Back">
-			<image style="width: {{navButtonHeight - 16}}px; height: {{navButtonHeight - 16}}px;" src="../../assests/Back.svg" />
+			<image style="width: {{navButtonHeight - 13}}px; height: {{navButtonHeight - 13}}px;" src="../../assests/Back.svg" />
 		</view>
 		<text class="Title TEXT-Large">{{title}}</text>
 	</view>
 	<view class="NavBar right" style="height: {{navHeight}}px; top: {{ navHeight + statusHeight }}px">
+		<view wx:if="{{cards.length>0}}" class="NavButton BG-Gray right" style="min-width: {{navButtonHeight}}px; width: {{navButtonHeight}}px; height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px; padding: 0px;" bindtap="tap_Share">
+			<image style="width: {{navButtonHeight - 15}}px; height: {{navButtonHeight - 15}}px;" src="../../assests/Share.svg" />
+		</view>
 		<view wx:if="{{cards.length>0}}" class="NavButton BG-Red right" style="height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px;" bindtap="switch_DeleteActive">
 			管理卡片
 		</view>

@@ -1,47 +1,13 @@
 <!--pages/Table.wxml-->
 
-<!-- templates -->
-<template name="Todo">
-	<card-todo idx="{{index}}" list="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged" />
-</template>
-
-<template name="Todo-Template">
-	<card-todo idx="{{index}}" list="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_SelectedCardChanged" />
-</template>
-
-<template name="Picture">
-	<card-picture idx="{{index}}" list="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged" />
-</template>
-
-<template name="Picture-Template">
-	<card-picture idx="{{index}}" list="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_SelectedCardChanged" />
-</template>
-
-<template name="Collection">
-	<card-collection idx="{{index}}" data="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged" />
-</template>
-
-<template name="Collection-Template">
-	<card-collection idx="{{index}}" data="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_SelectedCardChanged" />
-</template>
-
-<template name="Notify">
-	<card-notify idx="{{index}}" data="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged" />
-</template>
-
-<template name="Notify-Template">
-	<card-notify idx="{{index}}" data="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_SelectedCardChanged" />
-</template>
-
-
-
-
-
 <!--  -->
 <view class="StatusBar" style="height: {{navHeight + statusHeight}}px;">
 	<view class="NavBar" style="height: {{navHeight}}px; top: {{statusHeight}}px; padding-right: {{navButtonRight + navButtonWidth + 12}}px;">
 		<view class="NavButton BG-Gray left" style="min-width: {{navButtonHeight}}px; width: {{navButtonHeight}}px; height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px; padding: 0px;" bindtap="tap_Setting">
 			<image style="width: {{navButtonHeight - 13}}px; height: {{navButtonHeight - 13}}px;" src="../../assests/Setting.svg" />
+		</view>
+		<view class="NavButton BG-Gray left" style="min-width: {{navButtonHeight}}px; width: {{navButtonHeight}}px; height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px; padding: 0px;" bindtap="tap_Search">
+			<image style="width: {{navButtonHeight - 15}}px; height: {{navButtonHeight - 15}}px;" src="../../assests/Search.svg" />
 		</view>
 		<!-- <view class="NavButton BG-Gray left" style="min-width: {{navButtonHeight}}px; width: {{navButtonHeight}}px; height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px; padding: 0px;" bindtap="tap_Setting">
 			<image style="width: {{navButtonHeight - 8}}px; height: {{navButtonHeight - 8}}px;" src="Upload.svg" />
@@ -51,10 +17,10 @@
 </view>
 
 <view class="CourseTable">
-	<course-table class="CourseTableObject" courses="{{courses}}"/>
+	<course-table class="CourseTableObject" courses="{{courses}}" />
 </view>
 
-<view class="NavButton-Container right" style="margin: 0px 12px; height: {{navHeight}}px; position: sticky; top: {{navHeight + statusHeight}}px;">
+<!-- <view class="NavButton-Container right" style="margin: 0px 12px; height: {{navHeight}}px; position: sticky; top: {{navHeight + statusHeight}}px;">
 	<view wx:if="{{cards.length>0}}" class="NavButton BG-Red right" style="height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px;" bindtap="switch_DeleteActive">
 		管理卡片
 	</view>
@@ -76,13 +42,6 @@
 			<template is="{{item.card.type}}" data="{{index: index, data: item.card.data, full: false}}"></template>
 		</view>
 	</view>
-	<!-- <view style="width: 100%; margin: 12px 0px; box-sizing: border-box; display: flex; flex-direction: row; justify-content: center;">
-		<view wx:if="{{!isCardShopOpen}}" class="NavButton BG-Gray" style="height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px;" bindtap="open_CardShop">
-			Add
-		</view>
-		<view wx:else style="height: {{navButtonHeight}}px;"/>
-	</view> -->
-
 </view>
 
 <view class="Cover {{isCardShopOpen? 'show' : ''}}" bindtap="close_CardShop">
@@ -107,6 +66,14 @@
 	<view class="NavButton-Container right" style="margin: 0px 30px; height: {{navHeight}}px; margin-top: 10px">
 		<view class="NavButton BG-Green expand" hover-class="NavButton-Hover" style="height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px;" bindtap="add_Card">
 			添加
+		</view>
+	</view>
+</view> -->
+
+<view class="Container">
+	<view class="List-Container-Main">
+		<view class="Item-Container-Main" bindtap="goto_Main">
+			<text class="TEXT-Medium TEXT-Bold">随手记</text>
 		</view>
 	</view>
 </view>

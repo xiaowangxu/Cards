@@ -1,10 +1,6 @@
 {
   "usingComponents": {
-    "card-todo": "../../components/Card/Todo/Card_Todo",
-    "card-picture": "../../components/Card/Picture/Card_Picture",
-    "card-collection": "../../components/Card/Collection/Card_Collection",
-    "course-table": "../../components/CourseTable/CourseTable",
-    "card-notify": "../../components/Card/Notify/Card_Notify"
+    "course-table": "../../components/CourseTable/CourseTable"
   },
   "enablePullDownRefresh": true,
   "backgroundTextStyle": "dark"

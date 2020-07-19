@@ -1,0 +1,14 @@
+<!--pages/QRcode/QRcode.wxml-->
+<view class="StatusBar" style="height: {{navHeight + statusHeight}}px;">
+	<view class="NavBar" style="height: {{navHeight}}px; top: {{statusHeight}}px; padding-right: {{navButtonRight + navButtonWidth + 12}}px;">
+		<view class="NavButton BG-Gray left" style="min-width: {{navButtonHeight}}px; width: {{navButtonHeight}}px; height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px; padding: 0px;" bindtap="tap_Back">
+			<image style="width: {{navButtonHeight - 13}}px; height: {{navButtonHeight - 13}}px;" src="../../assests/Back.svg" />
+		</view>
+	</view>
+</view>
+
+<view class="QR-Container">
+	<view class="QR-Card">
+		<canvas canvas-id="QRcode" style="width: 240px; height: 240px;"></canvas>
+	</view>
+</view>

@@ -9,135 +9,9 @@ page {
 .Container {
     box-sizing: border-box;
     padding-bottom: 12px;
+    padding-left: 12px;
+    padding-right: 12px;
     /* transition: padding-bottom 0.2s linear; */
-}
-
-.Card {
-    width: 100%;
-    max-width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-    border-radius: 12px;
-    position: relative;
-    left: 0px;
-    transition: left 0.2s ease-out, width 0.2s ease-out;
-}
-
-.Card.selected {
-    left: 88px;
-    /* width: calc(100% - 88px); */
-    transition: left 0.2s ease-out, width 0.2s ease-out;
-}
-
-.Card-Button {
-    position: absolute;
-    padding-top: 20px;
-    top: 0;
-    left: 0;
-    width: 100px;
-    height: 100%;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    /* background-color: rgba(0, 0, 0, 0.1); */
-}
-
-.Button {
-    width: 50px;
-    height: 50px;
-    background-color: tomato;
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0px -4px 10px 0px rgba(0, 0, 0, 0.2);
-    /* box-shadow: 0px 4px 10px 4px rgba(0, 0, 0, 0.1); */
-    transform: translateY(-2px);
-    transition: box-shadow 0.1s ease-out, transform 0.1s ease-out;
-}
-
-.Button:active {
-    /* box-shadow: 0px 2px 8px 2px rgba(0, 0, 0, 0.2); */
-    transform: translateY(0px);
-    transition: box-shadow 0.1s ease-out, transform 0.1s ease-out;
-}
-
-.Card-Shop {
-    z-index: 102;
-    box-sizing: border-box;
-    border-radius: 20px 20px 0px 0px;
-    width: 100%;
-    height: 400px;
-    position: fixed;
-    bottom: -500px;
-    left: 0px;
-    background-color: white;
-    box-shadow: 0px -16px 20px 0px rgba(0, 0, 0, 0.4);
-    transition: bottom 0.2s linear;
-    pointer-events: all;
-    padding: 24px 0px;
-    display: flex;
-    flex-direction: column;
-}
-
-.Card-Shop.show {
-    bottom: 0px;
-    transition: bottom 0.2s linear;
-}
-
-.Cover {
-    z-index: 101;
-    position: fixed;
-    top: 0px;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-    background-color: rgba(0, 0, 0, 0);
-    pointer-events: none;
-    /* backdrop-filter: blur(0px); */
-    transition: background-color 0.2s linear;
-}
-
-.Cover.show {
-    background-color: rgba(0, 0, 0, 0.3);
-    pointer-events: all;
-    /* backdrop-filter: blur(20px); */
-    transition: background-color 0.2s linear;
-}
-
-.Card_Container {
-    flex: 1;
-    width: 100%;
-    /* margin-top: 12px; */
-    /* padding: 10px 0px; */
-    box-sizing: border-box;
-}
-
-.Card_Swiper {
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-}
-
-.Card_Item {
-    border-radius: 20px;
-    box-sizing: border-box;
-    /* background-color: blue; */
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    bottom: 0px;
-    right: 0px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    overflow-y: auto;
-    margin: 16px 0px 36px 0px;
-    padding: 0px 30px;
 }
 
 .CourseTable {
@@ -147,4 +21,44 @@ page {
     /* margin-bottom: 12px; */
     padding: 12px;
     box-sizing: border-box;
+}
+
+.List-Container-Main {
+    width: 100%;
+    /* padding: 4px 12px; */
+    /* height: 1000px; */
+    /* margin-top: 12px; */
+    margin-bottom: 12px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+}
+
+.Item-Container-Main {
+    padding: 10px 16px;
+    border-bottom: solid rgb(240, 240, 240) 1px;
+    background-color: white;
+    transition: background-color 0.1s ease-out;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.Item-Container-Main:active {
+    background-color: rgb(240, 240, 240);
+    transition: background-color 0.1s ease-out;
+}
+
+.List-Container-Main>.Item-Container-Main:first-child {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.List-Container-Main>.Item-Container-Main:last-child {
+    border-bottom: none;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
 }

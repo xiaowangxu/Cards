@@ -120,6 +120,12 @@ Page({
         }
     },
 
+    tap_Share: function () {
+        wx.navigateTo({
+          url: '../QRcode/QRcode?data=' + JSON.stringify(this.data.cards),
+        })
+    },
+
     get_Cards_with_UID: function (cards) {
         return cards.map((item) => {
             let uid = this.staticData.uid

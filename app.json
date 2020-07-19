@@ -3,7 +3,9 @@
         "pages/MainTable/MainTable",
         "pages/Table/Table",
         "pages/Setting/Setting",
-        "pages/File/File"
+        "pages/File/File",
+        "pages/Search/Search",
+        "pages/QRcode/QRcode"
     ],
     "window": {
         "backgroundTextStyle": "light",
