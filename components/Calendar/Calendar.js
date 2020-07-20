@@ -32,8 +32,6 @@ Component({
         year: 0,
         month: 0,
         date: 0,
-        toggleType: 'large',
-        scrollLeft: 0,
 
         YEAR: 0,
         MONTH: 0,
@@ -44,16 +42,6 @@ Component({
     },
 
     methods: {
-
-        toggleType() {
-            console.log(this.data.toggleType)
-            this.setData({
-                toggleType: this.data.toggleType == 'mini' ? 'large' : 'mini'
-            })
-
-            this.display(this.data.year, this.data.month, this.data.date);
-        },
-
         display: function (year, month, date) {
             this.setData({
                 year,
