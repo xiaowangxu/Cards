@@ -45,9 +45,6 @@
 		<text class="Title TEXT-Large">{{title}}</text>
 	</view>
 	<view class="NavBar right" style="height: {{navHeight}}px; top: {{ navHeight + statusHeight }}px">
-		<view wx:if="{{cards.length>0}}" class="NavButton BG-Gray right" style="min-width: {{navButtonHeight}}px; width: {{navButtonHeight}}px; height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px; padding: 0px;" bindtap="tap_Share">
-			<image style="width: {{navButtonHeight - 15}}px; height: {{navButtonHeight - 15}}px;" src="../../assests/Share.svg" />
-		</view>
 		<view wx:if="{{cards.length>0}}" class="NavButton BG-Red right" style="height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px;" bindtap="switch_DeleteActive">
 			管理卡片
 		</view>
@@ -57,12 +54,12 @@
 	</view>
 </view>
 
-<view class="Container" id="page">
+<view class="Container {{deleteActive? 'lift' : ''}}" id="page">
 
-	<view wx:for="{{cards}}" class="Card-MoveArea" style="top: {{ (navHeight * 2) + statusHeight + index * 12 }}px; " wx:key="uid">
+	<view wx:for="{{cards}}" class="Card-MoveArea" wx:key="uid">
 		<view class="Card-Button">
-			<view class="Button" data-index="{{index}}" bindtap="delete_Card">
-				<icon type="cancel" color="#ffffff" size="30"></icon>
+			<view class="Button {{item.selected? 'selected' : ''}}" data-index="{{index}}" bindtap="select_Card">
+				<icon wx:if="{{item.selected}}" type="success_no_circle" color="#ffffff" size="24"></icon>
 			</view>
 		</view>
 
@@ -98,9 +95,48 @@
 		</swiper>
 
 	</view>
-	<view class="NavButton-Container right" style="margin: 0px 30px; height: {{navHeight}}px; margin-top: 10px">
+	<view class="NavButton-Container right" style="margin: 0px 30px; height: {{navHeight}}px; margin-top: 10px;">
 		<view class="NavButton BG-Green expand" hover-class="NavButton-Hover" style="height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px;" bindtap="add_Card">
 			添加
 		</view>
 	</view>
 </view>
+
+<!-- <view class="Manage-Shop {{isManageShopOpen? 'show' : ''}}"> -->
+<view class="Manage-Shop {{deleteActive? 'show' : ''}}">
+	<view class="NavButton-Container right" style="margin: 0px 30px; height: {{navHeight}}px;">
+		<view class="NavButton BG-Gray left" hover-class="NavButton-Hover" style="height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px;" bindtap="select_AllCards">
+			{{is_AllSelected.check(cards)? '取消全选':'全部选中'}}
+		</view>
+		<view style="flex: 1;"></view>
+		<view wx:if="{{is_AllSelected.has(cards)}}" class="NavButton BG-Gray right" style="min-width: {{navButtonHeight}}px; width: {{navButtonHeight}}px; height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px; padding: 0px;" bindtap="tap_Share">
+			<image style="width: {{navButtonHeight - 15}}px; height: {{navButtonHeight - 15}}px;" src="../../assests/Share.svg" />
+		</view>
+		<view wx:if="{{is_AllSelected.has(cards)}}" class="NavButton BG-Red right" disable="true" hover-class="NavButton-Hover" style="height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px;" bindtap="delete_Cards">
+			删除
+		</view>
+	</view>
+</view>
+
+<wxs module="is_AllSelected">
+	var check = function(array) {
+		for (var i = 0; i < array.length; ++i) {
+			var item = array[i];
+			if (!item.selected) {
+				return false;
+			}
+		}
+		return true;
+	}
+	var has = function(array) {
+		for (var i = 0; i < array.length; ++i) {
+			var item = array[i];
+			if (item.selected) {
+				return true;
+			}
+		}
+		return false;
+	}
+	module.exports.check = check;
+	module.exports.has = has;
+</wxs>

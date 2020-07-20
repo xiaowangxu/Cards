@@ -132,6 +132,7 @@ Page({
             this.staticData.uid++
             return {
                 uid: uid,
+                selected: false,
                 card: item
             }
         })
@@ -148,6 +149,7 @@ Page({
         this.staticData.uid++
         return {
             uid: uid,
+            selected: false,
             card: card
         }
     },
@@ -177,22 +179,61 @@ Page({
     },
 
     switch_DeleteActive: function () {
+        this.staticData.cards.forEach((item) => {
+            item.selected = false
+        })
         this.setData({
-            deleteActive: !this.data.deleteActive
+            deleteActive: !this.data.deleteActive,
+            cards: this.staticData.cards
         })
     },
 
     set_DeleteActive: function (active) {
+        this.staticData.cards.forEach((item) => {
+            item.selected = false
+        })
         this.setData({
-            deleteActive: active
+            deleteActive: active,
+            cards: this.staticData.cards
         })
     },
 
-    delete_Card: function (event) {
+    select_Card: function (event) {
         let index = event.currentTarget.dataset.index
-        let item = this.staticData.cards.splice(index, 1)
-        if (item[0].card.type == 'Collection') {
-            app.remove(item[0].card.data.collectionid)
+        this.staticData.cards[index].selected = !this.staticData.cards[index].selected
+        this.setData({
+            ['cards['+ index+'].selected']: this.staticData.cards[index].selected
+        })
+    },
+
+    select_AllCards: function () {
+        let allselected = true
+        this.staticData.cards.forEach((item) => {
+            if (!item.selected) {
+                allselected = false
+            }
+        })
+        this.staticData.cards.forEach((item) => {
+            item.selected = !allselected
+        })
+        this.setData({
+            cards: this.staticData.cards
+        })
+    },
+
+    delete_Cards: function () {
+        let i = 0
+        while (i < this.staticData.cards.length) {
+            let item = this.staticData.cards[i]
+            if (item.selected) {
+                let deleteitem = this.staticData.cards.splice(i, 1)
+                if (deleteitem[0].card.type == 'Collection') {
+                    app.remove(deleteitem[0].card.data.collectionid)
+                }
+            }
+            else {
+                i++
+            }
         }
         this.setData({
             cards: this.staticData.cards,
@@ -202,6 +243,13 @@ Page({
         // console.log(this.data.cards.length)
     },
 
+    sync_StaticCards: function () {
+        this.staticData.cards = this.data.cards.filter((item) => {
+            return true
+        })
+    },
+
+    // Card Shop 
     open_CardShop: function () {
 		if (!this.data.isCardShopOpen) {
 			// this.scroll_PageToBottom()
@@ -239,12 +287,6 @@ Page({
         this.setData({
             isCardShopOpen: false,
             deleteActive: false
-        })
-    },
-
-    sync_StaticCards: function () {
-        this.staticData.cards = this.data.cards.filter((item) => {
-            return true
         })
     },
 

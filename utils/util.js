@@ -1,3 +1,4 @@
+// Time
 const formatTime = date => {
 	let year = date.getFullYear()
 	let month = date.getMonth() + 1
@@ -135,6 +136,12 @@ const getCourseTimeDuratiomFormated = (start, end) => {
 	}
 }
 
+// Cards
+const getShareString = cards => {
+	let array = []
+	cards
+}
+
 module.exports = {
 	formatTime: formatTime,
 	formatTimeOnly: formatTimeOnly,
@@ -144,5 +151,6 @@ module.exports = {
 	getCourseTime: getCourseTime,
 	getCourseTimeFormated: getCourseTimeFormated,
 	getTimeFiexdDate: getTimeFiexdDate,
-	getCourseTimeDuratiomFormated: getCourseTimeDuratiomFormated
+	getCourseTimeDuratiomFormated: getCourseTimeDuratiomFormated,
+	getShareString: getShareString
 }
