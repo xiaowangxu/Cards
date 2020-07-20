@@ -137,9 +137,33 @@ const getCourseTimeDuratiomFormated = (start, end) => {
 }
 
 // Cards
-const getShareString = cards => {
+const getShareString = (cards, collectionid = '0') => {
 	let array = []
-	cards
+	cards.forEach((item) => {
+		// console.log(item)
+		switch (item.type) {
+			case 'Todo':
+				if (item.data.length <= 0) {
+					break
+				}
+				let itemdata = []
+				item.data.forEach((i) => {
+					itemdata.push(i.text)
+					itemdata.push(i.finish)
+				})
+				array.push([
+					0,
+					'',
+					'',
+					itemdata
+				])
+				break
+			case 'Collection':
+				break
+			
+		}
+	})
+	return [collectionid, array]
 }
 
 module.exports = {

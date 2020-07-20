@@ -113,7 +113,7 @@ page {
     left: 0px;
     background-color: white;
     box-shadow: 0px -16px 20px 0px rgba(0, 0, 0, 0.2);
-    transition: bottom 0.2s linear;
+    transition: bottom 0.2s ease-out;
     pointer-events: all;
     padding: 24px 0px;
     display: flex;
@@ -122,7 +122,7 @@ page {
 
 .Card-Shop.show {
     bottom: 0px;
-    transition: bottom 0.2s linear;
+    transition: bottom 0.2s ease-out;
 }
 
 .Cover {
@@ -135,14 +135,14 @@ page {
     background-color: rgba(0, 0, 0, 0);
     pointer-events: none;
     /* backdrop-filter: blur(0px); */
-    transition: background-color 0.2s linear;
+    transition: background-color 0.2s ease-out;
 }
 
 .Cover.show {
     background-color: rgba(0, 0, 0, 0.3);
     pointer-events: all;
     /* backdrop-filter: blur(20px); */
-    transition: background-color 0.2s linear;
+    transition: background-color 0.2s ease-out;
 }
 
 .Card_Container {
@@ -188,7 +188,7 @@ page {
     left: 0px;
     background-color: white;
     box-shadow: 0px -16px 20px 0px rgba(0, 0, 0, 0.2);
-    transition: bottom 0.2s linear;
+    transition: bottom 0.2s ease-out;
     pointer-events: all;
     padding: 24px 0px;
     display: flex;
@@ -197,5 +197,5 @@ page {
 
 .Manage-Shop.show {
     bottom: 0px;
-    transition: bottom 0.2s linear;
+    transition: bottom 0.2s ease-out;
 }

@@ -21,5 +21,8 @@
 			<view class="Buttom-Finish blank" />
 			<input class="Line-Edit" adjust-position="true" placeholder="输入事项" value="{{inputdata}}" confirm-hold="true" bindconfirm="add" />
 		</view>
+		<view class="List-Container" style="min-height: unset; justify-content: flex-end;">
+			<text class="TEXT-Small" style="color: rgb(140, 140, 140);">{{start + ' - ' + end}}</text>
+		</view>
 	</view>
 </view>

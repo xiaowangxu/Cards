@@ -83,17 +83,20 @@ Page({
         return array
     },
 
-    file_Cards_with_UID: function (tables, type, list = [{collectionid: 'Main', path: '主页'}]) {
+    file_Cards_with_UID: function (tables, type, list = [{collectionid: 'Main', path: '主页', name: '主页'}]) {
         let filecards = []
         for (let t = 0; t < list.length; t++) {
             let checktable = list[t]
             let subtable = []
             let pathtable = []
+            let nametable = []
             subtable.push(checktable.collectionid)
             pathtable.push(checktable.path)
+            nametable.push(checktable.path)
             while (subtable.length > 0) {
                 let collectionid = subtable.pop()
                 let path = pathtable.pop()
+                let name = nametable.pop()
                 let samelayer = false
                 if (tables[collectionid] === undefined) continue
                 let table = tables[collectionid]
@@ -108,6 +111,7 @@ Page({
                                 card: {
                                     type: 'text',
                                     text: path,
+                                    title: name,
                                     collectionid: collectionid
                                 }
                             })
@@ -125,6 +129,7 @@ Page({
                     if (item.type === 'Collection') {
                         subtable.push(item.data.collectionid)
                         pathtable.push(path + " + " + item.data.name)
+                        nametable.push(item.data.name)
                     }
                 }
             }
@@ -167,6 +172,12 @@ Page({
                 delta: 0,
             })
         }
+    },
+
+    tap_To: function (event) {
+        wx.navigateTo({
+          url: '../Table/Table?collectionid=' + event.currentTarget.dataset.collectionid + '&title=' + event.currentTarget.dataset.title,
+        })
     },
 
     get_Cards_with_UID: function (cards) {

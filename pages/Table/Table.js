@@ -36,28 +36,36 @@ Page({
         uid: 0,
         cardsTemplate: [],
         cardsTemplateBlank: [{
-            type: 'Todo',
-            data: []
-        }, {
-            type: 'Picture',
-            data: []
-        }, {
-            type: 'Collection',
-            data: {
-                collectionid: 'template',
-                name: ''
+                type: 'Todo',
+                start: '',
+                end: '',
+                data: []
+            }, {
+                type: 'Picture',
+                start: '',
+                end: '',
+                data: []
+            }, {
+                type: 'Collection',
+                start: '',
+                end: '',
+                data: {
+                    collectionid: 'template',
+                    name: ''
+                }
             }
-        }, {
-			type: 'Notify',
-			data: {
-				name: '',
-				startdate: util.formatDate(startdate, '-'),
-				enddate: util.formatDate(enddate, '-'),
-				starttime: util.formatTimeOnly(startdate),
-				endtime: util.formatTimeOnly(enddate),
-				week: [true, true, true, true, true, true, true]
-			}
-		}]
+            // }, {
+            // 	type: 'Notify',
+            // 	data: {
+            // 		name: '',
+            // 		startdate: util.formatDate(startdate, '-'),
+            // 		enddate: util.formatDate(enddate, '-'),
+            // 		starttime: util.formatTimeOnly(startdate),
+            // 		endtime: util.formatTimeOnly(enddate),
+            // 		week: [true, true, true, true, true, true, true]
+            // 	}
+            // }]
+        ]
     },
 
     onLoad: function (options) {
@@ -121,8 +129,12 @@ Page({
     },
 
     tap_Share: function () {
+        let sharearray = this.staticData.cards.filter((item) => {
+            return item.selected
+        })
+        // console.log(this.unwrap_Cards_with_UID(sharearray))
         wx.navigateTo({
-          url: '../QRcode/QRcode?data=' + JSON.stringify(this.data.cards),
+            url: '../QRcode/QRcode?data=' + JSON.stringify(util.getShareString(this.unwrap_Cards_with_UID(sharearray))),
         })
     },
 
@@ -202,7 +214,7 @@ Page({
         let index = event.currentTarget.dataset.index
         this.staticData.cards[index].selected = !this.staticData.cards[index].selected
         this.setData({
-            ['cards['+ index+'].selected']: this.staticData.cards[index].selected
+            ['cards[' + index + '].selected']: this.staticData.cards[index].selected
         })
     },
 
@@ -230,8 +242,7 @@ Page({
                 if (deleteitem[0].card.type == 'Collection') {
                     app.remove(deleteitem[0].card.data.collectionid)
                 }
-            }
-            else {
+            } else {
                 i++
             }
         }
@@ -251,37 +262,25 @@ Page({
 
     // Card Shop 
     open_CardShop: function () {
-		if (!this.data.isCardShopOpen) {
-			// this.scroll_PageToBottom()
-		}
-		this.staticData.cardsTemplate = this.staticData.cardsTemplateBlank.map((item) => {
-			if (item.type === 'Notify') {
-				let startdate = new Date()
-				let date = new Date()
-				date.setTime(date.getTime() + 24 * 60 * 60 * 1000)
-				let enddate = date
-				return {
-					type: 'Notify',
-					data: {
-						name: '',
-						startdate: util.formatDate(startdate, '-'),
-						enddate: util.formatDate(enddate, '-'),
-						starttime: util.formatTimeOnly(startdate),
-						endtime: util.formatTimeOnly(enddate),
-						week: [true, true, true, true, true, true, true]
-					}
-				}
-			}
-			return item
-		})
-		// console.log(JSON.stringify(this.staticData.cardsTemplate))
-		this.setData({
-			isCardShopOpen: true,
-			cardShopList: this.staticData.cardsTemplate,
-			// selectedCardIndex: 0,
-			deleteActive: false
-		})
-	},
+        if (!this.data.isCardShopOpen) {
+            // this.scroll_PageToBottom()
+        }
+        this.staticData.cardsTemplate = this.staticData.cardsTemplateBlank.map((item) => {
+                let startdate = new Date()
+                let enddate = new Date()
+                enddate.setTime(enddate.getTime() + 24 * 60 * 60 * 1000)
+                item.start = util.formatTime(startdate)
+                item.end = util.formatTime(enddate)
+                return item
+        })
+        console.log(JSON.stringify(this.staticData.cardsTemplate))
+        this.setData({
+            isCardShopOpen: true,
+            cardShopList: this.staticData.cardsTemplate,
+            // selectedCardIndex: 0,
+            deleteActive: false
+        })
+    },
 
     close_CardShop: function () {
         this.setData({
@@ -298,6 +297,7 @@ Page({
         this.close_CardShop()
 
         let item = this.staticData.cardsTemplate[this.data.selectedCardIndex]
+        console.log(item)
         if (item.type === 'Collection') {
             if (getCurrentPages().length >= 10) {
                 // console.log(">>>>>>>>")

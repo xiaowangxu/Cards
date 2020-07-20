@@ -2,35 +2,35 @@
 
 <!-- templates -->
 <template name="Todo">
-	<card-todo idx="{{index}}" list="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged" />
+	<card-todo idx="{{index}}" start="{{starttime}}" end="{{endtime}}" list="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged" />
 </template>
 
 <template name="Todo-Template">
-	<card-todo idx="{{index}}" list="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_SelectedCardChanged" />
+	<card-todo idx="{{index}}" start="{{starttime}}" end="{{endtime}}" list="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_SelectedCardChanged" />
 </template>
 
 <template name="Picture">
-	<card-picture idx="{{index}}" list="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged" />
+	<card-picture idx="{{index}}" start="{{starttime}}" end="{{endtime}}" list="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged" />
 </template>
 
 <template name="Picture-Template">
-	<card-picture idx="{{index}}" list="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_SelectedCardChanged" />
+	<card-picture idx="{{index}}" start="{{starttime}}" end="{{endtime}}" list="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_SelectedCardChanged" />
 </template>
 
 <template name="Collection">
-	<card-collection idx="{{index}}" data="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged" />
+	<card-collection idx="{{index}}" start="{{starttime}}" end="{{endtime}}" data="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged" />
 </template>
 
 <template name="Collection-Template">
-	<card-collection idx="{{index}}" data="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_SelectedCardChanged" />
+	<card-collection idx="{{index}}" start="{{starttime}}" end="{{endtime}}" data="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_SelectedCardChanged" />
 </template>
 
 <template name="Notify">
-	<card-notify idx="{{index}}" data="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged" />
+	<card-notify idx="{{index}}" start="{{starttime}}" end="{{endtime}}" data="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged" />
 </template>
 
 <template name="Notify-Template">
-	<card-notify idx="{{index}}" data="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_SelectedCardChanged" />
+	<card-notify idx="{{index}}" start="{{starttime}}" end="{{endtime}}" data="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_SelectedCardChanged" />
 </template>
 
 
@@ -64,7 +64,7 @@
 		</view>
 
 		<view class="Card {{deleteActive&&cards.length>0 ? 'selected' : ''}}">
-			<template is="{{item.card.type}}" data="{{index: index, data: item.card.data, full: false}}"></template>
+			<template is="{{item.card.type}}" data="{{index: index, starttime: item.card.start, endtime: item.card.end, data: item.card.data, full: false}}"></template>
 		</view>
 	</view>
 	<!-- <view style="width: 100%; margin: 12px 0px; box-sizing: border-box; display: flex; flex-direction: row; justify-content: center;">
@@ -87,7 +87,7 @@
 			<swiper-item wx:for="{{cardShopList}}" style="box-sizing: border-box;">
 				<view class="Card_Item">
 					<view style="flex: 1;" />
-					<template is="{{item.type + '-Template'}}" data="{{index: index, data: item.data, full: true}}">
+					<template is="{{item.type + '-Template'}}" data="{{index: index, starttime: item.start, endtime: item.end, data: item.data, full: true}}">
 					</template>
 					<view style="flex: 1;" />
 				</view>

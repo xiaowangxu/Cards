@@ -2,19 +2,19 @@
 
 <!-- templates -->
 <template name="Todo">
-	<card-todo idx="{{index}}" list="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged" />
+	<card-todo idx="{{index}}" start="{{starttime}}" end="{{endtime}}"  list="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged" />
 </template>
 
 <template name="Picture">
-	<card-picture idx="{{index}}" list="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged" />
+	<card-picture idx="{{index}}" start="{{starttime}}" end="{{endtime}}"  list="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged" />
 </template>
 
 <template name="Collection">
-	<card-collection idx="{{index}}" data="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged" />
+	<card-collection idx="{{index}}" start="{{starttime}}" end="{{endtime}}"  data="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged" />
 </template>
 
 <template name="Notify">
-	<card-notify idx="{{index}}" data="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged" />
+	<card-notify idx="{{index}}" start="{{starttime}}" end="{{endtime}}"  data="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged" />
 </template>
 
 
@@ -38,9 +38,16 @@
 <view class="Container" id="page">
 
 	<view wx:for="{{cards}}" class="Card-MoveArea" wx:key="uid">
-		<text wx:if="{{item.card.type === 'text'}}" class="TEXT-Medium" style="font-weight: bold;">{{item.card.text}}</text>
+		<view wx:if="{{item.card.type === 'text'}}" class="NavButton-Container">
+			<text class="TEXT-Medium" style="font-weight: bold;">{{item.card.text}}</text>
+			<view style="flex: 1;"></view>
+			<view class="NavButton BG-Gray right" style="min-width: {{navButtonHeight}}px; width: {{navButtonHeight}}px; height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px; padding: 0px;" data-collectionid="{{item.card.collectionid}}" data-title="{{item.card.title}}" bindtap="tap_To">
+				<image style="width: {{navButtonHeight - 16}}px; height: {{navButtonHeight - 16}}px;" src="../../assests/To.svg" />
+			</view>
+		</view>
+
 		<view wx:else class="Card">
-			<template is="{{item.card.type}}" data="{{index: index, data: item.card.data, full: false}}"></template>
+			<template is="{{item.card.type}}" data="{{index: index, starttime: item.card.start, endtime: item.card.end, data: item.card.data, full: false}}"></template>
 		</view>
 	</view>
 	<!-- <view style="width: 100%; margin: 12px 0px; box-sizing: border-box; display: flex; flex-direction: row; justify-content: center;">
