@@ -3,6 +3,6 @@
     "card-todo": "../../components/Card/Todo/Card_Todo",
     "card-picture": "../../components/Card/Picture/Card_Picture",
     "card-collection": "../../components/Card/Collection/Card_Collection",
-    "card-notify": "../../components/Card/Notify/Card_Notify"
+    "card-passage": "../../components/Card/Passage/Card_Passage"
   }
 }

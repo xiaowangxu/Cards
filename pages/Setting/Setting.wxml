@@ -34,6 +34,10 @@
 			<view class="Card-Icon" style="background-color: rgb(244, 183, 62);"></view>
 			<text class="TEXT-Medium">Collection</text>
 		</view>
+		<view class="Item-Container" data-file="Passage" bindtap="goto_File">
+			<view class="Card-Icon" style="background-color: rgb(23, 53, 159);"></view>
+			<text class="TEXT-Medium">Passage</text>
+		</view>
 		<!-- <view class="Item-Container" data-file="Notify" bindtap="goto_File">
 			<view class="Card-Icon" style="background-color: rgb(23, 53, 159);"></view>
 			<text class="TEXT-Medium">Notify</text>

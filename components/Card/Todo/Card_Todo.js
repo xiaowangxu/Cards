@@ -19,6 +19,10 @@ Component({
             type: String,
             value: 'unknown'
         },
+        week: {
+            type: Array,
+            value: [true, true, true, true, true, true, true]
+        },
         list: {
             type: Array,
             value: [{text: 'Hello', finish: false},{text: 'World', finish: false},{text: '!!!', finish: false}],
@@ -90,6 +94,10 @@ Component({
                 innerText: 666
             })
             this.triggerEvent('datachange', {idx: this.properties.idx, data: {type: 'Todo',start: this.properties.start, end: this.properties.end, data: this.properties.list}}, {})
-        }
+        },
+
+        change_Time: function () {
+            this.triggerEvent('timechange', {idx: this.properties.idx}, {})
+        }    
     }
 })

@@ -1,0 +1,15 @@
+<!--components/Card_Text.wxml-->
+<view class="Card-Container">
+	<!-- <text class="TEXT_Large">{{idx}}</text> -->
+	<view class="Viewbox">
+		<view class="List-Container">
+			<input class="Line-Edit" style="font-size: 20px; font-weight: bold;color: white;" value="{{data.title}}" adjust-position="true" placeholder="标题" placeholder-style="color: rgba(255,255,255,0.5);" bindinput="input" bindblur="blur" catchtap="true"/>
+		</view>
+		<view class="List-Container">
+			<textarea class="TextArea-Edit"  adjust-position="true" placeholder="输入内容" value="{{data.passage}}" maxlength="-1" auto-height="true" placeholder-style="color: rgba(255,255,255,0.5);" bindinput="textarea" bindblur="blur" />
+		</view>
+		<view class="List-Container" style="min-height: unset; justify-content: flex-end;">
+			<text class="TEXT-Small" style="color: rgba(255,255,255,0.5);">{{start + ' - ' + end}}</text>
+		</view>
+	</view>
+</view>
