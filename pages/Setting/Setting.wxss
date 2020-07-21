@@ -55,6 +55,7 @@
 .Card-Icon {
     width: 12px;
     height: 12px;
-    margin-right: 20px;
+    margin-left: 4px;
+    margin-right: 16px;
     border-radius: 50%;
 }

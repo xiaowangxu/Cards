@@ -67,7 +67,9 @@ Page({
 	 * 生命周期函数--监听页面显示
 	 */
 	onShow: function () {
-
+		this.setData({
+			githubLogined: app.get_GitHubUrl() !== ''
+		})
 	},
 
 	/**
@@ -120,7 +122,7 @@ Page({
 		})
 	},
 
-	edit_CourseTable:function(){
+	edit_CourseTable: function () {
 		wx.navigateTo({
 			url: '../CourseEdit/CourseEdit'
 		})
@@ -136,7 +138,7 @@ Page({
 
 	goto_GitHub: function () {
 		wx.navigateTo({
-			url: '../GitHub/GitHub',
+			url: '../GitHub/GitHub'
 		})
 	},
 
@@ -225,6 +227,7 @@ Page({
 			})
 		}
 	},
+
 	goto_PrivacyTable: function (event) {
 		// console.log(event)
 		//let url = '../PrivacyTable/PrivacyTable'

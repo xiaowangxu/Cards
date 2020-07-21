@@ -105,7 +105,7 @@ Page({
 	tap_Back: function () {
 		// console.log(getCurrentPages())
 		wx.navigateBack({
-			delta: getCurrentPages().length - 1,
+			delta: 0
 		})
 	},
 
@@ -211,7 +211,10 @@ Page({
 			method: 'PUT',
 			data: {
 				message: 'Init CardsData',
-				content: encode(JSON.stringify({time: new Date().getTime(), tables: {}}, null, 2)),
+				content: encode(JSON.stringify({
+					time: new Date().getTime(),
+					tables: {}
+				}, null, 2)),
 			},
 			header: {
 				Authorization: 'token ' + that.data.token
@@ -282,7 +285,7 @@ Page({
 			},
 			success(res) {
 				wx.hideLoading()
-				console.log(res)
+				// console.log(res)
 				if (res.data.message === 'Not Found') {
 					that.init()
 					return
@@ -294,12 +297,18 @@ Page({
 						title: '验证失败',
 						icon: 'none'
 					})
+					that.setData({
+						state: 'Login'
+					})
 				}
 			},
 			fail(res) {
 				wx.showToast({
 					title: '验证失败',
 					icon: 'none'
+				})
+				that.setData({
+					state: 'Login'
 				})
 			}
 		})
@@ -367,7 +376,7 @@ Page({
 		// 	}
 		// })
 	},
-  lockreset:function(){
+	lockreset: function () {
 		wxlocker.lock.updatePassword();
 		let url = '../Setting/Setting';
 		wx.showToast({

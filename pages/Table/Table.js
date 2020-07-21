@@ -143,9 +143,16 @@ Page({
             })
         } else {
             // console.log("back")
-            wx.navigateBack({
-                delta: 0,
-            })
+            if (this.staticData.collectionid === 'Privacy') {
+                wx.navigateBack({
+                    delta: 2,
+                })
+            }
+            else {
+                wx.navigateBack({
+                    delta: 0,
+                })
+            }
         }
     },
 

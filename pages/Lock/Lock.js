@@ -55,10 +55,7 @@ Page({
   },
   lockSucc: function () { //解锁成功的回调函数
     //console.log("解锁成功！");
-    let url = '../PrivacyTable/PrivacyTable';
-    wx.navigateTo({
-      url: url,
-    })
+    app.navigateTo_Table('Privacy', '隐私空间', '')
   },
   lockreset: function () {
     wxlocker.lock.updatePassword();

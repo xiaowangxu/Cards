@@ -47,7 +47,7 @@
 
 	<view class="List-Container">
 		<view class="Item-Container" data-file="Todo" bindtap="goto_PrivacyTable">
-			<view class="Card-Icon" style="background-color: transparent;"></view>
+			<image class="Card-Icon" src="../../assests/Privacy.svg" style="width: 20px; height: 20px; margin-left: 0px; margin-right: 12px"></image>
 			<text class="TEXT-Medium">隐私空间</text>
 		</view>
 	</view>
@@ -71,7 +71,7 @@
 			</view>
 		</block>
 		<view class="Item-Container" bindtap="goto_GitHub">
-			<image class="Card-Icon" src="../../assests/GitHub-Mark.svg" style="width: 20px; height: 20px; margin-right: 12px"></image>
+			<image class="Card-Icon" src="../../assests/GitHub-Mark.svg" style="width: 20px; height: 20px; margin-left: 0px; margin-right: 12px"></image>
 			<text class="TEXT-Medium">配置GitHub账号</text>
 		</view>
 	</view>
