@@ -85,3 +85,12 @@ page {
     transform: translateY(0px);
     transition: box-shadow 0.1s ease-out, transform 0.1s ease-out;
 }
+
+.CollectionPath {
+    width: 100%;
+    box-sizing: border-box;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    /* white-space: nowrap; */
+    word-break: break-all;
+}

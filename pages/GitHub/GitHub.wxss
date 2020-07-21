@@ -41,6 +41,11 @@
     transition: background-color 0.1s ease-out;
 }
 
+.Item-Container.disable:active {
+    background-color: white;
+    transition: background-color 0.1s ease-out;
+}
+
 .List-Container>.Item-Container:first-child {
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
@@ -57,4 +62,25 @@
     height: 12px;
     margin-right: 20px;
     border-radius: 50%;
+}
+
+.VContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.HContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.VContainer>.HContainer:nth-child(n) {
+    margin-bottom: 8px;
+}
+
+.VContainer>.HContainer:last-child {
+    margin-bottom: 0px;
 }

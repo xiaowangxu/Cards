@@ -2,7 +2,7 @@
 
 <!-- templates -->
 <template name="Todo">
-	<card-todo idx="{{index}}" start="{{starttime}}" end="{{endtime}}" list="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged" />
+	<card-todo idx="{{index}}" start="{{starttime}}" end="{{endtime}}" list="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged" bind:timechange="on_TimeChangeRequest" />
 </template>
 
 <template name="Todo-Template">
@@ -31,6 +31,14 @@
 
 <template name="Notify-Template">
 	<card-notify idx="{{index}}" start="{{starttime}}" end="{{endtime}}" data="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_SelectedCardChanged" />
+</template>
+
+<template name="Passage">
+	<card-passage idx="{{index}}" start="{{starttime}}" end="{{endtime}}" data="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged" bind:timechange="on_TimeChangeRequest"/>
+</template>
+
+<template name="Passage-Template">
+	<card-passage idx="{{index}}" start="{{starttime}}" end="{{endtime}}" data="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_SelectedCardChanged" />
 </template>
 
 
@@ -76,7 +84,7 @@
 
 </view>
 
-<view class="Cover {{isCardShopOpen? 'show' : ''}}" bindtap="close_CardShop">
+<view class="Cover {{isCardShopOpen||timeChangeActive? 'show' : ''}}" bindtap="close_CardShop">
 </view>
 
 <view class="Card-Shop {{isCardShopOpen? 'show' : ''}}">
@@ -109,11 +117,70 @@
 			{{is_AllSelected.check(cards)? '取消全选':'全部选中'}}
 		</view>
 		<view style="flex: 1;"></view>
-		<view wx:if="{{is_AllSelected.has(cards)}}" class="NavButton BG-Gray right" style="min-width: {{navButtonHeight}}px; width: {{navButtonHeight}}px; height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px; padding: 0px;" bindtap="tap_Share">
+		<view wx:if="{{is_AllSelected.canShare(cards)}}" class="NavButton BG-Gray right" style="min-width: {{navButtonHeight}}px; width: {{navButtonHeight}}px; height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px; padding: 0px;" bindtap="tap_Share">
 			<image style="width: {{navButtonHeight - 15}}px; height: {{navButtonHeight - 15}}px;" src="../../assests/Share.svg" />
 		</view>
 		<view wx:if="{{is_AllSelected.has(cards)}}" class="NavButton BG-Red right" disable="true" hover-class="NavButton-Hover" style="height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px;" bindtap="delete_Cards">
 			删除
+		</view>
+	</view>
+</view>
+
+<view class="Time-Shop {{timeChangeActive? 'show' : ''}}">
+	<text class="TEXT-Large" style="margin: 0px 30px">时间设置</text>
+
+	<view class="List-Container">
+		<text class="TEXT-Medium TEXT-Bold">开始时间</text>
+		<view style="flex: 1;"></view>
+		<picker mode="date" style="margin-right: 12px;" value="{{starttime.date}}" bindchange="change_Startdate">
+			<text class="TEXT-Medium">{{starttime.date}}</text>
+		</picker>
+		<picker mode="time" value="{{starttime.time}}" bindchange="change_Starttime">
+			<text  class="TEXT-Medium">{{starttime.time}}</text>
+		</picker>
+	</view>
+
+	<view class="List-Container">
+		<text class="TEXT-Medium TEXT-Bold">结束时间</text>
+		<view style="flex: 1;"></view>
+		<picker mode="date" style="margin-right: 12px;" value="{{endtime.date}}" bindchange="change_Enddate">
+			<text class="TEXT-Medium">{{endtime.date}}</text>
+		</picker>
+		<picker mode="time" value="{{endtime.time}}" bindchange="change_Endtime">
+			<text class="TEXT-Medium">{{endtime.time}}</text>
+		</picker>
+	</view>
+
+	<view class="List-Container" style="margin-top: 16px;">
+		<text  class="TEXT-Medium TEXT-Bold">提醒星期</text>
+		<view style="flex: 1;"></view>
+		<view class="Radio-Container {{week[0]? 'selected' : ''}}" data-index="0" bindtap="switch_Week">
+			<text>日</text>
+		</view>
+		<view class="Radio-Container {{week[1]? 'selected' : ''}}" data-index="1" bindtap="switch_Week">
+			<text>一</text>
+		</view>
+		<view class="Radio-Container {{week[2]? 'selected' : ''}}" data-index="2" bindtap="switch_Week">
+			<text>二</text>
+		</view>
+		<view class="Radio-Container {{week[3]? 'selected' : ''}}" data-index="3" bindtap="switch_Week">
+			<text>三</text>
+		</view>
+		<view class="Radio-Container {{week[4]? 'selected' : ''}}" data-index="4" bindtap="switch_Week">
+			<text>四</text>
+		</view>
+		<view class="Radio-Container {{week[5]? 'selected' : ''}}" data-index="5" bindtap="switch_Week">
+			<text>五</text>
+		</view>
+		<view class="Radio-Container {{week[6]? 'selected' : ''}}" style="margin-right: 0px" data-index="6" bindtap="switch_Week">
+			<text>六</text>
+		</view>
+	</view>
+
+
+	<view class="NavButton-Container right" style="margin: 12px 30px 0px 30px; height: {{navHeight}}px;">
+		<view class="NavButton BG-Green right" disable="true" hover-class="NavButton-Hover" style="height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px;" bindtap="tap_TimeChange">
+			确定
 		</view>
 	</view>
 </view>
@@ -137,6 +204,20 @@
 		}
 		return false;
 	}
+	var canShare = function(array) {
+		var count = 0;
+		for (var i = 0; i < array.length; ++i) {
+			var item = array[i];
+			if (item.selected) {
+				if (item.card.type == 'Todo' || item.card.type == 'Passage') {
+					count++;
+				}
+			}
+		}
+		if (count === 1) return true;
+		else return false;
+	}
 	module.exports.check = check;
 	module.exports.has = has;
+	module.exports.canShare = canShare;
 </wxs>

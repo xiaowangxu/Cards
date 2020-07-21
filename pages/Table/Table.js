@@ -26,7 +26,18 @@ Page({
         cards: [],
 
 
-        deleteActive: false
+        deleteActive: false,
+        timeChangeActive: false,
+
+        starttime: {
+            date: util.formatDate(startdate, '-'),
+            time: util.formatTimeOnly(new Date())
+        },
+        endtime: {
+            date: util.formatDate(startdate, '-'),
+            time: util.formatTimeOnly(new Date())
+        },
+        week: [true, true, true, true, true, true, true]
     },
 
     staticData: {
@@ -45,6 +56,15 @@ Page({
                 start: '',
                 end: '',
                 data: []
+            }, {
+                type: 'Passage',
+                start: '',
+                end: '',
+                data: {
+                    title: '',
+                    passage: '',
+                    path: ''
+                }
             }, {
                 type: 'Collection',
                 start: '',
@@ -65,7 +85,8 @@ Page({
             // 		week: [true, true, true, true, true, true, true]
             // 	}
             // }]
-        ]
+        ],
+        timechangingIdx: -1
     },
 
     onLoad: function (options) {
@@ -134,7 +155,7 @@ Page({
         })
         // console.log(this.unwrap_Cards_with_UID(sharearray))
         wx.navigateTo({
-            url: '../QRcode/QRcode?data=' + JSON.stringify(util.getShareString(this.unwrap_Cards_with_UID(sharearray))),
+            url: '../QRcode/QRcode?data=' + JSON.stringify(util.getShareString(sharearray[0].card)),
         })
     },
 
@@ -266,14 +287,15 @@ Page({
             // this.scroll_PageToBottom()
         }
         this.staticData.cardsTemplate = this.staticData.cardsTemplateBlank.map((item) => {
-                let startdate = new Date()
-                let enddate = new Date()
-                enddate.setTime(enddate.getTime() + 24 * 60 * 60 * 1000)
-                item.start = util.formatTime(startdate)
-                item.end = util.formatTime(enddate)
-                return item
+            let startdate = new Date()
+            let enddate = new Date()
+            enddate.setTime(enddate.getTime() + 24 * 60 * 60 * 1000)
+            item.start = util.formatDate(startdate, '/') + ' ' + util.formatTimeOnly(startdate)
+            item.end = util.formatDate(enddate, '/') + ' ' + util.formatTimeOnly(enddate)
+            item.week = [true, true, false, true, true, true, true]
+            return item
         })
-        console.log(JSON.stringify(this.staticData.cardsTemplate))
+        // console.log(JSON.stringify(this.staticData.cardsTemplate))
         this.setData({
             isCardShopOpen: true,
             cardShopList: this.staticData.cardsTemplate,
@@ -285,7 +307,8 @@ Page({
     close_CardShop: function () {
         this.setData({
             isCardShopOpen: false,
-            deleteActive: false
+            deleteActive: false,
+            timeChangeActive: false
         })
     },
 
@@ -297,7 +320,7 @@ Page({
         this.close_CardShop()
 
         let item = this.staticData.cardsTemplate[this.data.selectedCardIndex]
-        console.log(item)
+        // console.log(item)
         if (item.type === 'Collection') {
             if (getCurrentPages().length >= 10) {
                 // console.log(">>>>>>>>")
@@ -328,5 +351,82 @@ Page({
         let index = event.detail.idx
         let data = event.detail.data
         this.staticData.cardsTemplate[index] = data
+    },
+
+    on_TimeChangeRequest: function (event) {
+        this.staticData.timechangingIdx = event.detail.idx
+        let week = this.staticData.cards[this.staticData.timechangingIdx].card.week
+        let start = {
+            date: (this.staticData.cards[this.staticData.timechangingIdx].card.start.split(' ')[0]).split('/').join('-'),
+            time: this.staticData.cards[this.staticData.timechangingIdx].card.start.split(' ')[1]
+        }
+        let end = {
+            date: (this.staticData.cards[this.staticData.timechangingIdx].card.end.split(' ')[0]).split('/').join('-'),
+            time: this.staticData.cards[this.staticData.timechangingIdx].card.end.split(' ')[1]
+        }
+        this.setData({
+            timeChangeActive: true,
+            week: week,
+            starttime: start,
+            endtime: end
+        })
+    },
+
+    change_Startdate: function (event) {
+        let time = event.detail.value
+        this.setData({
+            ['starttime.date']: time
+        })
+    },
+
+    change_Enddate: function (event) {
+        let time = event.detail.value
+        this.setData({
+            ['endtime.date']: time
+        })
+    },
+
+    change_Starttime: function (event) {
+        let time = event.detail.value
+        this.setData({
+            ['starttime.time']: time
+        })
+    },
+
+    change_Endtime: function (event) {
+        let time = event.detail.value
+        this.setData({
+            ['endtime.time']: time
+        })
+    },
+
+    switch_Week: function (event) {
+        let index = event.currentTarget.dataset.index
+        console.log(this.data.week)
+        this.setData({
+            ['week[' + index + ']']: !this.data.week[index]
+        })
+    },
+
+    tap_TimeChange: function () {
+        if (this.staticData.timechangingIdx >= 0 && this.staticData.timechangingIdx < this.staticData.cards.length) {
+            let starttime = this.data.starttime.date.split('-').join('/') + ' ' + this.data.starttime.time
+            let endtime = this.data.endtime.date.split('-').join('/') + ' ' + this.data.endtime.time
+            let week = this.data.week.filter((item) => {
+                return true
+            })
+            // console.log(starttime, endtime, week)
+            let card = this.staticData.cards[this.staticData.timechangingIdx].card
+            card.start = starttime
+            card.end = endtime
+            card.week = week
+            this.setData({
+                ['cards[' + this.staticData.timechangingIdx + '].card']: card
+            })
+            app.save(this.staticData.collectionid, this.unwrap_Cards_with_UID(this.staticData.cards))
+        }
+        this.setData({
+            timeChangeActive: false
+        })
     }
 })

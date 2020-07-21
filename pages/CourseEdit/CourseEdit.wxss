@@ -1,0 +1,92 @@
+/* pages/CourseEdit/CourseEdit.wxss */
+.Container {
+  box-sizing: border-box;
+  padding: 0px 12px 12px 12px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.List-Container {
+  width: 100%;
+  /* padding: 4px 12px; */
+  /* height: 1000px; */
+  margin-top: 12px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 8px;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+}
+
+.Item-Container {
+  padding: 10px 16px;
+  border-bottom: solid rgb(240, 240, 240) 1px;
+  background-color: white;
+  transition: background-color 0.1s ease-out;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.Add-Button{
+  width: 70px;
+  height: 25px;
+  margin-left: 70%;
+  margin-top: 12px;
+  text-align: center;
+  background-color:red; 
+  border-radius: 50%;
+}
+
+.Delete-Button{
+  position: absolute;
+  margin-left: 70%;
+  background-color: red;
+  color:white;
+  text-align: center;
+} 
+
+.Course-Shop {
+  z-index: 102;
+  box-sizing: border-box;
+  border-radius: 20px 20px 0px 0px;
+  width: 100%;
+  height: 270px;
+  position: fixed;
+  bottom: -370px;
+  left: 0px;
+  background-color: white;
+  box-shadow: 0px -16px 20px 0px rgba(0, 0, 0, 0.2);
+  transition: bottom 0.2s ease-out;
+  pointer-events: all;
+  padding: 24px 0px;
+  display: flex;
+  flex-direction: column;
+}
+
+.Course-Shop.show {
+  bottom: 0px;
+  transition: bottom 0.2s ease-out;
+}
+
+.Cover.show {
+  background-color: rgba(0, 0, 0, 0.3);
+  pointer-events: all;
+  /* backdrop-filter: blur(20px); */
+  transition: background-color 0.2s ease-out;
+}
+
+.Cover {
+  z-index: 101;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  background-color: rgba(0, 0, 0, 0);
+  pointer-events: none;
+  /* backdrop-filter: blur(0px); */
+  transition: background-color 0.2s ease-out;
+}

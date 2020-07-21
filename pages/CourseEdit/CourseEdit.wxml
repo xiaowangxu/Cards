@@ -1,0 +1,28 @@
+<!--pages/CourseEdit/CourseEdit.wxml-->
+<view class="StatusBar" style="height: {{navHeight + statusHeight}}px;">
+	<view class="NavBar" style="height: {{navHeight}}px; top: {{statusHeight}}px; padding-right: {{navButtonRight + navButtonWidth + 12}}px;">
+		<view class="NavButton BG-Gray left" style="min-width: {{navButtonHeight}}px; width: {{navButtonHeight}}px; height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px; padding: 0px;" bindtap="tap_Back">
+			<image style="width: {{navButtonHeight - 13}}px; height: {{navButtonHeight - 13}}px;" src="../../assests/Back.svg" />
+		</view>
+		<text class="Title TEXT-Large">课程设置</text>
+	</view>
+</view>
+
+<view class="Container">
+	<view class="Add-Button" bindtap="Add_Course">
+		<text class = "TEXT-Medium TEXT-Bold" style="color:white">添加</text>
+	</view>
+	<view class="List-Container">
+		<view wx:for="{{courses}}" class="Item-Container" data-itemindex="{{index}}">
+			<text class = "TEXT-Small">{{courses[index].name}}</text>
+			<view wx:if="{{courses.length>0}}" class="Delete-Button" style="height: 25px; border-radius: {{navButtonHeight/2}}px; width:50px;" data-itemindex="{{index}}" bindtap="Delete_Course">
+				删除
+			</view>
+		</view>
+	</view>
+</view>
+
+<view class="Cover {{deleteActive? 'show' : ''}}" bindtap="close_Course" />
+<view class="Course-Shop {{deleteActive? 'show' : ''}}">
+	<text class="TEXT-Large" style="margin: 0px 30px">课程信息</text>
+</view>

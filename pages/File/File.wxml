@@ -13,8 +13,8 @@
 	<card-collection idx="{{index}}" start="{{starttime}}" end="{{endtime}}"  data="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged" />
 </template>
 
-<template name="Notify">
-	<card-notify idx="{{index}}" start="{{starttime}}" end="{{endtime}}"  data="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged" />
+<template name="Passage">
+	<card-passage idx="{{index}}" start="{{starttime}}" end="{{endtime}}"  data="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged" />
 </template>
 
 
@@ -39,10 +39,10 @@
 
 	<view wx:for="{{cards}}" class="Card-MoveArea" wx:key="uid">
 		<view wx:if="{{item.card.type === 'text'}}" class="NavButton-Container">
-			<text class="TEXT-Medium" style="font-weight: bold;">{{item.card.text}}</text>
+			<text class="CollectionPath TEXT-Medium" style="font-weight: bold;">{{item.card.text}}</text>
 			<view style="flex: 1;"></view>
 			<view class="NavButton BG-Gray right" style="min-width: {{navButtonHeight}}px; width: {{navButtonHeight}}px; height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px; padding: 0px;" data-collectionid="{{item.card.collectionid}}" data-title="{{item.card.title}}" bindtap="tap_To">
-				<image style="width: {{navButtonHeight - 16}}px; height: {{navButtonHeight - 16}}px;" src="../../assests/To.svg" />
+				<image style="width: {{navButtonHeight - 13}}px; height: {{navButtonHeight - 13}}px;" src="../../assests/To.svg" />
 			</view>
 		</view>
 

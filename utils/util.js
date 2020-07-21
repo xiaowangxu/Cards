@@ -137,32 +137,36 @@ const getCourseTimeDuratiomFormated = (start, end) => {
 }
 
 // Cards
-const getShareString = (cards, collectionid = '0') => {
+const getShareString = (card, collectionid = 0) => {
 	let array = []
-	cards.forEach((item) => {
-		// console.log(item)
-		switch (item.type) {
-			case 'Todo':
-				if (item.data.length <= 0) {
-					break
-				}
-				let itemdata = []
-				item.data.forEach((i) => {
-					itemdata.push(i.text)
-					itemdata.push(i.finish)
-				})
-				array.push([
-					0,
-					'',
-					'',
-					itemdata
-				])
+	switch (card.type) {
+		case 'Todo':
+			if (card.data.length <= 0) {
 				break
-			case 'Collection':
-				break
-			
-		}
-	})
+			}
+			let itemdata = []
+			card.data.forEach((i) => {
+				itemdata.push(i.text)
+			})
+			array = [
+				0,
+				new Date(card.start).getTime(),
+				new Date(card.end).getTime(),
+				itemdata
+			]
+			break
+		case 'Collection':
+			break
+		case 'Passage':
+			array = [
+				2,
+				new Date(card.start).getTime(),
+				new Date(card.end).getTime(),
+				card.data.title,
+				card.data.passage
+			]
+			break
+	}
 	return [collectionid, array]
 }
 
