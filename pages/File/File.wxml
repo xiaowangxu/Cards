@@ -42,7 +42,7 @@
 			<text class="CollectionPath TEXT-Medium" style="font-weight: bold;">{{item.card.text}}</text>
 			<view style="flex: 1;"></view>
 			<view class="NavButton BG-Gray right" style="min-width: {{navButtonHeight}}px; width: {{navButtonHeight}}px; height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px; padding: 0px;" data-collectionid="{{item.card.collectionid}}" data-title="{{item.card.title}}" bindtap="tap_To">
-				<image style="width: {{navButtonHeight - 16}}px; height: {{navButtonHeight - 16}}px;" src="../../assests/To.svg" />
+				<image style="width: {{navButtonHeight - 13}}px; height: {{navButtonHeight - 13}}px;" src="../../assests/To.svg" />
 			</view>
 		</view>
 

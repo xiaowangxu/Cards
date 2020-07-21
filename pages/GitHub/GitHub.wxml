@@ -1,0 +1,96 @@
+<!--pages/Setting/Setting.wxml-->
+<view class="StatusBar" style="height: {{navHeight + statusHeight}}px;">
+	<view class="NavBar" style="height: {{navHeight}}px; top: {{statusHeight}}px; padding-right: {{navButtonRight + navButtonWidth + 12}}px;">
+		<view class="NavButton BG-Gray left" style="min-width: {{navButtonHeight}}px; width: {{navButtonHeight}}px; height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px; padding: 0px;" bindtap="tap_Back">
+			<image style="width: {{navButtonHeight - 13}}px; height: {{navButtonHeight - 13}}px;" src="../../assests/Back.svg" />
+		</view>
+		<!-- <view class="NavButton BG-Gray left" style="min-width: {{navButtonHeight}}px; width: {{navButtonHeight}}px; height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px; padding: 0px;" bindtap="tap_Setting">
+			<image style="width: {{navButtonHeight - 8}}px; height: {{navButtonHeight - 8}}px;" src="Upload.svg" />
+		</view> -->
+		<text class="Title TEXT-Large">GitHub</text>
+	</view>
+</view>
+
+<view class="Container">
+	<image src="../../assests/GitHub-Mark.svg" style="margin: 30px auto 18px auto;width: 100px; height: 100px"></image>
+
+	<block wx:if="{{state==='Login'}}">
+		<view class="List-Container">
+			<view class="Item-Container disable">
+				<view class="HContainer">
+					<text class="TEXT-Medium" style="margin-right: 24px">用户名</text>
+					<input class="TEXT-Medium" value="{{userName}}" placeholder="用户名" style="flex: 1; height: 24px; text-align: right;" bindinput="input_Name"></input>
+				</view>
+			</view>
+			<view class="Item-Container disable">
+				<view class="VContainer">
+					<view class="HContainer">
+						<text class="TEXT-Medium">Personal access tokens</text>
+					</view>
+					<view class="HContainer">
+						<input class="TEXT-Medium" style="flex: 1;" value="{{token}}" placeholder="Personal access tokens" type="password" bindinput="input_Token"></input>
+					</view>
+				</view>
+			</view>
+		</view>
+
+		<view wx:if="{{userName!=''&&token!=''}}" class="List-Container">
+			<view class="Item-Container" style="background-color: rgb(79, 197, 79);" bindtap="login">
+				<view class="HContainer">
+					<text class="TEXT-Medium" style="margin: 0px auto 0px auto; color: white;">配置</text>
+				</view>
+			</view>
+		</view>
+	</block>
+
+	<block wx:elif="{{state==='Select'}}">
+		<view class="List-Container">
+			<view class="Item-Container disable">
+				<view class="HContainer">
+					<text class="TEXT-Medium">选择目标代码库</text>
+				</view>
+			</view>
+			<view wx:for="{{repos}}" class="Item-Container" data-target="{{item}}" bindtap="tap_Repos">
+				<view class="HContainer">
+					<text class="TEXT-Medium">{{item}}</text>
+				</view>
+			</view>
+		</view>
+	</block>
+
+	<block wx:elif="{{state==='Fin'}}">
+		<view class="List-Container">
+			<view class="Item-Container disable">
+				<view class="HContainer">
+					<text class="TEXT-Medium" style="margin-right: 24px">用户名</text>
+					<input class="TEXT-Medium" value="{{userName}}" placeholder="用户名" style="flex: 1; height: 24px; text-align: right;" disabled="true"></input>
+				</view>
+			</view>
+			<view class="Item-Container disable">
+				<view class="VContainer">
+					<view class="HContainer">
+						<text class="TEXT-Medium">Personal access tokens</text>
+					</view>
+					<view class="HContainer">
+						<input class="TEXT-Medium" style="flex: 1;" value="{{token}}" placeholder="Personal access tokens" type="password" disabled="true"></input>
+					</view>
+				</view>
+			</view>
+			<view class="Item-Container disable">
+				<view class="HContainer">
+					<text class="TEXT-Medium" style="margin-right: 24px">代码库</text>
+					<input class="TEXT-Medium" value="{{repo}}" placeholder="代码库" style="flex: 1; height: 24px; text-align: right;" disabled="true"></input>
+				</view>
+			</view>
+		</view>
+
+		<view class="List-Container">
+			<view class="Item-Container" style="background-color: tomato;" bindtap="logout">
+				<view class="HContainer">
+					<text class="TEXT-Medium" style="margin: 0px auto 0px auto; color: white;" bindtap="exit">删除数据并退出</text>
+				</view>
+			</view>
+		</view>
+	</block>
+
+</view>

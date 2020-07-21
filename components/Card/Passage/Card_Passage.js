@@ -19,6 +19,10 @@ Component({
             type: String,
             value: 'unknown'
         },
+        week: {
+            type: Array,
+            value: [true, true, true, true, true, true, true]
+        },
         data: {
             type: Object,
             value: {
@@ -56,7 +60,11 @@ Component({
         },
 
         blur: function(event) {
-            this.triggerEvent('datachange', {idx: this.properties.idx, data: {type: 'Passage',start: this.properties.start, end: this.properties.end, data: this.properties.data}}, {})
-        }
+            this.triggerEvent('datachange', {idx: this.properties.idx, data: {type: 'Passage',start: this.properties.start, end: this.properties.end, week: this.properties.week, data: this.properties.data}}, {})
+        },
+
+        change_Time: function () {
+            this.triggerEvent('timechange', {idx: this.properties.idx}, {})
+        }   
     }
 })

@@ -320,7 +320,7 @@ Page({
         this.close_CardShop()
 
         let item = this.staticData.cardsTemplate[this.data.selectedCardIndex]
-        console.log(item)
+        // console.log(item)
         if (item.type === 'Collection') {
             if (getCurrentPages().length >= 10) {
                 // console.log(">>>>>>>>")
@@ -402,6 +402,7 @@ Page({
 
     switch_Week: function (event) {
         let index = event.currentTarget.dataset.index
+        console.log(this.data.week)
         this.setData({
             ['week[' + index + ']']: !this.data.week[index]
         })
@@ -414,7 +415,7 @@ Page({
             let week = this.data.week.filter((item) => {
                 return true
             })
-            console.log(starttime, endtime, week)
+            // console.log(starttime, endtime, week)
             let card = this.staticData.cards[this.staticData.timechangingIdx].card
             card.start = starttime
             card.end = endtime

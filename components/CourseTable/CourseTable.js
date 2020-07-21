@@ -129,7 +129,7 @@ Component({
 			}
 
 			let nextCourse = this.get_Next_Course(1, day, date)
-			console.log(">>", nextCourse)
+			// console.log(">>", nextCourse)
 			if (nextCourse !== null) {
 				nextCourse.formattedtime = util.getCourseTimeDuratiomFormated(nextCourse.course.timestart, nextCourse.course.timeend)
 			}

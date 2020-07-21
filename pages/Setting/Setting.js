@@ -2,6 +2,10 @@
 
 const app = getApp()
 import util from '../../utils/util.js';
+import {
+	encode,
+	decode
+} from '../../utils/Base64';
 
 Page({
 
@@ -14,6 +18,8 @@ Page({
 		navButtonHeight: app.globalData.navButtonHeight,
 		navButtonWidth: app.globalData.navButtonWidth,
 		navButtonRight: app.globalData.navButtonRight,
+
+		githubLogined: false
 	},
 
 	/**
@@ -42,6 +48,11 @@ Page({
 			console.log('当前是春季学期第', this.data.number + '周');
 		} else {
 			console.log('日期出错了');
+		}
+		if (app.get_GitHubUrl() !== '') {
+			this.setData({
+				githubLogined: true
+			})
 		}
 	},
 
@@ -117,4 +128,95 @@ Page({
 		})
 	},
 
+	goto_GitHub: function () {
+		wx.navigateTo({
+			url: '../GitHub/GitHub',
+		})
+	},
+
+	upload_GitHub: function () {
+		let url = app.get_GitHubUrl()
+		let date = new Date()
+		if (url !== '') {
+			let data = {
+				time: date.getTime(),
+				tables: app.globalData.tables
+			}
+			let message = {
+				message: 'Update Tables ' + util.formatTime(date),
+				content: encode(JSON.stringify(data, null, 2)),
+				sha: app.globalData.github.sha
+			}
+			wx.showLoading({
+				title: '上传中'
+			})
+			wx.request({
+				url: url,
+				method: 'PUT',
+				data: message,
+				header: {
+					Authorization: 'token ' + app.globalData.github.token
+				},
+				success(res) {
+					wx.hideLoading()
+					if (res.statusCode === 200) {
+						let sha = res.data.content.sha
+						app.globalData.github.sha = sha
+						app.save_GitHub()
+					} else {
+						wx.showToast({
+							title: '上传失败',
+							icon: 'none'
+						})
+					}
+				},
+				fail(res) {
+					wx.showToast({
+						title: '上传失败',
+						icon: 'none'
+					})
+				}
+			})
+		}
+	},
+
+	load_GitHub: function () {
+		let url = app.get_GitHubUrl()
+		if (url !== '') {
+			wx.showLoading({
+				title: '下载中'
+			})
+			wx.request({
+				url: url,
+				method: 'GET',
+				header: {
+					Authorization: 'token ' + app.globalData.github.token
+				},
+				success(res) {
+					wx.hideLoading()
+					console.log(res)
+					if (res.statusCode === 200) {
+						let tables = decode(res.data.content)
+						app.globalData.tables = JSON.parse(tables).tables
+						console.log(app.globalData.tables)
+						app.save_Data()
+						let sha = res.data.sha
+						app.globalData.github.sha = sha
+						app.save_GitHub()
+					} else {
+						wx.showToast({
+							title: '下载失败',
+							icon: 'none'
+						})
+					}
+				},
+				fail(res) {
+					wx.showToast({
+						title: '下载失败',
+						icon: 'none'
+					})
+				}
+			})
+		}
+	}
 })

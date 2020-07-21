@@ -45,9 +45,26 @@
 	</view>
 
 	<view class="List-Container">
-		<view class="Item-Container" data-file="Todo" bindtap="edit_CourseTable">
+		<view class="Item-Container" bindtap="edit_CourseTable">
 			<view class="Card-Icon" style="background-color: transparent;"></view>
 			<text class="TEXT-Medium">编辑课程表</text>
+		</view>
+	</view>
+
+	<view class="List-Container">
+		<block wx:if="{{githubLogined}}">
+			<view class="Item-Container" bindtap="upload_GitHub">
+				<view class="Card-Icon" style="background-color: transparent;"></view>
+				<text class="TEXT-Medium">上传至GitHub</text>
+			</view>
+			<view class="Item-Container" bindtap="load_GitHub">
+				<view class="Card-Icon" style="background-color: transparent;"></view>
+				<text class="TEXT-Medium">从GitHub同步</text>
+			</view>
+		</block>
+		<view class="Item-Container" bindtap="goto_GitHub">
+			<image class="Card-Icon" src="../../assests/GitHub-Mark.svg" style="width: 20px; height: 20px; margin-right: 12px"></image>
+			<text class="TEXT-Medium">配置GitHub账号</text>
 		</view>
 	</view>
 

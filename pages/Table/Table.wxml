@@ -34,7 +34,7 @@
 </template>
 
 <template name="Passage">
-	<card-passage idx="{{index}}" start="{{starttime}}" end="{{endtime}}" data="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged" />
+	<card-passage idx="{{index}}" start="{{starttime}}" end="{{endtime}}" data="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged" bind:timechange="on_TimeChangeRequest"/>
 </template>
 
 <template name="Passage-Template">

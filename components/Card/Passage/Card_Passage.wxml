@@ -9,7 +9,7 @@
 			<textarea class="TextArea-Edit"  adjust-position="true" placeholder="输入内容" value="{{data.passage}}" maxlength="-1" auto-height="true" placeholder-style="color: rgba(255,255,255,0.5);" bindinput="textarea" bindblur="blur" />
 		</view>
 		<view class="List-Container" style="min-height: unset; justify-content: flex-end;">
-			<text class="TEXT-Small" style="color: rgba(255,255,255,0.5);">{{start + ' - ' + end}}</text>
+			<text class="TEXT-Small" style="color: rgba(255,255,255,0.5);" bindtap="change_Time">{{start + ' - ' + end}}</text>
 		</view>
 	</view>
 </view>

@@ -56,7 +56,7 @@ Component({
                 list: newlist,
                 inputdata: ''
             })
-            this.triggerEvent('datachange', {idx: this.properties.idx, data: {type: 'Todo',start: this.properties.start, end: this.properties.end, data: this.properties.list}}, {})
+            this.triggerEvent('datachange', {idx: this.properties.idx, data: {type: 'Todo',start: this.properties.start, end: this.properties.end, week: this.properties.week, data: this.properties.list}}, {})
         },
 
         has: function (value) {
@@ -82,7 +82,7 @@ Component({
                 list: newlist,
                 inputdata: ''
             })
-            this.triggerEvent('datachange', {idx: this.properties.idx, data: {type: 'Todo',start: this.properties.start, end: this.properties.end, data: this.properties.list}}, {})
+            this.triggerEvent('datachange', {idx: this.properties.idx, data: {type: 'Todo',start: this.properties.start, end: this.properties.end, week: this.properties.week, data: this.properties.list}}, {})
         },
 
         switch_active: function (event) {
@@ -93,7 +93,7 @@ Component({
                 [item]: !value,
                 innerText: 666
             })
-            this.triggerEvent('datachange', {idx: this.properties.idx, data: {type: 'Todo',start: this.properties.start, end: this.properties.end, data: this.properties.list}}, {})
+            this.triggerEvent('datachange', {idx: this.properties.idx, data: {type: 'Todo',start: this.properties.start, end: this.properties.end, week: this.properties.week, data: this.properties.list}}, {})
         },
 
         change_Time: function () {
