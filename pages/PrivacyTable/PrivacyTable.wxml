@@ -42,7 +42,7 @@
 		<view class="NavButton BG-Gray left" style="min-width: {{navButtonHeight}}px; width: {{navButtonHeight}}px; height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px; padding: 0px;" bindtap="tap_Back">
 			<image style="width: {{navButtonHeight - 13}}px; height: {{navButtonHeight - 13}}px;" src="../../assests/Back.svg" />
 		</view>
-		<text class="Title TEXT-Large">{{title}}</text>
+		<text class="Title TEXT-Large">隐私空间</text>
 	</view>
 	<view class="NavBar right" style="height: {{navHeight}}px; top: {{ navHeight + statusHeight }}px">
 		<view wx:if="{{cards.length>0}}" class="NavButton BG-Red right" style="height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px;" bindtap="switch_DeleteActive">
