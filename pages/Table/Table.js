@@ -155,7 +155,7 @@ Page({
         })
         // console.log(this.unwrap_Cards_with_UID(sharearray))
         wx.navigateTo({
-            url: '../QRcode/QRcode?data=' + JSON.stringify(util.getShareString(sharearray[0].card)),
+            url: '../QRcode/QRcode?data=' + JSON.stringify(util.getShareString(sharearray[0].card, this.staticData.collectionid)),
         })
     },
 

@@ -28,15 +28,15 @@
 		</view>
 		<text class="Title TEXT-Large">{{title}}</text>
 	</view>
-	<!-- <view class="NavBar right" style="height: {{navHeight}}px; top: {{ navHeight + statusHeight }}px">
-		<view wx:if="{{cards.length>0}}" class="NavButton BG-Red right" style="height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px;" bindtap="switch_DeleteActive">
-			管理卡片
-		</view>
-	</view> -->
 </view>
 
 <view class="Container" id="page">
-
+<block wx:if="{{cards.length <= 0}}">
+	<view style="width: 100%; display: flex; flex-direction: row; jusitify-content: center;">
+		<image src="../../assests/Empty.svg" style="margin: 30px auto 18px auto; width: 140px; height: 140px; align-self: center;"></image>
+		</view>
+	</block>
+	<block wx:else>
 	<view wx:for="{{cards}}" class="Card-MoveArea" wx:key="uid">
 		<view wx:if="{{item.card.type === 'text'}}" class="NavButton-Container">
 			<text class="CollectionPath TEXT-Medium" style="font-weight: bold;">{{item.card.text}}</text>
@@ -50,6 +50,7 @@
 			<template is="{{item.card.type}}" data="{{index: index, starttime: item.card.start, endtime: item.card.end, data: item.card.data, full: false}}"></template>
 		</view>
 	</view>
+	</block>
 	<!-- <view style="width: 100%; margin: 12px 0px; box-sizing: border-box; display: flex; flex-direction: row; justify-content: center;">
 		<view wx:if="{{!isCardShopOpen}}" class="NavButton BG-Gray" style="height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px;" bindtap="open_CardShop">
 			Add

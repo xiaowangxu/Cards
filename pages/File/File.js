@@ -72,18 +72,26 @@ Page({
     },
 
     get_MainAndCourseCollectionID: function () {
-        let array = [{collectionid: 'Main', path: '主页'}]
+        let array = [{
+            collectionid: 'Main',
+            path: '主页'
+        }]
         let courses = app.globalData.courses
         for (let i = 0; i < courses.length; i++) {
             let course = courses[i]
             array.push({
-                collectionid: course.name, path: course.name
+                collectionid: course.name,
+                path: course.name
             })
         }
         return array
     },
 
-    file_Cards_with_UID: function (tables, type, list = [{collectionid: 'Main', path: '主页', name: '主页'}]) {
+    file_Cards_with_UID: function (tables, type, list = [{
+        collectionid: 'Main',
+        path: '主页',
+        name: '主页'
+    }]) {
         let filecards = []
         for (let t = 0; t < list.length; t++) {
             let checktable = list[t]
@@ -161,22 +169,14 @@ Page({
     },
 
     tap_Back: function () {
-        if (this.data.deleteActive) {
-            // console.log("close card shop")
-            this.setData({
-                deleteActive: false
-            })
-        } else {
-            // console.log("back")
-            wx.navigateBack({
-                delta: 0,
-            })
-        }
+        wx.navigateBack({
+            delta: 0,
+        })
     },
 
     tap_To: function (event) {
         wx.navigateTo({
-          url: '../Table/Table?collectionid=' + event.currentTarget.dataset.collectionid + '&title=' + event.currentTarget.dataset.title,
+            url: '../Table/Table?collectionid=' + event.currentTarget.dataset.collectionid + '&title=' + event.currentTarget.dataset.title,
         })
     },
 
