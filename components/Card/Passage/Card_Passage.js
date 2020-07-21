@@ -53,7 +53,7 @@ Component({
 
         textarea: function(event) {
             let value = event.detail.value
-            console.log(value)
+            // console.log(value)
             this.setData({
                 ['data.passage']: value
             })

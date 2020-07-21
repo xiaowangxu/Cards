@@ -87,7 +87,7 @@
 		<view class="List-Container">
 			<view class="Item-Container" style="background-color: tomato;" bindtap="logout">
 				<view class="HContainer">
-					<text class="TEXT-Medium" style="margin: 0px auto 0px auto; color: white;" bindtap="exit">删除数据并退出</text>
+					<text class="TEXT-Medium" style="margin: 0px auto 0px auto; color: white;" bindtap="exit">退出</text>
 				</view>
 			</view>
 		</view>

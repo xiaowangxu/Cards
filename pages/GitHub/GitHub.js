@@ -160,7 +160,7 @@ Page({
 	},
 
 	load: function (res) {
-		console.log(">>> Load", res)
+		// console.log(">>> Load", res)
 		let that = this
 		wx.showModal({
 			title: '从GitHub同步',
@@ -168,9 +168,9 @@ Page({
 			success(con) {
 				if (con.confirm) {
 					let tables = decode(res.data.content)
-					console.log(tables)
+					// console.log(tables)
 					app.globalData.tables = JSON.parse(tables).tables
-					console.log(app.globalData.tables)
+					// console.log(app.globalData.tables)
 					app.save_Data()
 					let sha = res.data.sha
 					app.globalData.github = {
@@ -306,53 +306,65 @@ Page({
 	},
 
 	exit: function () {
-		let that = this
-		wx.showLoading({
-			title: '删除中',
+		this.setData({
+			repo: '',
+			sha: 'unknown',
+			state: 'Login'
 		})
-		wx.request({
-			url: 'https://api.github.com/repos/' + that.data.userName + '/' + that.data.repo + '/contents/Data.txt',
-			method: 'DELETE',
-			data: {
-				message: 'Delete CardsData',
-				sha: that.data.sha
-			},
-			header: {
-				Authorization: 'token ' + that.data.token
-			},
-			success(res) {
-				// console.log(res)
-				if (res.statusCode === 200) {
-					wx.hideLoading()
-					that.setData({
-						repo: '',
-						sha: 'unknown',
-						state: 'Login'
-					})
-					app.globalData.github = {
-						user: '',
-						token: '',
-						repo: '',
-						sha: 'unknown'
-					}
-					app.save_GitHub()
-				} else {
-					wx.hideLoading()
-					wx.showModal({
-						title: '错误',
-						content: '无法连接至GitHub/repos/' + that.data.repo + '/Data.txt或token无效',
-						showCancel: false
-					})
-				}
-			},
-			fail(res) {
-				wx.hideLoading()
-				wx.showModal({
-					title: '错误',
-					content: '无法连接至GitHub/repos/' + target + '/Data.txt或token无效',
-					showCancel: false,
-				})
-			}
-		})
+		app.globalData.github = {
+			user: '',
+			token: '',
+			repo: '',
+			sha: 'unknown'
+		}
+		app.save_GitHub()
+		// let that = this
+		// wx.showLoading({
+		// 	title: '删除中',
+		// })
+		// wx.request({
+		// 	url: 'https://api.github.com/repos/' + that.data.userName + '/' + that.data.repo + '/contents/Data.txt',
+		// 	method: 'DELETE',
+		// 	data: {
+		// 		message: 'Delete CardsData',
+		// 		sha: that.data.sha
+		// 	},
+		// 	header: {
+		// 		Authorization: 'token ' + that.data.token
+		// 	},
+		// 	success(res) {
+		// 		// console.log(res)
+		// 		if (res.statusCode === 200) {
+		// 			wx.hideLoading()
+		// 			that.setData({
+		// 				repo: '',
+		// 				sha: 'unknown',
+		// 				state: 'Login'
+		// 			})
+		// 			app.globalData.github = {
+		// 				user: '',
+		// 				token: '',
+		// 				repo: '',
+		// 				sha: 'unknown'
+		// 			}
+		// 			app.save_GitHub()
+		// 		} else {
+		// 			wx.hideLoading()
+		// 			wx.showModal({
+		// 				title: '错误',
+		// 				content: '无法连接至GitHub/repos/' + that.data.repo + '/Data.txt或token无效',
+		// 				showCancel: false
+		// 			})
+		// 		}
+		// 	},
+		// 	fail(res) {
+		// 		wx.hideLoading()
+		// 		wx.showModal({
+		// 			title: '错误',
+		// 			content: '无法连接至GitHub/repos/' + target + '/Data.txt或token无效',
+		// 			showCancel: false,
+		// 		})
+		// 	}
+		// })
 	}
 })

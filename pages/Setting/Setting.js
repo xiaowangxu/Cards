@@ -194,11 +194,11 @@ Page({
 				},
 				success(res) {
 					wx.hideLoading()
-					console.log(res)
+					// console.log(res)
 					if (res.statusCode === 200) {
 						let tables = decode(res.data.content)
 						app.globalData.tables = JSON.parse(tables).tables
-						console.log(app.globalData.tables)
+						// console.log(app.globalData.tables)
 						app.save_Data()
 						let sha = res.data.sha
 						app.globalData.github.sha = sha
