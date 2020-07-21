@@ -170,6 +170,10 @@ const getShareString = (card, collectionid = 0) => {
 	return [collectionid, array]
 }
 
+function toThousands(num) {
+	return (num || "").replace(/(\d)(?=(?:\d{3})+$)/g, '$1,');
+}
+
 module.exports = {
 	formatTime: formatTime,
 	formatTimeOnly: formatTimeOnly,
@@ -180,5 +184,6 @@ module.exports = {
 	getCourseTimeFormated: getCourseTimeFormated,
 	getTimeFiexdDate: getTimeFiexdDate,
 	getCourseTimeDuratiomFormated: getCourseTimeDuratiomFormated,
-	getShareString: getShareString
+	getShareString: getShareString,
+	toThousands:toThousands
 }
