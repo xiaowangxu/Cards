@@ -120,6 +120,12 @@ Page({
 		})
 	},
 
+	edit_CourseTable:function(){
+		wx.navigateTo({
+			url: '../CourseEdit/CourseEdit'
+		})
+	},
+
 	goto_MainTable: function (event) {
 		// console.log(event)
 		let url = '../MainTable/MainTable'

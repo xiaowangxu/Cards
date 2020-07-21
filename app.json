@@ -1,20 +1,21 @@
 {
-    "pages": [
-        "pages/MainTable/MainTable",
-        "pages/Table/Table",
-        "pages/Setting/Setting",
-        "pages/GitHub/GitHub",
-        "pages/File/File",
-        "pages/Search/Search",
-        "pages/QRcode/QRcode"
-    ],
-    "window": {
-        "backgroundTextStyle": "light",
-        "navigationBarBackgroundColor": "#fff",
-        "navigationBarTitleText": "WeChat",
-        "navigationBarTextStyle": "black",
-        "navigationStyle": "custom"
-    },
-    "style": "v2",
-    "sitemapLocation": "sitemap.json"
+  "pages": [
+    "pages/MainTable/MainTable",
+    "pages/Table/Table",
+    "pages/Setting/Setting",
+    "pages/GitHub/GitHub",
+    "pages/File/File",
+    "pages/Search/Search",
+    "pages/QRcode/QRcode",
+    "pages/CourseEdit/CourseEdit"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
 }
