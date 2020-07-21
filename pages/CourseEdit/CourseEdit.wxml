@@ -9,13 +9,20 @@
 </view>
 
 <view class="Container">
-  <view class ="Add-Button">
-    <text class = "TEXT-Medium TEXT-Bold" style="color:white">添加</text>
-  </view>
-  <view wx:for="{{courses}}"class = "List-Container" data-itemindex="{{index}}">
-    <text class = "TEXT-Medium" style="margin-left:12px">{{courses[index].name}}</text>
-    <view wx:if="{{courses.length>0}}" class="Delete-Button" style="height: 25px; border-radius: {{navButtonHeight/2}}px; width:50px;" data-itemindex="{{index}}" bindtap="Delete_Course">
-			删除
+	<view class="Add-Button" bindtap="Add_Course">
+		<text class = "TEXT-Medium TEXT-Bold" style="color:white">添加</text>
+	</view>
+	<view class="List-Container">
+		<view wx:for="{{courses}}" class="Item-Container" data-itemindex="{{index}}">
+			<text class = "TEXT-Small">{{courses[index].name}}</text>
+			<view wx:if="{{courses.length>0}}" class="Delete-Button" style="height: 25px; border-radius: {{navButtonHeight/2}}px; width:50px;" data-itemindex="{{index}}" bindtap="Delete_Course">
+				删除
+			</view>
 		</view>
-  </view>
+	</view>
+</view>
+
+<view class="Cover {{deleteActive? 'show' : ''}}" bindtap="close_Course" />
+<view class="Course-Shop {{deleteActive? 'show' : ''}}">
+	<text class="TEXT-Large" style="margin: 0px 30px">课程信息</text>
 </view>

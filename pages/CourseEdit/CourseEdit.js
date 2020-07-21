@@ -15,6 +15,7 @@ Page({
     navButtonRight: app.globalData.navButtonRight,
     
     courses:[],
+    deleteActive: false,
   },
 
   /**
@@ -88,5 +89,18 @@ Page({
     this.setData({
       courses: newcourses
     })
-  }
+  },
+  
+  Add_Course:function(){
+    this.setData({
+      courses: this.data.courses,
+      deleteActive: !this.data.deleteActive
+    })
+  },
+
+  close_Course: function () {
+    this.setData({
+        deleteActive: false,
+    })
+},
 })
