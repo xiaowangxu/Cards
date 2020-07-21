@@ -305,7 +305,7 @@ Page({
 		})
 	},
 
-	exit: function () {
+	logout: function () {
 		this.setData({
 			repo: '',
 			sha: 'unknown',
