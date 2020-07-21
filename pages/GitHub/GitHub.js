@@ -1,5 +1,5 @@
 // pages/Setting/Setting.js
-
+var wxlocker = require("../../utils/wxlocker.js");
 const app = getApp()
 import util from '../../utils/util.js';
 import {
@@ -366,5 +366,19 @@ Page({
 		// 		})
 		// 	}
 		// })
+	},
+  lockreset:function(){
+		wxlocker.lock.updatePassword();
+		let url = '../Setting/Setting';
+		wx.showToast({
+			title: '重置成功',
+			icon: 'none',
+			duration: 1000,
+		})
+		setTimeout(function () {
+			wx.navigateTo({
+				url: url,
+			})
+		}, 1000);
 	}
 })

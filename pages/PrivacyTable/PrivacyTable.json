@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "card-todo": "../../components/Card/Todo/Card_Todo",
+    "card-picture": "../../components/Card/Picture/Card_Picture",
+    "card-collection": "../../components/Card/Collection/Card_Collection",
+    "card-passage": "../../components/Card/Passage/Card_Passage"
+  }
+}

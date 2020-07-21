@@ -224,5 +224,13 @@ Page({
 				}
 			})
 		}
+	},
+	goto_PrivacyTable: function (event) {
+		// console.log(event)
+		//let url = '../PrivacyTable/PrivacyTable'
+		let url = '../Lock/Lock'
+		wx.navigateTo({
+			url: url,
+		})
 	}
 })

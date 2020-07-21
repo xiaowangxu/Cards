@@ -7,7 +7,9 @@
     "pages/File/File",
     "pages/Search/Search",
     "pages/QRcode/QRcode",
-    "pages/CourseEdit/CourseEdit"
+    "pages/CourseEdit/CourseEdit",    
+    "pages/Lock/Lock",
+    "pages/PrivacyTable/PrivacyTable"
   ],
   "window": {
     "backgroundTextStyle": "light",

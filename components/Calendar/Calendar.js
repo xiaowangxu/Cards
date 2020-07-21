@@ -76,11 +76,11 @@ Component({
 
         select: function (e) {
             let date = e.currentTarget.dataset.date,
-                select = this.data.year + '-' + this.zero(this.data.month) + '-' + this.zero(date),
-                url = '../Table/Table';
-            wx.navigateTo({
-                url: url,
-            });
+                select = this.data.year + '-' + this.zero(this.data.month) + '-' + this.zero(date);
+            //     url = '../Table/Table';
+            // wx.navigateTo({
+            //     url: url,
+            // });
             this.setData({
                 title: this.data.year + '年' + this.zero(this.data.month) + '月' + this.zero(date) + '日',
                 select: select,

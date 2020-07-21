@@ -45,57 +45,57 @@ const getDay = date => {
 }
 
 const CourseTime = [{
-		start: new Date('2000/1/1 08:00:00'),
-		end: new Date('2000/1/1 08:45:00')
-	},
-	{
-		start: new Date('2000/1/1 08:55:00'),
-		end: new Date('2000/1/1 09:40:00')
-	},
-	{
-		start: new Date('2000/1/1 10:00:00'),
-		end: new Date('2000/1/1 10:45:00')
-	},
-	{
-		start: new Date('2000/1/1 10:55:00'),
-		end: new Date('2000/1/1 11:40:00')
-	},
-	{
-		start: new Date('2000/1/1 12:10:00'),
-		end: new Date('2000/1/1 12:55:00')
-	},
-	{
-		start: new Date('2000/1/1 13:05:00'),
-		end: new Date('2000/1/1 13:50:00')
-	},
-	{
-		start: new Date('2000/1/1 14:10:00'),
-		end: new Date('2000/1/1 14:50:00')
-	},
-	{
-		start: new Date('2000/1/1 15:05:00'),
-		end: new Date('2000/1/1 15:50:00')
-	},
-	{
-		start: new Date('2000/1/1 16:00:00'),
-		end: new Date('2000/1/1 16:45:00')
-	},
-	{
-		start: new Date('2000/1/1 16:55:00'),
-		end: new Date('2000/1/1 17:40:00')
-	},
-	{
-		start: new Date('2000/1/1 18:00:00'),
-		end: new Date('2000/1/1 18:45:00')
-	},
-	{
-		start: new Date('2000/1/1 18:55:00'),
-		end: new Date('2000/1/1 19:40:00')
-	},
-	{
-		start: new Date('2000/1/1 19:50:00'),
-		end: new Date('2000/1/1 20:35:00')
-	},
+	start: new Date('2000/1/1 08:00:00'),
+	end: new Date('2000/1/1 08:45:00')
+},
+{
+	start: new Date('2000/1/1 08:55:00'),
+	end: new Date('2000/1/1 09:40:00')
+},
+{
+	start: new Date('2000/1/1 10:00:00'),
+	end: new Date('2000/1/1 10:45:00')
+},
+{
+	start: new Date('2000/1/1 10:55:00'),
+	end: new Date('2000/1/1 11:40:00')
+},
+{
+	start: new Date('2000/1/1 12:10:00'),
+	end: new Date('2000/1/1 12:55:00')
+},
+{
+	start: new Date('2000/1/1 13:05:00'),
+	end: new Date('2000/1/1 13:50:00')
+},
+{
+	start: new Date('2000/1/1 14:10:00'),
+	end: new Date('2000/1/1 14:50:00')
+},
+{
+	start: new Date('2000/1/1 15:05:00'),
+	end: new Date('2000/1/1 15:50:00')
+},
+{
+	start: new Date('2000/1/1 16:00:00'),
+	end: new Date('2000/1/1 16:45:00')
+},
+{
+	start: new Date('2000/1/1 16:55:00'),
+	end: new Date('2000/1/1 17:40:00')
+},
+{
+	start: new Date('2000/1/1 18:00:00'),
+	end: new Date('2000/1/1 18:45:00')
+},
+{
+	start: new Date('2000/1/1 18:55:00'),
+	end: new Date('2000/1/1 19:40:00')
+},
+{
+	start: new Date('2000/1/1 19:50:00'),
+	end: new Date('2000/1/1 20:35:00')
+},
 ]
 
 const getCourse = date => {
@@ -208,8 +208,8 @@ const parseShareString = (str) => {
 					}
 				}
 			}
-			default:
-				break;
+		default:
+			break;
 	}
 }
 
@@ -306,6 +306,10 @@ const searchCard = (card, keyword) => {
 	return yes
 }
 
+function toThousands(num) {
+	return (num || "").replace(/(\d)(?=(?:\d{3})+$)/g, '$1,');
+}
+
 module.exports = {
 	formatTime: formatTime,
 	formatTimeOnly: formatTimeOnly,
@@ -318,5 +322,6 @@ module.exports = {
 	getCourseTimeDuratiomFormated: getCourseTimeDuratiomFormated,
 	getShareString: getShareString,
 	parseShareString: parseShareString,
-	searchCard: searchCard
+	searchCard: searchCard,
+	toThousands: toThousands
 }
