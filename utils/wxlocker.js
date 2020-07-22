@@ -135,8 +135,8 @@
                      duration: 1000,
                  })
                  setTimeout(function () {
-                     wx.navigateTo({
-                         url: url,
+                     wx.navigateBack({
+                       delta: 0,
                      })
                  }, 1000);
                  // wx.setStorageSync('chooseType', this.chooseType);
