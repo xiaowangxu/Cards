@@ -51,10 +51,6 @@
 			<image class="Card-Icon" src="../../assests/Privacy.svg" style="width: 20px; height: 20px; margin-left: 0px; margin-right: 12px"></image>
 			<text class="TEXT-Medium">隐私空间</text>
 		</view>
-		<view wx:if="{{hasPrivacy}}" class="Item-Container" data-file="Todo" bindtap="lockreset">
-			<view class="Card-Icon" style="background-color: transparent;"></view>
-			<text class="TEXT-Medium">重置手势密码</text>
-		</view>
 	</view>
 
 	<view class="List-Container">
