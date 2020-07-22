@@ -110,6 +110,17 @@ const getCourse = date => {
 	return -1
 }
 
+const getCourseWeek = (start, today) => {
+	var days = today.getTime() - start.getTime()
+	var day = (days / (1000 * 60 * 60 * 24))
+	var num = Math.ceil(day / 7)
+	if (day > 0) {
+		return num
+	} else {
+		return -1
+	}
+}
+
 const getCourseTime = coursetime => {
 	if (coursetime < 1 || coursetime > 13) {
 		return null
@@ -367,5 +378,6 @@ module.exports = {
 	parseShareString: parseShareString,
 	searchCard: searchCard,
 	matchCard_Date: matchCard_Date,
+	getCourseWeek: getCourseWeek,
 	toThousands: toThousands
 }

@@ -1,6 +1,5 @@
 // pages/Setting/Setting.js
-
-var app = getApp()
+const app = getApp()
 import util from '../../utils/util.js';
 import {
 	encode,
@@ -19,41 +18,37 @@ Page({
 		navButtonWidth: app.globalData.navButtonWidth,
 		navButtonRight: app.globalData.navButtonRight,
 		number: app.globalData.date_number,
-		githubLogined: false
+		githubLogined: false,
+		startDate: ''
 	},
 
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
-		start_date_time = wx.getStorageSync('起始日期');
-		var start_date_time = start_date_time;
-		//console.log('start_date_time:', start_date_time);
-		var DATE_TIME = util.formatDate(new Date());
-		this.setData({
-			date_time: DATE_TIME,
-			start_date_time: start_date_time
-		})
-		//console.log('date_time:', this.data.date_time);
-		//console.log('start_date_time:', this.data.start_date_time);
-		var date_time = new Date(this.data.date_time);
-		var start_date_time = new Date(this.data.start_date_time);
-		var days = date_time.getTime() - start_date_time.getTime();
-		var day = parseInt(days / (1000 * 60 * 60 * 24));
-		var num = Math.ceil(day / 7);
-		if (day > 0) {
+		let startdatestr = app.globalData.startDate
+		if (startdatestr === '') {
 			this.setData({
+				startDate: '',
+				number: -1
+			})
+		} else {
+			let startdate = new Date(startdatestr + ' 00:00:00')
+			let num = util.getCourseWeek(startdate, new Date())
+			this.setData({
+				startDate: util.formatDate(startdate, '-'),
 				number: num
 			})
-			app.globalData.date_number = this.data.number;
-			//console.log('app.globalData.date_number:',app.globalData.date_number);
-			console.log('当前是春季学期第', this.data.number + '周');
-		} else {
-			console.log('日期出错了');
 		}
 		if (app.get_GitHubUrl() !== '') {
 			this.setData({
-				githubLogined: true
+				githubLogined: true,
+			})
+		}
+		let storage = wx.getStorageInfoSync()
+		if (storage.keys.includes('passwordxx')) {
+			this.setData({
+				hasPrivacy: true
 			})
 		}
 	},
@@ -69,8 +64,10 @@ Page({
 	 * 生命周期函数--监听页面显示
 	 */
 	onShow: function () {
+		let storage = wx.getStorageInfoSync()
 		this.setData({
-			githubLogined: app.get_GitHubUrl() !== ''
+			githubLogined: app.get_GitHubUrl() !== '',
+			hasPrivacy: storage.keys.includes('passwordxx')
 		})
 	},
 
@@ -242,30 +239,27 @@ Page({
 	select: function (event) {
 		let date = event.detail.date
 		wx.navigateTo({
-		  url: '../FileDate/FileDate?date=' + date,
+			url: '../FileDate/FileDate?date=' + date,
 		})
 	},
 
 	bindStartDateChange(event) {
-		let that = this;
-		//console.log(event.detail.value)
-		that.setData({
-			start_date_time: event.detail.value.replace(/-/g, '/'),
-		})
-		//console.log(event.detail.value.replace(/-/g, '/'));
-		wx.setStorageSync('起始日期', event.detail.value.replace(/-/g, '/'));
-		var date_time = new Date(this.data.date_time);
-		var start_date_time = new Date(this.data.start_date_time);
-		var days = date_time.getTime() - start_date_time.getTime();
-		var day = parseInt(days / (1000 * 60 * 60 * 24));
-		var num = Math.ceil(day / 7);
-		if (day > 0) {
+		let startdatestr = event.detail.value.replace(/-/g, '/')
+		app.globalData.startDate = startdatestr
+		app.save_StartDate()
+		if (startdatestr === '') {
 			this.setData({
-				number: num
+				number: -1
 			})
-			console.log('当前是春季学期第', this.data.number + '周');
 		} else {
-			console.log('日期出错了');
+			let startdate = new Date(startdatestr + ' 00:00:00')
+			let num = util.getCourseWeek(startdate, new Date())
+			if (app.get_GitHubUrl() !== '') {
+				this.setData({
+					githubLogined: true,
+					number: num
+				})
+			}
 		}
 	}
 })

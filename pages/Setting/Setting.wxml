@@ -14,9 +14,9 @@
 <view class="Container">
 
 	<view class="List-Container">
-		<view class="Item-Container">
-			<picker mode="date" value="{{start_date_time}}"  end="{{date_time}}" bindchange="bindStartDateChange">
-				<text class="TEXT-Medium">当前学期第{{number}}周(点击设置起始日)</text>
+		<view class="Item-Container" style="padding: 0px;">
+			<picker mode="date" style="flex: 1; padding: 10px 16px;" value="{{startDate}}" bindchange="bindStartDateChange">
+				<text class="TEXT-Medium">{{number === -1? '点击设置学期起始日' : '当前是第'+number+'周'}}</text>
 			</picker>
 		</view>
 		<Calendar id="Calendar" bind:select="select"></Calendar>
@@ -50,6 +50,10 @@
 		<view class="Item-Container" data-file="Todo" bindtap="goto_PrivacyTable">
 			<image class="Card-Icon" src="../../assests/Privacy.svg" style="width: 20px; height: 20px; margin-left: 0px; margin-right: 12px"></image>
 			<text class="TEXT-Medium">隐私空间</text>
+		</view>
+		<view wx:if="{{hasPrivacy}}" class="Item-Container" data-file="Todo" bindtap="lockreset">
+			<view class="Card-Icon" style="background-color: transparent;"></view>
+			<text class="TEXT-Medium">重置手势密码</text>
 		</view>
 	</view>
 

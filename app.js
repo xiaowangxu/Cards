@@ -38,7 +38,7 @@ App({
 			repo: '',
 			sha: 'unknown'
 		},
-		date_number: ' '
+		startDate: ''
 	},
 
 	load_Tables: function () {
@@ -159,6 +159,10 @@ App({
 			let data = wx.getStorageSync('github')
 			this.globalData.github = data
 		}
+		if (storage.keys.includes('startdate')) {
+			let data = wx.getStorageSync('startdate')
+			this.globalData.startDate = data
+		}
 	},
 
 	save: function (collectionid, data) {
@@ -218,6 +222,13 @@ App({
 		wx.setStorage({
 			key: 'github',
 			data: this.globalData.github
+		})
+	},
+
+	save_StartDate: function () {
+		wx.setStorage({
+			key: 'startdate',
+			data: this.globalData.startDate
 		})
 	},
 

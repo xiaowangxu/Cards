@@ -1,5 +1,6 @@
 // components/CourseTable/CourseTable.js
 const util = require("../../utils/util.js")
+const app = getApp()
 
 Component({
 	// behaviors: ['wx://component-export'],
@@ -56,7 +57,7 @@ Component({
 						}
 						// console.log(time, coursetime)
 						let courseweek = course.week
-						if (coursetime.timestart <= time && time <= coursetime.timeend) { // 在这里添加对周数的判断 => courseweek.include(当前周数 以1开始)
+						if (coursetime.timestart <= time && time <= coursetime.timeend && courseweek.includes(week)) { // 在这里添加对周数的判断 => courseweek.include(当前周数 以1开始)
 							return {
 								course: { name: course.name, property: course.property, timestart: coursetime.timestart, timeend: coursetime.timeend },
 								color: this.data.colorPalettes[i % this.data.colorPalettes.length]
@@ -86,7 +87,7 @@ Component({
 						let coursestart = util.getCourseTime(coursetime.timestart)
 						let courseend = util.getCourseTime(coursetime.timeend)
 						let courseweek = course.week
-						if (formeteddate < coursestart.start || formeteddate < courseend.end) { // 在这里添加对周数的判断 => courseweek.include(当前周数 以1开始)
+						if ((formeteddate < coursestart.start || formeteddate < courseend.end) && courseweek.includes(week)) { // 在这里添加对周数的判断 => courseweek.include(当前周数 以1开始)
 							// console.log(">> ", course)
 							if (lastcourse === null) {
 								lastcourse = {
@@ -117,20 +118,20 @@ Component({
 		},
 
 		refresh: function () {
-			let courses = this.properties.courses
-			// let date = new Date('2020/7/13 13:52:00')
+			// let date = new Date('2020/8/26 18:55:00')
 			let date = new Date()
 			let day = util.getDay(date)
 			let coursetime = util.getCourse(date)
+			let week = util.getCourseWeek(new Date(app.globalData.startDate + ' 00:00:00'), date)
 
 			// console.log(coursetime)
 
-			let currentCourse = this.get_Course(1, day, coursetime)
+			let currentCourse = this.get_Course(week, day, coursetime)
 			if (currentCourse !== null) {
 				currentCourse.formattedtime = util.getCourseTimeDuratiomFormated(currentCourse.course.timestart, currentCourse.course.timeend)
 			}
 
-			let nextCourse = this.get_Next_Course(1, day, date)
+			let nextCourse = this.get_Next_Course(week, day, date)
 			// console.log(">>", nextCourse)
 			if (nextCourse !== null) {
 				nextCourse.formattedtime = util.getCourseTimeDuratiomFormated(nextCourse.course.timestart, nextCourse.course.timeend)

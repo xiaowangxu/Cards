@@ -93,11 +93,4 @@
 		</view>
 	</block>
 
-	<view class="List-Container">
-		<view class="Item-Container" data-file="Todo" bindtap="lockreset">
-			<view class="Card-Icon" style="background-color: transparent;"></view>
-			<text class="TEXT-Medium">重置手势密码</text>
-		</view>
-	</view>
-
 </view>
