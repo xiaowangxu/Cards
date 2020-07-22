@@ -14,7 +14,7 @@
 	</view>
 	<view class="List-Container">
 		<view wx:for="{{courses}}" class="Item-Container" data-itemindex="{{index}}">
-			<text class = "TEXT-Small">{{courses[index].name}}</text>
+			<text class = "TEXT-Medium">{{courses[index].name}}</text>
 			<view wx:if="{{courses.length>0}}" class="Delete-Button" style="height: 25px; border-radius: {{navButtonHeight/2}}px; width:50px;" data-itemindex="{{index}}" bindtap="Delete_Course">
 				删除
 			</view>
@@ -27,7 +27,7 @@
 	<text class="TEXT-Large" style="margin: 0px 30px">课程信息</text>
   <view class="ListContainer">
 		<text class="TEXT-Medium TEXT-Bold">课程名称:</text>
-    <input class="Line-Edit" value="{{name}}" adjust-position="true" bindinput="input" bindblur="blur" catchtap="true" bindconfirm="addname"/>
+    <input class="Line-Edit" placeholder="(必填)" value="{{name}}" adjust-position="true" bindinput="input" bindblur="blur" catchtap="true" bindconfirm="addname"/>
   </view>
   <view class="ListContainer">
 		<text class="TEXT-Medium TEXT-Bold">课程周数:</text>
@@ -66,11 +66,11 @@
   <view class="ListContainer">
 		<text class="TEXT-Medium TEXT-Bold">课程时间:</text>
     <view wx:for="{{time}}" >
-			<input class="Line-Edit" value="{{item.text}}" adjust-position="true" data-itemindex="{{index}}" bindinput="input" bindblur="blur" catchtap="true"/>
+			<input class="Line-Edit-time" value="周{{item.day}}  {{item.timestart}}-{{item.timeend}}" adjust-position="true" data-itemindex="{{index}}" bindinput="input" bindblur="blur" catchtap="true"/>
     </view>
   </view>
   <view class="ListContainer">
-			<input class="Line-Edit" adjust-position="true" placeholder="1,1,2 周一1-2节课" value="{{inputdata}}" confirm-hold="true" bindconfirm="addtime" />
+			<input class="Line-Edit" adjust-position="true" placeholder="1,1,2 周一1-2节课(必填)" value="{{inputdata}}" confirm-hold="true" bindconfirm="addtime" />
 	</view>
 
   <view class="ListContainer">

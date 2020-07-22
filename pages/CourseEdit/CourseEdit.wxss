@@ -114,9 +114,20 @@
   flex: 1;
 }
 
+.Line-Edit-time {
+  width: 60px;
+  height: unset;
+  display: block;
+  position: unset;
+  color: black;
+  text-align: left;
+  margin-left: 18px;
+  flex: 1;
+}
+
 .Week-Container {
-  width: 26px;
-  height: 26px;
+  width: 38px;
+  height: 30px;
   /* border: solid 1px white; */
   border-radius: 4px;
   display: flex;
