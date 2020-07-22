@@ -8,5 +8,9 @@
 		<view class="Image-Container" bindtap="select_Pictures">
 
 		</view>
+		
+	</view>
+	<view class="List-Container" style="min-height: unset; justify-content: flex-end; margin-right: 10px; margin-bottom: 7px">
+			<text class="TEXT-Small" style="color: rgba(255,255,255,0.5);" bindtap="change_Time">{{start + ' - ' + end}}</text>
 	</view>
 </view>

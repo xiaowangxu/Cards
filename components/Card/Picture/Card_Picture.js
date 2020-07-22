@@ -1,5 +1,8 @@
 // components/Card_Text.js
 Component({
+    options: {
+		addGlobalClass: true
+	},
     /**
      * 组件的属性列表
      */
@@ -7,6 +10,18 @@ Component({
         idx: {
             type: Number,
             value: -1,
+        },
+        start: {
+            type: String,
+            value: 'unknown'
+        },
+        end: {
+            type: String,
+            value: 'unknown'
+        },
+        week: {
+            type: Array,
+            value: [true, true, true, true, true, true, true]
         },
         list: {
             type: Array,
@@ -38,7 +53,7 @@ Component({
                     that.setData({
                         list: res.tempFilePaths
                     })
-                    that.triggerEvent('datachange',{idx: that.properties.idx, data: {type: 'Picture', data: that.properties.list}}, {})
+                    that.triggerEvent('datachange',{idx: that.properties.idx, start: this.properties.start, end: this.properties.end, week: this.properties.week, data: {type: 'Picture', data: that.properties.list}}, {})
                 }
             })
         },
@@ -74,6 +89,10 @@ Component({
                 current,
                 urls: this.properties.list
             })
-        }
+        },
+
+        change_Time: function () {
+            this.triggerEvent('timechange', {idx: this.properties.idx}, {})
+        } 
     }
 })

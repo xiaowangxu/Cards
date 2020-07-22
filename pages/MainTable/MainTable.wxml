@@ -72,6 +72,11 @@
 
 <view class="Container">
 	<view class="List-Container-Main">
+		<view class="Item-Container-Main" style="background-color: rgb(80, 80, 80);" bindtap="goto_Today">
+			<text class="TEXT-Medium TEXT-Bold" style="color: white;">一天</text>
+		</view>
+	</view>
+	<view class="List-Container-Main">
 		<view class="Item-Container-Main" bindtap="goto_Main">
 			<text class="TEXT-Medium TEXT-Bold">随手记</text>
 		</view>

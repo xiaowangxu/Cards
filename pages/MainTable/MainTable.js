@@ -108,5 +108,11 @@ Page({
 
 	goto_Main: function () {
 		app.navigateTo_Table('Main', '随手记', '课程表')
+	},
+
+	goto_Today: function () {
+		wx.navigateTo({
+		  url: '../FileDate/FileDate?date=' + util.formatDate(new Date()),
+		})
 	}
 })

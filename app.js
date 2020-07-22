@@ -183,7 +183,6 @@ App({
 	},
 
 	remove_Card: function (collectionid, index) {
-		console.log("????")
 		collectionid = String(collectionid)
 		let table = this.globalData.tables[collectionid]
 		console.log(collectionid)

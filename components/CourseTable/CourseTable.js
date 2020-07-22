@@ -55,7 +55,8 @@ Component({
 							continue
 						}
 						// console.log(time, coursetime)
-						if (coursetime.timestart <= time && time <= coursetime.timeend) {
+						let courseweek = course.week
+						if (coursetime.timestart <= time && time <= coursetime.timeend) { // 在这里添加对周数的判断 => courseweek.include(当前周数 以1开始)
 							return {
 								course: { name: course.name, property: course.property, timestart: coursetime.timestart, timeend: coursetime.timeend },
 								color: this.data.colorPalettes[i % this.data.colorPalettes.length]
@@ -84,7 +85,8 @@ Component({
 						}
 						let coursestart = util.getCourseTime(coursetime.timestart)
 						let courseend = util.getCourseTime(coursetime.timeend)
-						if (formeteddate < coursestart.start || formeteddate < courseend.end) {
+						let courseweek = course.week
+						if (formeteddate < coursestart.start || formeteddate < courseend.end) { // 在这里添加对周数的判断 => courseweek.include(当前周数 以1开始)
 							// console.log(">> ", course)
 							if (lastcourse === null) {
 								lastcourse = {

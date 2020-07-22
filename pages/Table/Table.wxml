@@ -10,7 +10,7 @@
 </template>
 
 <template name="Picture">
-	<card-picture idx="{{index}}" start="{{starttime}}" end="{{endtime}}" list="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged" />
+	<card-picture idx="{{index}}" start="{{starttime}}" end="{{endtime}}" list="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged" bind:timechange="on_TimeChangeRequest"/>
 </template>
 
 <template name="Picture-Template">
@@ -23,14 +23,6 @@
 
 <template name="Collection-Template">
 	<card-collection idx="{{index}}" start="{{starttime}}" end="{{endtime}}" data="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_SelectedCardChanged" />
-</template>
-
-<template name="Notify">
-	<card-notify idx="{{index}}" start="{{starttime}}" end="{{endtime}}" data="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged" />
-</template>
-
-<template name="Notify-Template">
-	<card-notify idx="{{index}}" start="{{starttime}}" end="{{endtime}}" data="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_SelectedCardChanged" />
 </template>
 
 <template name="Passage">

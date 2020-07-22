@@ -45,57 +45,57 @@ const getDay = date => {
 }
 
 const CourseTime = [{
-	start: new Date('2000/1/1 08:00:00'),
-	end: new Date('2000/1/1 08:45:00')
-},
-{
-	start: new Date('2000/1/1 08:55:00'),
-	end: new Date('2000/1/1 09:40:00')
-},
-{
-	start: new Date('2000/1/1 10:00:00'),
-	end: new Date('2000/1/1 10:45:00')
-},
-{
-	start: new Date('2000/1/1 10:55:00'),
-	end: new Date('2000/1/1 11:40:00')
-},
-{
-	start: new Date('2000/1/1 12:10:00'),
-	end: new Date('2000/1/1 12:55:00')
-},
-{
-	start: new Date('2000/1/1 13:05:00'),
-	end: new Date('2000/1/1 13:50:00')
-},
-{
-	start: new Date('2000/1/1 14:10:00'),
-	end: new Date('2000/1/1 14:50:00')
-},
-{
-	start: new Date('2000/1/1 15:05:00'),
-	end: new Date('2000/1/1 15:50:00')
-},
-{
-	start: new Date('2000/1/1 16:00:00'),
-	end: new Date('2000/1/1 16:45:00')
-},
-{
-	start: new Date('2000/1/1 16:55:00'),
-	end: new Date('2000/1/1 17:40:00')
-},
-{
-	start: new Date('2000/1/1 18:00:00'),
-	end: new Date('2000/1/1 18:45:00')
-},
-{
-	start: new Date('2000/1/1 18:55:00'),
-	end: new Date('2000/1/1 19:40:00')
-},
-{
-	start: new Date('2000/1/1 19:50:00'),
-	end: new Date('2000/1/1 20:35:00')
-},
+		start: new Date('2000/1/1 08:00:00'),
+		end: new Date('2000/1/1 08:45:00')
+	},
+	{
+		start: new Date('2000/1/1 08:55:00'),
+		end: new Date('2000/1/1 09:40:00')
+	},
+	{
+		start: new Date('2000/1/1 10:00:00'),
+		end: new Date('2000/1/1 10:45:00')
+	},
+	{
+		start: new Date('2000/1/1 10:55:00'),
+		end: new Date('2000/1/1 11:40:00')
+	},
+	{
+		start: new Date('2000/1/1 12:10:00'),
+		end: new Date('2000/1/1 12:55:00')
+	},
+	{
+		start: new Date('2000/1/1 13:05:00'),
+		end: new Date('2000/1/1 13:50:00')
+	},
+	{
+		start: new Date('2000/1/1 14:10:00'),
+		end: new Date('2000/1/1 14:50:00')
+	},
+	{
+		start: new Date('2000/1/1 15:05:00'),
+		end: new Date('2000/1/1 15:50:00')
+	},
+	{
+		start: new Date('2000/1/1 16:00:00'),
+		end: new Date('2000/1/1 16:45:00')
+	},
+	{
+		start: new Date('2000/1/1 16:55:00'),
+		end: new Date('2000/1/1 17:40:00')
+	},
+	{
+		start: new Date('2000/1/1 18:00:00'),
+		end: new Date('2000/1/1 18:45:00')
+	},
+	{
+		start: new Date('2000/1/1 18:55:00'),
+		end: new Date('2000/1/1 19:40:00')
+	},
+	{
+		start: new Date('2000/1/1 19:50:00'),
+		end: new Date('2000/1/1 20:35:00')
+	},
 ]
 
 const getCourse = date => {
@@ -182,34 +182,59 @@ const getShareString = (card, collectionid = 0) => {
 const parseShareString = (str) => {
 	let collectionid = str[0]
 	let data = str[1]
-	switch (data[0]) {
-		case 2:
-			let date = new Date()
-			date.setTime(data[1])
-			console.log(date)
-			let start = formatTime(date, false)
-			date.setTime(data[2])
-			let end = formatTime(date, false)
-			let week = data[3].map((item) => {
-				return item === 1 ? true : false
-			})
-			let title = data[4]
-			let passage = data[5]
+	let type = data[0]
+	if (type === 0) {
+		let date = new Date()
+		date.setTime(data[1])
+		console.log(date)
+		let start = formatTime(date, false)
+		date.setTime(data[2])
+		let end = formatTime(date, false)
+		let week = data[3].map((item) => {
+			return item === 1 ? true : false
+		})
+		let list = data[4].map((item) => {
 			return {
-				collectionid: collectionid, card: {
-					type: 'Passage',
-					start: start,
-					end: end,
-					week: week,
-					data: {
-						title: title,
-						passage: passage,
-						path: ''
-					}
+				text: item,
+				finish: false
+			}
+		})
+		return {
+			collectionid: collectionid,
+			card: {
+				type: 'Todo',
+				start: start,
+				end: end,
+				week: week,
+				data: list
+			}
+		}
+	} else if (type === 2) {
+		let date = new Date()
+		date.setTime(data[1])
+		console.log(date)
+		let start = formatTime(date, false)
+		date.setTime(data[2])
+		let end = formatTime(date, false)
+		let week = data[3].map((item) => {
+			return item === 1 ? true : false
+		})
+		let title = data[4]
+		let passage = data[5]
+		return {
+			collectionid: collectionid,
+			card: {
+				type: 'Passage',
+				start: start,
+				end: end,
+				week: week,
+				data: {
+					title: title,
+					passage: passage,
+					path: ''
 				}
 			}
-		default:
-			break;
+		}
 	}
 }
 
@@ -310,6 +335,24 @@ function toThousands(num) {
 	return (num || "").replace(/(\d)(?=(?:\d{3})+$)/g, '$1,');
 }
 
+const matchCard_Date = (card, start, end) => {
+	// console.log(card)
+	let weekday = new Date(start + ' 00:00:00').getDay()
+	if (!card.week[weekday]) return false
+	let starttime = new Date(card.start).getTime()
+	let endtime = new Date(card.end).getTime()
+	let startdate = new Date(start + ' 00:00:00').getTime()
+	let enddate = new Date(end + ' 23:59:59').getTime()
+	if (starttime < startdate) {
+		if (endtime < startdate) return false
+		else if (endtime <= enddate) return true
+		else return true
+	} else if (starttime <= enddate) {
+		if (endtime <= enddate) return true
+		else return true
+	} else return false
+}
+
 module.exports = {
 	formatTime: formatTime,
 	formatTimeOnly: formatTimeOnly,
@@ -323,5 +366,6 @@ module.exports = {
 	getShareString: getShareString,
 	parseShareString: parseShareString,
 	searchCard: searchCard,
+	matchCard_Date: matchCard_Date,
 	toThousands: toThousands
 }

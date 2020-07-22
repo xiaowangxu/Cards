@@ -77,6 +77,8 @@ Component({
         select: function (e) {
             let date = e.currentTarget.dataset.date,
                 select = this.data.year + '-' + this.zero(this.data.month) + '-' + this.zero(date);
+            let formatDate = this.data.year + '/' + this.zero(this.data.month) + '/' + this.zero(date)
+            this.triggerEvent('select', {date: formatDate}, {})
             //     url = '../Table/Table';
             // wx.navigateTo({
             //     url: url,

@@ -35,3 +35,16 @@
     height: 80px;
     border-radius: 6px;
 }
+
+.List-Container {
+    /* width: 100%; */
+    justify-self: stretch;
+    min-height: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 4px 0px 4px 0px;
+    box-sizing: border-box;
+    position: relative;
+}

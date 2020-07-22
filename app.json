@@ -5,6 +5,7 @@
     "pages/Setting/Setting",
     "pages/GitHub/GitHub",
     "pages/File/File",
+    "pages/FileDate/FileDate",
     "pages/Search/Search",
     "pages/QRcode/QRcode",
     "pages/CourseEdit/CourseEdit",    

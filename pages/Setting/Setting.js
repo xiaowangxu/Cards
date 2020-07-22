@@ -235,5 +235,12 @@ Page({
 		wx.navigateTo({
 			url: url,
 		})
+	},
+
+	select: function (event) {
+		let date = event.detail.date
+		wx.navigateTo({
+		  url: '../FileDate/FileDate?date=' + date,
+		})
 	}
 })
