@@ -52,108 +52,6 @@ App({
 		if (storage.keys.includes('courses')) {
 			let data = wx.getStorageSync('courses')
 			this.globalData.courses = data
-		} else {
-			this.globalData.courses = [{
-				name: '汇编语言程序设计',
-				week: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-				times: [{
-					day: 1,
-					timestart: 11,
-					timeend: 13
-				}, {
-					day: 3,
-					timestart: 6,
-					timeend: 8
-				}],
-				property: {
-					place: 'A103',
-					teacher: '杨洪斌'
-				}
-			}, {
-				name: '组合数学',
-				week: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-				times: [{
-					day: 1,
-					timestart: 6,
-					timeend: 8
-				}],
-				property: {
-					place: 'A103',
-					teacher: '李卫民'
-				}
-			}, {
-				name: '形势与政策',
-				week: [1, 6],
-				times: [{
-					day: 3,
-					timestart: 11,
-					timeend: 12
-				}],
-				property: {
-					place: 'A103',
-					teacher: '宋津明'
-				}
-			}, {
-				name: '操作系统(1)',
-				week: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-				times: [{
-					day: 2,
-					timestart: 7,
-					timeend: 8
-				}, {
-					day: 4,
-					timestart: 1,
-					timeend: 2
-				}, {
-					day: 4,
-					timestart: 3,
-					timeend: 4
-				}],
-				property: {
-					place: 'A103',
-					teacher: '刘福岩'
-				}
-			}, {
-				name: '计算机图形学',
-				week: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-				times: [{
-					day: 2,
-					timestart: 11,
-					timeend: 13
-				}, {
-					day: 5,
-					timestart: 7,
-					timeend: 8
-				}],
-				property: {
-					place: 'A103',
-					teacher: '王宜敏'
-				}
-			}, {
-				name: '计算机网络',
-				week: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-				times: [{
-					day: 1,
-					timestart: 1,
-					timeend: 2
-				}, {
-					day: 1,
-					timestart: 3,
-					timeend: 4
-				}, {
-					day: 3,
-					timestart: 1,
-					timeend: 2
-				}, {
-					day: 3,
-					timestart: 3,
-					timeend: 4
-				}],
-				property: {
-					place: 'A103',
-					teacher: '张云华'
-				}
-			}]
 		}
 		if (storage.keys.includes('github')) {
 			let data = wx.getStorageSync('github')
@@ -225,6 +123,14 @@ App({
 		})
 	},
 
+	save_Courses: function () {
+		wx.setStorage({
+			key: 'courses',
+			data: this.globalData.courses
+		})
+	},
+
+
 	save_StartDate: function () {
 		wx.setStorage({
 			key: 'startdate',
@@ -232,12 +138,12 @@ App({
 		})
 	},
 
-	get_GitHubUrl: function () {
+	get_GitHubUrl: function (file = 'Data.txt') {
 		if (this.globalData.github.sha === 'unknown') {
 			return ''
 		}
 		else {
-			return 'https://api.github.com/repos/'+this.globalData.github.user+'/'+this.globalData.github.repo+'/contents/Data.txt'
+			return 'https://api.github.com/repos/'+this.globalData.github.user+'/'+this.globalData.github.repo+'/contents/' + file
 		}
 	},
 

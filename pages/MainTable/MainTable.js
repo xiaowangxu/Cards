@@ -69,6 +69,8 @@ Page({
 						that.setData({
 							courses: data,
 						})
+						let coursetable = that.selectComponent('.CourseTableObject')
+						coursetable.refresh()
 					}
 				}
 			}
@@ -112,7 +114,7 @@ Page({
 
 	goto_Today: function () {
 		wx.navigateTo({
-		  url: '../FileDate/FileDate?date=' + util.formatDate(new Date()),
+			url: '../FileDate/FileDate?date=' + util.formatDate(new Date()),
 		})
 	}
 })
