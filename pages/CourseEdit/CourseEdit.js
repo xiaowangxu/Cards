@@ -155,6 +155,7 @@ Page({
       week:[true, true, true, true, true, true, true, true, true, true]
     })
     console.log(this.data.courses)
+    app.save_Courses()
   },
 
   hasnotime: function (value) {

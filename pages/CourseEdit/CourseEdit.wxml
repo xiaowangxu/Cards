@@ -14,7 +14,7 @@
 	</view>
 	<view class="List-Container">
 		<view wx:for="{{courses}}" class="Item-Container" data-itemindex="{{index}}">
-			<text class = "TEXT-Small">{{courses[index].name}}</text>
+			<text class = "TEXT-Medium">{{courses[index].name}}</text>
 			<view wx:if="{{courses.length>0}}" class="Delete-Button" style="height: 25px; border-radius: {{navButtonHeight/2}}px; width:50px;" data-itemindex="{{index}}" bindtap="Delete_Course">
 				删除
 			</view>
