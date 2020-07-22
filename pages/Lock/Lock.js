@@ -8,7 +8,7 @@ Page({
     navButtonHeight: app.globalData.navButtonHeight,
     navButtonWidth: app.globalData.navButtonWidth,
     navButtonRight: app.globalData.navButtonRight,
-    title: '请设置手势密码',
+    title: '设置手势密码',
     titleColor: ""
   },
   onLoad: function (options) {
@@ -57,13 +57,23 @@ Page({
     //console.log("解锁成功！");
     app.navigateTo_Table('Privacy', '隐私空间', '')
   },
-  lockreset: function () {
-    wxlocker.lock.updatePassword();
-    this.initState();
-  },
   tap_Back: function () {
 		wx.navigateBack({
 			delta: 0,
 		})
 	},
+	lockreset: function () {
+		wxlocker.lock.updatePassword();
+		let url = '../Setting/Setting';
+		wx.showToast({
+			title: '重置成功',
+			icon: 'success',
+			duration: 1000,
+		})
+		setTimeout(function () {
+			wx.navigateTo({
+				url: url,
+			})
+		}, 1000);
+	}
 })

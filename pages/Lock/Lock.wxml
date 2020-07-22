@@ -9,6 +9,6 @@
 <view class="lock-box">
     <view class="lock-title {{titleColor}}">{{title}}</view>
     <!-- <view class="lock-set" bindtap="SetPassword">设置密码</view> -->
-    <!-- <view class="lock-reset" hidden="{{resetHidden}}" bindtap="lockreset">忘记密码</view> -->
+    <view class="lock-reset" hidden="{{resetHidden}}" bindtap="lockreset">重置手势密码</view>
     <canvas disable-scroll="true" class="lock-cav" bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" canvas-id="locker" style="width:686rpx;height:686rpx;"></canvas>
 </view>
