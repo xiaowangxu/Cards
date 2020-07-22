@@ -16,6 +16,14 @@ Page({
     
     courses:[],
     deleteActive: false,
+    week: [true, true, true, true, true, true, true, true, true, true],
+    add_course:{},
+    time:[],
+    inputdata:"",
+    name:"",
+    place:"",
+    teacher:"",
+    addcourseActive:false,
   },
 
   /**
@@ -101,6 +109,102 @@ Page({
   close_Course: function () {
     this.setData({
         deleteActive: false,
+        addcourseActive:false,
     })
 },
+  switch_Week: function (event) {
+    let index = event.currentTarget.dataset.index
+    this.setData({
+        ['week[' + index + ']']: !this.data.week[index]
+    })
+  },
+  tap_CourseAdd:function (event){
+    let newweek = []
+    let property = {}
+    let newtime = this.data.time
+    for (let i = 0; i < this.data.time.length; i++){
+      delete newtime[i].text
+      delete newtime[i].finish
+    }
+    property['place'] = this.data.place
+    property['teacher'] = this.data.teacher
+    for(let i = 0; i < 10; i++)
+    {
+      if(this.data.week[i] == true)
+      {
+        newweek.push(i + 1)
+      }
+    }
+    if(this.data.name != "" && newtime != [])
+    {
+      this.data.add_course['name'] = this.data.name
+      this.data.add_course['week'] = newweek
+      this.data.add_course['times'] = newtime
+      this.data.add_course['property'] = property
+      this.data.courses.push(this.data.add_course)
+    }
+    this.setData({
+      courses: this.data.courses,
+      addcourseActive: false,
+      time:[],
+      place:"",
+      teacher:"",
+      name:"",
+      inputdata:"",
+      week:[true, true, true, true, true, true, true, true, true, true]
+    })
+    console.log(app.globalData.courses)
+  },
+
+  has: function (value) {
+    for (let i = 0; i< this.data.time.length; i++) {
+        let item = this.data.time[i].text
+        if (item === value) {
+            return true
+        }
+    }
+    return false
+  },
+
+  addtime: function(event) {
+    let value = event.detail.value
+    
+    if (value === '') return
+    if (this.has(value)) return
+    
+    let newlist = this.data.time
+    newlist.push({day: parseInt(value.split(',')[0]), timestart: parseInt(value.split(',')[1]), timeend:parseInt(value.split(',')[2]), finish:false, text: value})
+    this.setData({
+        time: newlist,
+        inputdata: ''
+    })
+  },
+
+  addname:function(event){
+    let value = event.detail.value
+    if (value === '') return
+    this.setData({
+        name: value,
+    })
+  },
+  addplace:function(event){
+    let value = event.detail.value
+    if (value === '') return
+    this.setData({
+        place: value,
+    })
+  },
+  addteacher:function(event){
+    let value = event.detail.value
+    if (value === '') return
+    this.setData({
+        teacher: value,
+    })
+  },
+  addActive:function(){
+    this.setData({
+      addcourseActive:true,
+      deleteActive:true,
+    })
+  }
 })

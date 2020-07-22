@@ -10,7 +10,7 @@
 
 <view class="Container">
 	<view class="Add-Button" bindtap="Add_Course">
-		<text class = "TEXT-Medium TEXT-Bold" style="color:white">添加</text>
+		<text class = "TEXT-Medium TEXT-Bold" style="color:white" bindtap="addActive">添加</text>
 	</view>
 	<view class="List-Container">
 		<view wx:for="{{courses}}" class="Item-Container" data-itemindex="{{index}}">
@@ -22,7 +22,68 @@
 	</view>
 </view>
 
-<view class="Cover {{deleteActive? 'show' : ''}}" bindtap="close_Course" />
-<view class="Course-Shop {{deleteActive? 'show' : ''}}">
+<view class="Cover {{deleteActive || addcourseActive? 'show' : ''}}" bindtap="close_Course" />
+<view class="Course-Shop {{addcourseActive? 'show' : ''}}">
 	<text class="TEXT-Large" style="margin: 0px 30px">课程信息</text>
+  <view class="ListContainer">
+		<text class="TEXT-Medium TEXT-Bold">课程名称:</text>
+    <input class="Line-Edit" value="{{name}}" adjust-position="true" bindinput="input" bindblur="blur" catchtap="true" bindconfirm="addname"/>
+  </view>
+  <view class="ListContainer">
+		<text class="TEXT-Medium TEXT-Bold">课程周数:</text>
+    <view class="Week-Container {{week[0]? 'selected' : ''}}" data-index="0" bindtap="switch_Week">
+			<text>一</text>
+		</view>
+		<view class="Week-Container {{week[1]? 'selected' : ''}}" data-index="1" bindtap="switch_Week">
+			<text>二</text>
+		</view>
+		<view class="Week-Container {{week[2]? 'selected' : ''}}" data-index="2" bindtap="switch_Week">
+			<text>三</text>
+		</view>
+		<view class="Week-Container {{week[3]? 'selected' : ''}}" data-index="3" bindtap="switch_Week">
+			<text>四</text>
+		</view>
+		<view class="Week-Container {{week[4]? 'selected' : ''}}" data-index="4" bindtap="switch_Week">
+			<text>五</text>
+		</view>
+		<view class="Week-Container {{week[5]? 'selected' : ''}}" data-index="5" bindtap="switch_Week">
+			<text>六</text>
+		</view>
+		<view class="Week-Container {{week[6]? 'selected' : ''}}"  data-index="6" bindtap="switch_Week">
+			<text>七</text>
+		</view>
+    <view class="Week-Container {{week[7]? 'selected' : ''}}"  data-index="7" bindtap="switch_Week">
+			<text>八</text>
+		</view>
+    <view class="Week-Container {{week[8]? 'selected' : ''}}"  data-index="8" bindtap="switch_Week">
+			<text>九</text>
+		</view>
+    <view class="Week-Container {{week[9]? 'selected' : ''}}"  data-index="9" bindtap="switch_Week">
+			<text>十</text>
+		</view>
+  </view>
+
+  <view class="ListContainer">
+		<text class="TEXT-Medium TEXT-Bold">课程时间:</text>
+    <view wx:for="{{time}}" >
+			<input class="Line-Edit" value="{{item.text}}" adjust-position="true" data-itemindex="{{index}}" bindinput="input" bindblur="blur" catchtap="true"/>
+    </view>
+  </view>
+  <view class="ListContainer">
+			<input class="Line-Edit" adjust-position="true" placeholder="1,1,2 周一1-2节课" value="{{inputdata}}" confirm-hold="true" bindconfirm="addtime" />
+	</view>
+
+  <view class="ListContainer">
+		<text class="TEXT-Medium TEXT-Bold">课程地点:</text>
+    <input class="Line-Edit" value="{{place}}" placeholder="A101" adjust-position="true" bindinput="input" bindblur="blur" catchtap="true"bindconfirm="addplace"/>
+  </view>
+  <view class="ListContainer">
+		<text class="TEXT-Medium TEXT-Bold">授课教师:</text>
+    <input class="Line-Edit" value="{{teacher}}" adjust-position="true" bindinput="input" bindblur="blur" catchtap="true"bindconfirm="addteacher"/>
+  </view>
+  <view class="NavButton-Container right" style="margin: 12px 30px 0px 30px; height: {{navHeight}}px;">
+		<view class="NavButton BG-Green right" disable="true" hover-class="NavButton-Hover" style="height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px;" bindtap="tap_CourseAdd">
+			确定
+		</view>
+	</view>
 </view>
