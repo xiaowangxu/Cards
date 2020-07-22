@@ -151,16 +151,18 @@ Page({
       teacher:"",
       name:"",
       inputdata:"",
+      add_course:{},
       week:[true, true, true, true, true, true, true, true, true, true]
     })
-    console.log(app.globalData.courses)
+    console.log(this.data.courses)
   },
 
-  has: function (value) {
-    for (let i = 0; i< this.data.time.length; i++) {
-        let item = this.data.time[i].text
-        if (item === value) {
-            return true
+  hasnotime: function (value) {
+    for (let i = 0; i< this.data.courses.length; i++) {
+        let item = this.data.courses[i].times
+        for (let index = 0; index < item.length; index++)
+        {
+          if(value.day == item[index].day && value.timestart >= item[index].timestart && value.timestart <= item[index].timeend) return true
         }
     }
     return false
@@ -170,7 +172,11 @@ Page({
     let value = event.detail.value
     
     if (value === '') return
-    if (this.has(value)) return
+    for (let i = 0; i < value.length; i++)
+    {
+      if (value[i] == '，') value[i] = ','
+    }
+    if (this.hasnotime({day: parseInt(value.split(',')[0]), timestart: parseInt(value.split(',')[1]), timeend:parseInt(value.split(',')[2])})) return
     
     let newlist = this.data.time
     newlist.push({day: parseInt(value.split(',')[0]), timestart: parseInt(value.split(',')[1]), timeend:parseInt(value.split(',')[2]), finish:false, text: value})
@@ -180,12 +186,21 @@ Page({
     })
   },
 
+  hasname:function(value){
+    for (let i = 0; i< this.data.courses.length; i++) {
+      let item = this.data.courses[i].name
+      if(item == value) return true
+    }
+    return false
+  },
   addname:function(event){
     let value = event.detail.value
     if (value === '') return
+    if (this.hasname(value)) return
     this.setData({
         name: value,
     })
+    console.log(this.data.name)
   },
   addplace:function(event){
     let value = event.detail.value
