@@ -158,11 +158,16 @@ Page({
   },
 
   hasnotime: function (value) {
+    for (let i = 0; i < this.data.time.length; i++)
+    {
+      let item = this.data.time
+      if(value.day == item[i].day && (value.timestart >= item[i].timestart && value.timestart <= item[i].timeend) || (value.timeend >= item[i].timestart && value.timeend <= item[i].timeend)) return true
+    }
     for (let i = 0; i< this.data.courses.length; i++) {
         let item = this.data.courses[i].times
         for (let index = 0; index < item.length; index++)
         {
-          if(value.day == item[index].day && value.timestart >= item[index].timestart && value.timestart <= item[index].timeend) return true
+          if(value.day == item[index].day && (value.timestart >= item[index].timestart && value.timestart <= item[index].timeend) || (value.timeend >= item[index].timestart && value.timeend <= item[index].timeend)) return true
         }
     }
     return false
