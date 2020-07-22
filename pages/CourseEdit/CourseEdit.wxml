@@ -27,7 +27,7 @@
 	<text class="TEXT-Large" style="margin: 0px 30px">课程信息</text>
   <view class="ListContainer">
 		<text class="TEXT-Medium TEXT-Bold">课程名称:</text>
-    <input class="Line-Edit" placeholder="(必填)" value="{{name}}" adjust-position="true" bindinput="input" bindblur="blur" catchtap="true" bindconfirm="addname"/>
+    <input class="Line-Edit" placeholder="(必填)" value="{{name}}" adjust-position="true" bindinput="addname"/>
   </view>
   <view class="ListContainer">
 		<text class="TEXT-Medium TEXT-Bold">课程周数:</text>
