@@ -1,6 +1,6 @@
 // pages/Setting/Setting.js
 
-const app = getApp()
+var app = getApp()
 import util from '../../utils/util.js';
 import {
 	encode,
@@ -18,7 +18,7 @@ Page({
 		navButtonHeight: app.globalData.navButtonHeight,
 		navButtonWidth: app.globalData.navButtonWidth,
 		navButtonRight: app.globalData.navButtonRight,
-
+		number: app.globalData.date_number,
 		githubLogined: false
 	},
 
@@ -26,16 +26,16 @@ Page({
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
-		var TIME = util.formatTime(new Date());
+		start_date_time = wx.getStorageSync('起始日期');
+		var start_date_time = start_date_time;
+		//console.log('start_date_time:', start_date_time);
 		var DATE_TIME = util.formatDate(new Date());
 		this.setData({
-			time: TIME,
 			date_time: DATE_TIME,
-			start_date_time: '2020/04/06', //开始时间
+			start_date_time: start_date_time
 		})
-		console.log('time:', this.data.time);
-		console.log('date_time:', this.data.date_time);
-		console.log('start_date_time:', this.data.start_date_time);
+		//console.log('date_time:', this.data.date_time);
+		//console.log('start_date_time:', this.data.start_date_time);
 		var date_time = new Date(this.data.date_time);
 		var start_date_time = new Date(this.data.start_date_time);
 		var days = date_time.getTime() - start_date_time.getTime();
@@ -45,6 +45,8 @@ Page({
 			this.setData({
 				number: num
 			})
+			app.globalData.date_number = this.data.number;
+			//console.log('app.globalData.date_number:',app.globalData.date_number);
 			console.log('当前是春季学期第', this.data.number + '周');
 		} else {
 			console.log('日期出错了');
@@ -242,5 +244,28 @@ Page({
 		wx.navigateTo({
 		  url: '../FileDate/FileDate?date=' + date,
 		})
+	},
+
+	bindStartDateChange(event) {
+		let that = this;
+		//console.log(event.detail.value)
+		that.setData({
+			start_date_time: event.detail.value.replace(/-/g, '/'),
+		})
+		//console.log(event.detail.value.replace(/-/g, '/'));
+		wx.setStorageSync('起始日期', event.detail.value.replace(/-/g, '/'));
+		var date_time = new Date(this.data.date_time);
+		var start_date_time = new Date(this.data.start_date_time);
+		var days = date_time.getTime() - start_date_time.getTime();
+		var day = parseInt(days / (1000 * 60 * 60 * 24));
+		var num = Math.ceil(day / 7);
+		if (day > 0) {
+			this.setData({
+				number: num
+			})
+			console.log('当前是春季学期第', this.data.number + '周');
+		} else {
+			console.log('日期出错了');
+		}
 	}
 })

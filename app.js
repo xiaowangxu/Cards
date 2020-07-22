@@ -37,7 +37,8 @@ App({
 			token: '',
 			repo: '',
 			sha: 'unknown'
-		}
+		},
+		date_number: ' '
 	},
 
 	load_Tables: function () {
