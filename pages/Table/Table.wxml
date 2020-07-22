@@ -10,7 +10,7 @@
 </template>
 
 <template name="Picture">
-	<card-picture idx="{{index}}" start="{{starttime}}" end="{{endtime}}" list="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged" bind:timechange="on_TimeChangeRequest"/>
+	<card-picture idx="{{index}}" start="{{starttime}}" end="{{endtime}}" list="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged" bind:timechange="on_TimeChangeRequest" />
 </template>
 
 <template name="Picture-Template">
@@ -26,7 +26,7 @@
 </template>
 
 <template name="Passage">
-	<card-passage idx="{{index}}" start="{{starttime}}" end="{{endtime}}" data="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged" bind:timechange="on_TimeChangeRequest"/>
+	<card-passage idx="{{index}}" start="{{starttime}}" end="{{endtime}}" data="{{data}}" style="{{full? 'width: 100%' : ''}}" bind:datachange="on_CardChanged" bind:timechange="on_TimeChangeRequest" />
 </template>
 
 <template name="Passage-Template">
@@ -55,25 +55,30 @@
 </view>
 
 <view class="Container {{deleteActive? 'lift' : ''}}" id="page">
+	<block wx:if="{{cards.length <= 0}}">
+		<view style="width: 100%; display: flex; flex-direction: row; jusitify-content: center;">
+			<image src="../../assests/Empty.svg" style="margin: 30px auto 18px auto; width: 140px; height: 140px; align-self: center;"></image>
+		</view>
+	</block>
+	<block wx:else>
+		<view wx:for="{{cards}}" class="Card-MoveArea" wx:key="uid">
+			<view class="Card-Button">
+				<view class="Button {{item.selected? 'selected' : ''}}" data-index="{{index}}" bindtap="select_Card">
+					<icon wx:if="{{item.selected}}" type="success_no_circle" color="#ffffff" size="24"></icon>
+				</view>
+			</view>
 
-	<view wx:for="{{cards}}" class="Card-MoveArea" wx:key="uid">
-		<view class="Card-Button">
-			<view class="Button {{item.selected? 'selected' : ''}}" data-index="{{index}}" bindtap="select_Card">
-				<icon wx:if="{{item.selected}}" type="success_no_circle" color="#ffffff" size="24"></icon>
+			<view class="Card {{deleteActive&&cards.length>0 ? 'selected' : ''}}">
+				<template is="{{item.card.type}}" data="{{index: index, starttime: item.card.start, endtime: item.card.end, data: item.card.data, full: false}}"></template>
 			</view>
 		</view>
-
-		<view class="Card {{deleteActive&&cards.length>0 ? 'selected' : ''}}">
-			<template is="{{item.card.type}}" data="{{index: index, starttime: item.card.start, endtime: item.card.end, data: item.card.data, full: false}}"></template>
-		</view>
-	</view>
-	<!-- <view style="width: 100%; margin: 12px 0px; box-sizing: border-box; display: flex; flex-direction: row; justify-content: center;">
+		<!-- <view style="width: 100%; margin: 12px 0px; box-sizing: border-box; display: flex; flex-direction: row; justify-content: center;">
 		<view wx:if="{{!isCardShopOpen}}" class="NavButton BG-Gray" style="height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px;" bindtap="open_CardShop">
 			Add
 		</view>
 		<view wx:else style="height: {{navButtonHeight}}px;"/>
 	</view> -->
-
+	</block>
 </view>
 
 <view class="Cover {{isCardShopOpen||timeChangeActive? 'show' : ''}}" bindtap="close_CardShop">

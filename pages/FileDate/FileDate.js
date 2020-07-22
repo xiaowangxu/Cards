@@ -73,7 +73,7 @@ Page({
     get_MainAndCourseCollectionID: function () {
         let array = [{
             collectionid: 'Main',
-            path: '主页'
+            path: '随手记'
         }]
         let courses = app.globalData.courses
         for (let i = 0; i < courses.length; i++) {

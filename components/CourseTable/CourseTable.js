@@ -118,7 +118,7 @@ Component({
 		},
 
 		refresh: function () {
-			// let date = new Date('2020/8/26 18:55:00')
+			// let date = new Date('2020/7/23 16:20:00')
 			let date = new Date()
 			let day = util.getDay(date)
 			let coursetime = util.getCourse(date)

@@ -1,28 +1,35 @@
 <!--pages/CourseEdit/CourseEdit.wxml-->
-<view class="StatusBar" style="height: {{navHeight + statusHeight}}px;">
+<view class="StatusBar" style="height: {{navHeight * 2 + statusHeight }}px;">
 	<view class="NavBar" style="height: {{navHeight}}px; top: {{statusHeight}}px; padding-right: {{navButtonRight + navButtonWidth + 12}}px;">
 		<view class="NavButton BG-Gray left" style="min-width: {{navButtonHeight}}px; width: {{navButtonHeight}}px; height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px; padding: 0px;" bindtap="tap_Back">
 			<image style="width: {{navButtonHeight - 13}}px; height: {{navButtonHeight - 13}}px;" src="../../assests/Back.svg" />
 		</view>
-		<text class="Title TEXT-Large">课程设置</text>
+		<text class="Title TEXT-Large">编辑课程表</text>
+	</view>
+	<view class="NavBar right" style="height: {{navHeight}}px; top: {{ navHeight + statusHeight }}px">
+		<view wx:if="{{cards.length>0}}" class="NavButton BG-Red right" style="height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px;" bindtap="switch_DeleteActive">
+			管理卡片
+		</view>
+		<view class="NavButton BG-Green right" style="height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px;" bindtap="Add_Course">
+			添加课程
+		</view>
 	</view>
 </view>
 
 <view class="Container">
-	<view class="Add-Button" bindtap="Add_Course">
-		<text class = "TEXT-Medium TEXT-Bold" style="color:white" bindtap="addActive">添加</text>
-	</view>
 	<view class="List-Container">
 		<view wx:for="{{courses}}" class="Item-Container" data-itemindex="{{index}}">
+		<view class="Card-Icon" style="background-color: {{colorPalettes[(index % colorPalettes.length)]}};"></view>
 			<text class = "TEXT-Medium">{{courses[index].name}}</text>
-			<view wx:if="{{courses.length>0}}" class="Delete-Button" style="height: 25px; border-radius: {{navButtonHeight/2}}px; width:50px;" data-itemindex="{{index}}" bindtap="Delete_Course">
+			<view style="flex: 1;"></view>
+			<view wx:if="{{courses.length>0}}" class="NavButton BG-Red" style="height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px;" data-itemindex="{{index}}" bindtap="Delete_Course">
 				删除
 			</view>
 		</view>
 	</view>
 </view>
 
-<view class="Cover {{deleteActive || addcourseActive? 'show' : ''}}" bindtap="close_Course" />
+<view class="Cover {{addcourseActive? 'show' : ''}}" bindtap="close_Course" />
 <view class="Course-Shop {{addcourseActive? 'show' : ''}}">
 	<text class="TEXT-Large" style="margin: 0px 30px">课程信息</text>
   <view class="ListContainer">

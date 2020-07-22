@@ -43,6 +43,30 @@
   align-items: center;
 }
 
+.Item-Container:active {
+  background-color: rgb(240, 240, 240);
+  transition: background-color 0.1s ease-out;
+}
+
+.List-Container>.Item-Container:first-child {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.List-Container>.Item-Container:last-child {
+  border-bottom: none;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.Card-Icon {
+    width: 12px;
+    height: 12px;
+    margin-left: 4px;
+    margin-right: 16px;
+    border-radius: 50%;
+}
+
 .Add-Button{
   width: 70px;
   height: 25px;
@@ -54,11 +78,12 @@
 }
 
 .Delete-Button{
-  position: absolute;
-  margin-left: 70%;
-  background-color: red;
+  background-color: tomato;
   color:white;
-  text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 } 
 
 .Course-Shop {
