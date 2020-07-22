@@ -66,7 +66,7 @@
   <view class="ListContainer">
 		<text class="TEXT-Medium TEXT-Bold">课程时间:</text>
     <view wx:for="{{time}}" >
-			<input class="Line-Edit" value="{{item.text}}" adjust-position="true" data-itemindex="{{index}}" bindinput="input" bindblur="blur" catchtap="true"/>
+			<input class="Line-Edit-time" value="{{item.text}}" adjust-position="true" data-itemindex="{{index}}" bindinput="input" bindblur="blur" catchtap="true"/>
     </view>
   </view>
   <view class="ListContainer">
