@@ -147,7 +147,8 @@ Page({
 		if (url !== '') {
 			let data = {
 				time: date.getTime(),
-				tables: app.globalData.tables
+				tables: app.globalData.tables,
+				courses: app.globalData.courses
 			}
 			let message = {
 				message: 'Update Tables ' + util.formatTime(date),
@@ -204,48 +205,14 @@ Page({
 					// console.log(res)
 					if (res.statusCode === 200) {
 						let tables = decode(res.data.content)
-						app.globalData.tables = JSON.parse(tables).tables
-						// console.log(app.globalData.tables)
-						app.save_Data()
+						let tableobject = JSON.parse(tables)
+						app.globalData.tables = tableobject.tables
+						app.globalData.courses = tableobject.courses
 						let sha = res.data.sha
 						app.globalData.github.sha = sha
-						app.save_GitHub()
-					} else {
-						wx.showToast({
-							title: '下载失败',
-							icon: 'none'
-						})
-					}
-				},
-				fail(res) {
-					wx.showToast({
-						title: '下载失败',
-						icon: 'none'
-					})
-				}
-			})
-		}
-	},
-
-	load_GitHubCourses: function () {
-		let url = app.get_GitHubUrl('Courses.txt')
-		if (url !== '') {
-			wx.showLoading({
-				title: '下载中'
-			})
-			wx.request({
-				url: url,
-				method: 'GET',
-				header: {
-					Authorization: 'token ' + app.globalData.github.token
-				},
-				success(res) {
-					wx.hideLoading()
-					// console.log(res)
-					if (res.statusCode === 200) {
-						let courses = decode(res.data.content)
-						app.globalData.courses = JSON.parse(courses)
 						app.save_Courses()
+						app.save_Data()
+						app.save_GitHub()
 					} else {
 						wx.showToast({
 							title: '下载失败',

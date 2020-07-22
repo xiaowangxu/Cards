@@ -58,10 +58,6 @@
 			<view class="Card-Icon" style="background-color: transparent;"></view>
 			<text class="TEXT-Medium">编辑课程表</text>
 		</view>
-		<view wx:if="{{githubLogined}}" class="Item-Container" bindtap="load_GitHubCourses">
-			<view class="Card-Icon" style="background-color: transparent;"></view>
-			<text class="TEXT-Medium">从GitHub同步课程表</text>
-		</view>
 	</view>
 
 	<view class="List-Container">
