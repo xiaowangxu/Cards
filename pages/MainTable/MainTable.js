@@ -159,7 +159,7 @@ Page({
 
 	add_VoiceInput: function () {
 		if (app.globalData.tables['Main'] === undefined) {
-			App.globalData.tables['Main'] = []
+			app.globalData.tables['Main'] = []
 		}
 		let startdate = new Date()
 		let enddate = new Date()
