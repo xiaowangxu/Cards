@@ -8,7 +8,7 @@
     "pages/FileDate/FileDate",
     "pages/Search/Search",
     "pages/QRcode/QRcode",
-    "pages/CourseEdit/CourseEdit",    
+    "pages/CourseEdit/CourseEdit",
     "pages/Lock/Lock"
   ],
   "window": {
@@ -19,5 +19,11 @@
     "navigationStyle": "custom"
   },
   "style": "v2",
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "plugins": {
+    "WechatSI": {
+      "version": "0.0.6",
+      "provider": "wx069ba97219f66d99"
+    }
+  }
 }

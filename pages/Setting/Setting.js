@@ -257,12 +257,9 @@ Page({
 		} else {
 			let startdate = new Date(startdatestr + ' 00:00:00')
 			let num = util.getCourseWeek(startdate, new Date())
-			if (app.get_GitHubUrl() !== '') {
-				this.setData({
-					githubLogined: true,
-					number: num
-				})
-			}
+			this.setData({
+				number: num
+			})
 		}
 	}
 })

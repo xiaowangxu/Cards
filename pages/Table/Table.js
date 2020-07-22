@@ -348,7 +348,7 @@ Page({
     on_CardChanged: function (event) {
         let index = event.detail.idx
         let data = event.detail.data
-        // console.log("!!!!!", index, JSON.stringify(data))
+        console.log("!!!!!", index, JSON.stringify(data))
         this.staticData.cards[index].card = data
         // console.log(this.staticData.cards)
         app.save(this.staticData.collectionid, this.unwrap_Cards_with_UID(this.staticData.cards))

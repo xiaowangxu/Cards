@@ -3,10 +3,8 @@ const util = require("../../utils/util.js")
 // pages/Table.js
 
 const app = getApp()
-const startdate = new Date()
-let date = new Date()
-date.setTime(date.getTime() + 24 * 60 * 60 * 1000)
-const enddate = date
+const plugin = requirePlugin("WechatSI")
+const manager = plugin.getRecordRecognitionManager()
 
 Page({
 
@@ -19,10 +17,13 @@ Page({
 		navButtonRight: app.globalData.navButtonRight,
 
 		courses: [],
-
+		voiceinputActive: false,
+		voiceinputFin: false,
+		currentText: '语音输入中...'
 	},
 
 	onLoad: function (options) {
+		this.initRecord()
 		this.setData({
 			courses: app.globalData.courses
 		})
@@ -115,6 +116,81 @@ Page({
 	goto_Today: function () {
 		wx.navigateTo({
 			url: '../FileDate/FileDate?date=' + util.formatDate(new Date()),
+		})
+	},
+
+	streamRecord: function () {
+		this.setData({
+			voiceinputActive: true,
+			voiceinputFin: false,
+			currentText: '语音输入中...'
+		})
+		manager.start({
+			lang: 'zh_CN',
+		})
+	},
+
+	streamRecordEnd: function () {
+		manager.stop()
+	},
+
+	initRecord: function () {
+		//有新的识别内容返回，则会调用此事件
+		manager.onRecognize = (res) => {
+			let text = res.result
+			this.setData({
+				currentText: text,
+			})
+		}
+		// 识别结束事件
+		manager.onStop = (res) => {
+			wx.hideLoading()
+			let text = res.result
+			if (text == '') {
+				// 用户没有说话，可以做一下提示处理...
+				return
+			}
+			this.setData({
+				voiceinputFin: true,
+				currentText: text,
+			})
+		}
+	},
+
+	add_VoiceInput: function () {
+		if (app.globalData.tables['Main'] === undefined) {
+			App.globalData.tables['Main'] = []
+		}
+		let startdate = new Date()
+		let enddate = new Date()
+		enddate.setTime(startdate.getTime() + 24 * 60 * 60 * 1000)
+		app.globalData.tables['Main'].push({
+			type: 'Passage',
+			start: util.formatTime(startdate, false),
+			end: util.formatTime(enddate, false),
+			week: [true, true, true, true, true, true, true],
+			data: {
+				title: '由语音输入 ' + util.formatTime(startdate, false),
+				passage: this.data.currentText,
+				path: ''
+			}
+		})
+		app.save_Data()
+		this.setData({
+			voiceinputActive: false,
+			voiceinputFin: false,
+			currentText: '语音输入中...'
+		})
+		setTimeout(function () {
+			app.navigateTo_Table('Main', '随手记', '课程表')
+		}, 300)
+	},
+
+	close_Cover: function () {
+		this.setData({
+			voiceinputActive: false,
+			voiceinputFin: false,
+			currentText: '语音输入中...'
 		})
 	}
 })

@@ -53,7 +53,7 @@ Component({
                     that.setData({
                         list: res.tempFilePaths
                     })
-                    that.triggerEvent('datachange',{idx: that.properties.idx, start: this.properties.start, end: this.properties.end, week: this.properties.week, data: {type: 'Picture', data: that.properties.list}}, {})
+                    that.triggerEvent('datachange',{idx: that.properties.idx, data: {type: 'Picture', start: that.properties.start, end: that.properties.end, week: that.properties.week, data: that.properties.list}}, {})
                 }
             })
         },

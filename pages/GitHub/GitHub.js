@@ -168,7 +168,10 @@ Page({
 				if (con.confirm) {
 					let tables = decode(res.data.content)
 					// console.log(tables)
-					app.globalData.tables = JSON.parse(tables).tables
+					let tableobject = JSON.parse(tables)
+					app.globalData.tables = tableobject.tables
+					app.globalData.courses = tableobject.courses
+					app.save_Courses()
 					// console.log(app.globalData.tables)
 					app.save_Data()
 					let sha = res.data.sha
@@ -212,7 +215,8 @@ Page({
 				message: 'Init CardsData',
 				content: encode(JSON.stringify({
 					time: new Date().getTime(),
-					tables: {}
+					tables: {},
+					courses: []
 				}, null, 2)),
 			},
 			header: {
