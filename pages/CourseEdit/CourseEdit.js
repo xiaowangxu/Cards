@@ -90,7 +90,7 @@ Page({
 	tap_Back: function () {
 		wx.navigateBack({
 			delta: 0,
-		})
+    })
 	},
 
 	Delete_Course: function (event) {
@@ -135,7 +135,12 @@ Page({
 
 	close_Course: function () {
 		this.setData({
-			addcourseActive: false,
+      addcourseActive: false,
+      name:'',
+      time: [],
+			place: "",
+      teacher: "",
+      inputdata:""
 		})
 	},
 
@@ -179,7 +184,6 @@ Page({
 			add_course: {},
 			week: [true, true, true, true, true, true, true, true, true, true]
 		})
-		console.log(this.data.courses)
 		app.save_Courses()
 	},
 
@@ -199,7 +203,6 @@ Page({
 
 	addtime: function (event) {
 		let value = event.detail.value
-
 		if (value === '') return
 		for (let i = 0; i < value.length; i++) {
 			if (value[i] == '，') value[i] = ','
@@ -208,7 +211,21 @@ Page({
 				day: parseInt(value.split(',')[0]),
 				timestart: parseInt(value.split(',')[1]),
 				timeend: parseInt(value.split(',')[2])
-			})) return
+			})) {
+        wx.showModal({
+          title: '警告',
+          content: '该时间已被占用，请重新输入',
+          success(con) {
+            if (con.confirm) {
+      
+            }
+          }
+        })
+        this.setData({
+          inputdata: ""
+        })
+        return
+      }
 
 		let newlist = this.data.time
 		newlist.push({
@@ -232,13 +249,18 @@ Page({
 		return false
 	},
 	addname: function (event) {
-		let value = event.detail.value
-		if (value === '') return
-		if (this.hasname(value)) return
+    let value = event.detail.value
+    let isAllNumber = true
+		if (value === '' || value === 'Main' || value === 'Privacy') return
+    if (this.hasname(value)) return
+    for (let i = 0; i < value.length; i++)
+    {
+      if (!(value[i].charCodeAt() >= 48 && value[i].charCodeAt() <= 57)) isAllNumber = false
+    }
+    if (isAllNumber) return
 		this.setData({
 			name: value,
 		})
-		console.log(this.data.name)
 	},
 	addplace: function (event) {
 		let value = event.detail.value

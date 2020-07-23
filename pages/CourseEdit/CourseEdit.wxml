@@ -82,11 +82,11 @@
 
   <view class="ListContainer">
 		<text class="TEXT-Medium TEXT-Bold">课程地点:</text>
-    <input class="Line-Edit" value="{{place}}" placeholder="A101" adjust-position="true" bindinput="input" bindblur="blur" catchtap="true"bindconfirm="addplace"/>
+    <input class="Line-Edit" value="{{place}}" placeholder="A101" adjust-position="true" bindinput="addplace"/>
   </view>
   <view class="ListContainer">
 		<text class="TEXT-Medium TEXT-Bold">授课教师:</text>
-    <input class="Line-Edit" value="{{teacher}}" adjust-position="true" bindinput="input" bindblur="blur" catchtap="true"bindconfirm="addteacher"/>
+    <input class="Line-Edit" value="{{teacher}}" adjust-position="true" bindinput="addteacher" />
   </view>
   <view class="NavButton-Container right" style="margin: 12px 30px 0px 30px; height: {{navHeight}}px;">
 		<view class="NavButton BG-Green right" disable="true" hover-class="NavButton-Hover" style="height: {{navButtonHeight}}px; border-radius: {{navButtonHeight/2}}px;" bindtap="tap_CourseAdd">
