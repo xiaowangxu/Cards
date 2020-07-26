@@ -45,6 +45,7 @@ Page({
 
 	onPullDownRefresh: function () {
 		let coursetable = this.selectComponent('.CourseTableObject')
+		// console.log(coursetable)
 		coursetable.refresh()
 		wx.stopPullDownRefresh()
 	},
@@ -71,6 +72,7 @@ Page({
 							courses: data,
 						})
 						let coursetable = that.selectComponent('.CourseTableObject')
+						// console.log(coursetable)
 						coursetable.refresh()
 					}
 				}
